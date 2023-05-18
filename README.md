@@ -140,7 +140,7 @@ Assignments will be introduced in class, can be discussed in tutorial, and quest
 -   While you are encouraged to discuss approaches to assessments with other students, the material turned in must be your own.
 
 ## Notice of Video Recording and Sharing (Download Prohibited; Reuse Prohibited)
--   This course, including your participation, may be recorded on video and will be available to students in the course for viewing remotely and after each session. Course videos and materials belong to your instructor, the University, and/or other sources depending on the specific facts of each situation and are protected by copyright. In this course, you are permitted to view session videos and materials for your own academic use, but you should not copy, share, or use them for any other purpose without the explicit permission of the instructor. For questions about the recording and use of videos in which you appear, please contact the instructor.
+- Video recordings of this course, including your participation, may be created and made accessible to students for remote viewing during and after each session. These course videos and materials are the property of your instructor, the University, and/or other relevant sources, and they are protected by copyright. As a student in this course, you are allowed to view the session videos and materials for your own academic purposes. However, it is important to note that copying, sharing, or using them for any other purpose without explicit permission from the instructor is prohibited. If you have any inquiries regarding the recording and usage of videos in which you appear, please reach out to the instructo
 <div style="text-align:left"> 
 
 ## Missed Class
