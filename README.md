@@ -110,7 +110,7 @@ Grading is based on two components: 2 assignments, and class participation. The 
 | Participation | NA | NA | 10% |
 
 **Assignments**
-Assignments will be introduced in class, can be discussed in tutorial, and questions can be ask of the Instructor over email. Assignments are due by midnight on Sundays. Please arrange for extensions in advance with the Instructor. Please email submissions, as an RMarkdown PDF, to the Instructor titled DSI-IntroR: Assignment X, Name. The assignments are located in the Assignments directory, located above. You will find an .html file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as."
+Assignments will be introduced in class, can be discussed in tutorial, and questions can be ask of the Instructor over email. Assignments are due by midnight on Sundays. Please arrange for extensions in advance with the Instructor. Please email submissions, as an RMarkdown PDF, to the Instructor titled DSI-IntroR: Assignment X, Name. The assignments are located in the Assessment directory, located above. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as."
 
 ### Assignment Due-dates
 
