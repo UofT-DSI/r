@@ -5,7 +5,7 @@ Welcome! This course, offered by the University of Toronto's Data Sciences Insti
 ## Contents
 1. [Description](#Description)
 2. [Learning Outcomes](#Learning Outcomes)
-3. [Course Contacts](#Course Contacts)
+3. [Course Contact](#Course Contact)
 4. [Delivery Instructions](#Delivery Instructions)
 5. [Course Notes](#Course Notes)
 6. [Materials](#Materials)
@@ -38,7 +38,7 @@ By the end of this course, learners will be able to:
 
 # Logistical Information
 
-## Course Contacts
+## Course Contact
 -  Instructor for this course is Julia Gallucci, PhD student (she/her). For emails to the instructor, use julia.gallucci@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response times: Week day: 48h and Weekends: 48h - 72h.
 
 
