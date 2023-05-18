@@ -159,7 +159,7 @@ Assignments will be introduced in class, can be discussed in tutorial, and quest
 -   Alternatively, to download individual files, e.g., 03-Data-in-R PDF slides only, visit the slide [link](https://github.com/anjalisilva/IntroductionToR/blob/main/Lessons-PDF/03-data-in-r_deck.pdf) and click the 'Download' button on top right side of page as shown below (see red arrow):
 <div style="text-align:center">
 
-<img src="Teaching-Notes/README-images/GitHub_Download2.png" alt="GitHubDownload" width="700" height="300"/>
+<img src="Teaching-Notes/README-images/GitHubDownload2.png" alt="GitHubDownload" width="700" height="300"/>
 
 <div style="text-align:center">
 <div style="text-align:left">  
