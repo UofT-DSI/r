@@ -169,12 +169,12 @@ Assignments will be introduced in class, can be discussed in tutorial, and quest
 <div style="text-align:left"> 
 
 # Acknowledgements
-Slides are adapted from Anjali Silva, originally from Amy Farrow under the supervision of Rohan Alexander, University of Toronto. Slides have been created and modified by Julia Gallucci for Summer 2023.
+- Slides are adapted from Anjali Silva, originally from Amy Farrow under the supervision of Rohan Alexander, University of Toronto. Slides have been created and modified by Julia Gallucci for Summer 2023.
 
 - We wish to acknowledge this land on which the University of Toronto operates. For thousands of years it has been the traditional land of the Huron-Wendat, the Seneca, and most recently, the Mississaugas of the Credit River. Today, this meeting place is still the home to many Indigenous people from across Turtle Island and we are grateful to have the opportunity to work on this land.
 
 ## Maintainer
--   Anjali Silva (<a.silva@utoronto.ca>), University of Toronto.
+-   Julia Gallucci (<julia.gallucci@mail.utoronto.ca>), University of Toronto.
 
 ## Contributions
 -   `IntroductionToR` welcomes issues, enhancement requests, and other contributions. To submit an issue, use the [GitHub
