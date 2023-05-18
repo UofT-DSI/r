@@ -86,8 +86,8 @@ Folder structure is as follows:
     * Wiley, Matt, Wiley, Joshua F., 2020. *Advanced R 4 Data Programming and the Cloud*
     * *Using PostgreSQL, AWS, and Shiny*, Apress.
 
-## Schedule*
-*Schedule may be modified as needed, and learners will be informed. Course will be taught using R version 4.2.1 and RStudio Desktop version 2022.06.23. 
+## Schedule
+Schedule may be modified as needed, and learners will be informed. Course will be taught using R version 4.2.1 and RStudio Desktop version 2022.06.23. 
 
 ### Class topics
 | Class | Date | Topic | Slides |
