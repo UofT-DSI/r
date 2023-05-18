@@ -103,7 +103,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice |  |                                                                                                                                                                                                                                        	|
 
 # Marking Scheme
-|Grading is based on two components: 2 assignments, and class participation. The grading scheme is as follows:
+Grading is based on two components: 2 assignments, and class participation. The grading scheme is as follows:
 | Assessment | Number | Individual Weight | Cumulative Weight |
 | --- | --- | --- | --- |
 | Assignments | 2 | 45% | 80% |
