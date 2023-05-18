@@ -4,14 +4,14 @@ Welcome! This course, offered by the University of Toronto's Data Sciences Insti
 
 ## Contents
 1. [Description](#Description)
-2. [Learning Outcomes](#Learning Outcomes)
-3. [Course Contact](#Course Contact)
-4. [Delivery Instructions](#Delivery Instructions)
-5. [Course Notes](#Course Notes)
+2. [Learning Outcomes](#Learning-Outcomes)
+3. [Course Contact](#Course-Contact)
+4. [Delivery Instructions](#Delivery-Instructions)
+5. [Course Notes](#Course-Notes)
 6. [Materials](#Materials)
 7. [Schedule](#Schedule)
-8. [Marking Scheme](#Marking Scheme)
-9. [Course Policies](#Course Policies)
+8. [Marking Scheme](#Marking-Scheme)
+9. [Course Policies](#Course-Policies)
 
 # Course Overview
 
