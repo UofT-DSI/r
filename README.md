@@ -106,7 +106,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 Grading is based on two components: 2 assignments, and class participation. The grading scheme is as follows:
 | Assessment | Number | Individual Weight | Cumulative Weight |
 | --- | --- | --- | --- |
-| Assignments | 2 | 45% | 80% |
+| Assignments | 2 | 45% | 90% |
 | Participation | NA | NA | 10% |
 
 **Assignments**
