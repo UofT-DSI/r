@@ -150,7 +150,7 @@ Assignments will be introduced in class, can be discussed in tutorial, and quest
 -   All course material will be available via [IntroductionToR](https://github.com/anjalisilva/IntroductionToR) GitHub repository. As per prerequisites outlined for the course, it will be assumed that learners are familiar with GitHub. If you are unsure how to download files from GitHub, you may visit the repository [link](https://github.com/anjalisilva/IntroductionToR) and click 'Code' and then 'Download zip' to download all files, as shown below (see red arrows 1 and 2):
 <div style="text-align:center">
 
-<img src="Teaching-Notes/README-images/GitHubDownload1.png" alt="MixtureGaussian" width="550" height="350"/>
+<img src="Teaching-Notes/README-images/GitHubDownload_1.png" alt="MixtureGaussian" width="550" height="350"/>
 
 <div style="text-align:center">
 <div style="text-align:left">
