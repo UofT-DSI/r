@@ -1,0 +1,332 @@
+---
+title: "4.0 Introduction to R: Introduction"
+institute: "Data Science Institute, University of Toronto"
+author: "Julia Gallucci"
+date: "May, 29, 2023"
+format: beamer
+editor: visual
+---
+
+## Acknowledgements
+
+Slides are adapted from Anjali Silva, originally from Amy Farrow under the supervision of Rohan Alexander, University of Toronto. Slides have been modified by Julia Gallucci, 2023.
+
+## About myself
+
+Instructor: Julia Gallucci, HBSc, MSc
+
+PhD student, Institute of Medical Science UofT and CAMH
+
+Pronouns: She/Her
+
+julia.gallucci\@mail.utoronto.ca (Please use subject line: i.e., DSI-IntroR: Inquiry about Lecture 1)
+
+## Course Documents
+
+Visit: https://github.com/UofT-DSI/04-intro_r
+
+All course material will be available via IntroductionToR GitHub repository (https://github.com/UofT-DSI/04-intro_r). Folder structure is as follows:
+
+-   Lessons - All files: This folder contains all files.
+-   Lessons - Data only: This folder contains data only.
+-   Lessons - Lesson Plans only: This folder contains lesson plans only.
+-   Lessons - PDF only: This folder contains slide PDFs only.
+-   README - README file
+-   .gitignore - Files to ignore specified by instructor
+
+## Course Description
+
+This course is designed for learners who have a degree in something other than Computer Science/Statistics who are looking to enhance their data science skills for their career.
+
+1.  Manipulating and visualizing data in R. Learners will get set up with a functional RStudio workflow, use different file types, transform data tables, import and manipulate data, use functions and loops, create data visualizations, make a Shiny app, and learn how to solve problems with their programming. Both base R and tidyverse methods are taught. To work reproducibly, learners will create R Projects.
+2.  Ethics of consent, Equity, Diversity & Inclusion (EDI) training, and professional skills including presentation, project management, and data security.
+3.  Industry case study.
+
+## Learning Outcomes
+
+1.  Setting up and using R and RStudio.
+2.  Manipulating and visualizing data.
+3.  Fixing errors.
+4.  Understanding consent in data-based studies.
+5.  Making presentations and managing project
+
+## Content Delivery
+
+This course will be held over a 3-week period, with classes taking place 3 days per week (2 hours of lecture, 1 hour of tutorial).
+
+Tutorials will be used for homework/assignment help, and support hours
+
+Format: online synchronous via zoom
+
+Further course communication will take place via email
+
+## Prerequisite knowledge
+
+-   The parts of a data table/spreadsheet
+
+-   Basics of file folder structure
+
+-   Summary statistics (mean, median, proportion, etc.)
+
+-   Basic data visualization types (bar charts, histograms, scatter plots)
+
+-   GitHub account
+
+## Outline of course schedule
+
+![](Outline_schedule.png){fig-align="center"}
+
+## Assessments
+
+Class attendance**:** 10% of final grade.
+
+Problem sets: 90% of final grade (2 assignments, 45% each).
+
+1.  Problem set 1 is based on R basics, navigating RStudio, data types and structures, R coercion rules, using built-in functions, working with missing values, use of external functions by downloading R packages and string manipulation. **Due: Sunday June 11, 2023 11:59 PM EST**
+
+2.  Problem set 2 is based on data reshaping techniques and tidyverse R package, including applications of data manipulating, wrangling, functional programming and data visualization. **Due: Sunday June 18, 2023 11:59 PM EST**
+
+## Some Resources
+
+### Key Texts
+
+#### General references:
+
+-   R for Data Science by Wickham and Grolemund (2017) https://r4ds.had.co.nz/index.html
+
+-   DoSS Toolkit (2021) https://rohanalexander.github.io/doss_toolkit_book/.
+
+## Some Resources
+
+### Key Texts
+
+#### For specific topics:
+
+-   Alexander, 2022, Telling Stories with Data, CRC Press. https://www.tellingstorieswithdata.com/
+
+-   Alexander (eds), 2021, DoSS Toolkit, https://rohanalexander.github.io/doss_toolkit_book/.
+
+-   de Graaf, 2019, Managing Your Data Science Projects: Learn Salesmanship, Presentation, and Maintenance of Completed Models, Apress.
+
+-   Healy, 2018, Data Visualization: A Practical Introduction, Princeton University Press
+
+## Some Resources
+
+### Key Texts
+
+#### For specific topics:
+
+-   Timbers et al., 2021. Data Science: A First Introduction. https://ubc-dsci.github.io/introduction-to-datascience/
+-   Wickham and Grolemund, 2017, R for Data Science, O'Reilly. https://r4ds.had.co.nz/
+-   Wickham, 2021, Mastering Shiny, O'Reilly. https://mastering-shiny.org/
+-   Wiley, Matt, Wiley, Joshua F., 2020, Advanced R 4 Data Programming and the Cloud
+-   Using PostgreSQL, AWS, and Shiny, Apress.
+
+## Materials
+
+Learners must have internet connection and a computer with a microphone in order to participate in online activities.
+
+Learners must have R (http://www.r-project.org/).
+
+Learners must have RStudio (http://www.rstudio.com/).
+
+*Optional* Try posit cloud to access RStudio right from your browser - no installation required! (https://posit.cloud/)
+
+Screen space can be a limitation during online learning since you'll want to see the instructor's screen and have your RStudio open so that you can type along. If you have access to a second monitor or a larger tablet to attend the course while keeping your laptop screen available for coding - this would be great! If not - don't worry, we'll manage!
+
+## Course expectations
+
+![Zoom 'Reactions' that you may use.](ZoomReactions.png){fig-align="center" width="300"}
+
+## Course expectations
+
+![It is recommended that windows are resized so that both the user RStudio window and Instructor Zoom window (with RStudio) is visible at the same time. User may collapse panels of their RStudio not in current use](ScreenSplit.png){fig-align="center"}
+
+## Course expectations
+
+This course will mainly be a live-coding class, learners are expected to follow along
+
+Students with diverse learning styles and needs are welcome to this course. I aim to provide an accessible learning environment. Please notify me in advance via email if you require accommodations or if there is anything that can be done to make the course more accessible to you.
+
+# Questions?
+
+## Data Science Tools
+
+![KDnuggets Survey of Machine Learning Software that asked respondents which data science tools they had used for projects within the past year. The x-axis shows the proportion of users who used a particular data science tool within the past year. Figure from https://www.kdnuggets.com/2020/06/ data-science-tools-popularity-animated.html](DataScienceTools.png){width="75%"}
+
+## Data Science Skills
+
+![](DataScienceSkills.png){fig-align="center" width="60%"}
+
+## What is R?
+
+Language and environment for statistical computing and graphics
+
+R was initially written by Ross Ihaka and Robert Gentleman
+
+R runs on a wide variety of UNIX platforms, Windows and MacOS.
+
+R is designed with interactive data exploration in mind
+
+A version of R is released annually. Current release is 4.2.3
+
+*Optional:* Further reading, Ihaka R and Gentleman, R (1996) R: a language for data analysis and graphics. J. Comput. Grapj. Statist., 5, 299-314
+
+## Why use R?
+
+R is open source and free
+
+R has a community
+
+With R, you can share your data analysis in a reproducible way
+
+More than 18 thousand packages (on CRAN) that extend R's capabilities to provide easy ways to accomplish a wide variety of tasks
+
+R is a standard language recommended for data science
+
+RStudio makes it easier to use R
+
+## RStudio
+
+RStudio is an integrated development environment R
+
+Contains:
+
+-   Console
+
+-   Syntax-highlighting editor for code execution
+
+-   Tools for plotting, viewing history, debugging and workspace management
+
+RStudio contains features that make development easier and faster!
+
+## Options to work with R
+
+![Several other options are present including the Jupyter Notebook and Posit cloud.](RWorkingOptions.png)
+
+# Questions?
+
+## What can we do with R?
+
+### Load Data
+
+```{r}
+library(tidyverse)
+apt_data <- read_csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-AllFiles%20/0_introduction/Apartment%20Building%20Evaluation.csv")
+apt_data %>%
+  select(YEAR_BUILT, YEAR_EVALUATED, LONGITUDE, LATITUDE, SCORE)
+
+```
+
+## What can we do with R?
+
+### Clean Data
+
+```{r}
+library(janitor)
+apt_data_clean <- apt_data %>%
+  clean_names()
+apt_data_clean %>%
+  select(year_built, year_evaluated, longitude, latitude, score)
+```
+
+## What can we do with R?
+
+### Manipulate and Combine Data
+
+```{r}
+assault_data <- read_csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-AllFiles%20/0_introduction/Assault.csv")
+
+apt_data_clean <- apt_data_clean %>%
+  mutate(coords = paste0("(", round(latitude, digits = 2), ",", round(longitude, digits = 2), ")")) %>%
+  mutate(year = year_evaluated) %>%
+  filter(year != 2021)
+
+assault_data <- assault_data %>%
+  mutate(coords = paste0("(", round(Lat, digits = 2), ",", round(Long, digits = 2), ")"))
+
+assault_summary <- assault_data %>%
+  mutate(year = str_sub(occurrencedate, 1, 4)) %>%
+  group_by(coords, year) %>%
+  summarise(count = n()) %>%
+  mutate(year = as.numeric(year))
+
+joined_data <- left_join(apt_data_clean, assault_summary, by = c('coords', 'year')) %>%
+  mutate(count = replace_na(count, 0))
+
+joined_data %>%
+  select(year_built, property_type, confirmed_units, score, year, count)
+```
+
+## What can we do with R?
+
+### Summarize Data
+
+```{r}
+library(knitr)
+apt_data_clean %>%
+  group_by(ward) %>%
+  summarise(`Count` = n(),
+            `Average Score` = mean(score),
+            `Median Year Built` = median(year_built, na.rm=TRUE),
+            `Median Number of Storeys` = median(confirmed_storeys),
+            `Median Number of Units` = median(confirmed_units)) %>%
+  slice(1:10) %>%
+  kable()
+```
+
+## What can we do with R?
+
+### Visualize Data
+
+```{r}
+ward_summaries <- joined_data %>%
+  group_by(ward) %>%
+  summarise(med_score = median(score),
+            med_assault = median(count))
+
+left_join(joined_data, ward_summaries, by = 'ward') %>%
+  mutate(ward = as.factor(ward)) %>%
+  filter(year == 2019) %>%
+  ggplot() +
+  geom_boxplot(aes(x = ward, y = count, fill = med_score)) +
+  scale_fill_continuous(low = "red", high = "blue") +
+  labs(x = "Ward",
+       y = "Number of assaults reported in building",
+       fill = "Median\nbuilding\nevaluation\nscore",
+       title = "Apartment building evaluation scores and reported assaults in 2019") +
+  theme_minimal()
+type_summaries <- joined_data %>%
+  filter(year == 2019) %>%
+  group_by(property_type) %>%
+  summarise(med_score = median(score),
+            med_assault = median(count))
+```
+
+## What can we do with R?
+
+### Write reports
+
+![](sample_paper.png)
+
+## What can we do with R?
+
+### Built interactive applications
+
+![](sample_app.png)
+
+## What can we do with R?
+
+### And more!
+
+-   Data collection
+
+-   Statistical analysis
+
+-   Data modeling
+
+-   Presentations
+
+-   Websites
+
+# Questions?
