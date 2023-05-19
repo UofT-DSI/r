@@ -39,7 +39,8 @@ By the end of this course, learners will be able to:
 # Logistical Information
 
 ## Course Contact
--  Instructor for this course is Julia Gallucci, PhD student (she/her). For emails to the instructor, use julia.gallucci@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response times: Week day: 48h and Weekends: 48h - 72h.
+-  Instructor for this course is Julia Gallucci, PhD student (she/her). For emails to the instructor, use julia.gallucci@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. 
+-  Response times: 48 hrs on week days, 48-72 hrs on weekends.
 
 
 ## Delivery Instructions
