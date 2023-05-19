@@ -31,7 +31,7 @@ By the end of this course, learners will be able to:
 
 3. Develop the skills and strategies necessary to diagnose and fix errors in R. Learners will gain proficiency in interpreting error messages, identifying common coding mistakes, and utilizing debugging tools and techniques effectively. Learners will be able to apply systematic approaches to troubleshoot and resolve errors in their R code.
 
-4. Demonstrate a comprehensive understanding of the concept of consent in data-based studies. Learners will be able to identify the ethical considerations and legal requirements related to obtaining informed consent from participants, and apply appropriate strategies to ensure ethical data collection and usage.
+4. Demonstrate a comprehensive understanding of the concept of consent in data-based studies. Learners will be able to identify the ethical considerations and legal requirements related to obtaining informed consent from participants, and apply appropriate strategies to ensure ethical data  usage.
 
 5. Acquire the skills and knowledge required to create compelling presentations and effectively manage projects using R. Learners will demonstrate proficiency in utilizing R's visualization and presentation packages to generate visually appealing and informative slides, charts, and graphs. They will also gain proficiency in project management techniques specific to R, including organizing and structuring R code, as well as effectively documenting code.
 
