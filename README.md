@@ -112,13 +112,13 @@ Grading is based on two components: 2 assignments, and class participation. The 
 | Participation | NA | NA | 10% |
 
 **Assignments**
-Assignments will be introduced in class, can be discussed in tutorial, and questions can be ask of the Instructor over email. Assignments are due by midnight on Sundays. Please arrange for extensions in advance with the Instructor. Please email submissions, as an RMarkdown PDF, to the Instructor titled DSI-IntroR: Assignment X, Name. The assignments are located in the Assessment directory, located above. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as."
+Assignments will be introduced in class, can be discussed in tutorial, and questions can be ask of the Instructor over email. Assignments are due by midnight on Sundays. Please arrange for extensions in advance with the Instructor. Please email submissions, as an RMarkdown PDF, to the Instructor titled DSI-IntroR: Assignment X, Name. The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as."
 
 ### Assignment Due-dates
 
 | Assessment	|  Due Date | 
 | --- | --- | 
-| [Assignment 1](./Assessments/04-Assignment_1.pdf) <br> [Template](./Assessments/Assessment1_template.Rmd)|	 Sunday 11 June, by 11:59 PM EST| 
+| [Assignment 1](./Assessments/04-Assignment_1.pdf) <br> [Rmd modifiable template](./Assessments/Assessment1_template.Rmd)|	 Sunday 11 June, by 11:59 PM EST| 
 | Assignment 2|	 Sunday 18 June, by 11:59 PM EST| 
 
 # Course Policies
