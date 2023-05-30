@@ -5,7 +5,7 @@ author: Julia Gallucci
 date: "2023-05-29"
 ---
 Class 1
-Lesson 00,01,02
+Lesson 00,01
 
 Get working directory
 ```{r}
