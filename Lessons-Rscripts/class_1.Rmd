@@ -1,0 +1,136 @@
+---
+title: "Live_coding"
+output: html_document
+author: Julia Gallucci
+date: "2023-05-29"
+---
+Class 1
+Lesson 00,01,02
+
+Get working directory
+```{r}
+getwd() # get working directory
+```
+
+Set working directory (NOT recommended method)
+```{r}
+# setwd("/Users/as/Desktop/DSI-IntroR") 
+```
+Set working directory (Recommended method)
+
+- Session -> Set working directory -> choose directory
+- Or use files tab
+
+
+A variable/ R object
+As mentioned, the top right quadrant is where variables you made are stored. lets make a variable!
+```{r}
+exampleVariable <- 1 # <- is the assignment operator
+exampleVariable = 1 # not recommended
+exampleVariable # autoprinting
+```
+you can remove variables so they no longer appear in your environment
+```{r}
+rm(exampleVariable) 
+```
+
+You can comment outside of chunks, or within chunks using the #
+```{r}
+# This is a new comment. 
+```
+
+R is case sensitive
+```{r}
+exampleVariable <- 1
+examplevariable
+exampleVariable
+exampleVariable2 <- 2
+
+rm(exampleVariable, exampleVariable2)
+```
+You can also overwrite variables or 'reassign' them 
+```{r}
+exampleVariable <- 1
+exampleVariable
+exampleVariable <- 10 # dynamic variable typing
+exampleVariable
+exampleVariable <- "a"
+exampleVariable
+```
+
+
+
+Variable convention
+you can call your variable in the console by simply typing in the variable name
+
+Object names camelCase styling
+```{r}
+exampleVariable
+```
+Object names snake_case styling
+```{r}
+example_variable
+```
+Object names dot.style not recommended
+```{r}
+example.variable
+```
+R has reserved words
+```{r}
+NA # not available
+NaN # not a number
+TRUE
+FALSE
+T
+F
+# don't use these to create objects
+```
+
+Write and run your own variable!
+```{r}
+my_name <- "Julia"
+todays_date <- "May 29, 2023"
+```
+
+Mathematical operations
++  add
+-  subtract
+*  multiplication
+/  division
+
+Let’s pretend we want to write some code, that performs basic math operations. 
+I.e., we want to code 2+2
+```{r}
+2 + 2 
+```
+Write and run your own basic addition in your script! 
+We can do something similar, directly in the console (type 2 + 2 in the console!)
+```{r}
+```
+
+Built-in functions; originally a statistical language
+```{r}
+mean()
+sqrt()
+seq()
+```
+Structure of a function
+functionName(argumentName) 
+args, return values
+this gives return values
+
+```{r}
+nums <- seq(1,3)
+mean(nums)
+```
+
+Help documentation
+example from help documentation
+```{r}
+?mean
+help(mean)
+
+```
+
+
+# End of class 29 May 
