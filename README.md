@@ -102,7 +102,19 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 6 | Saturday 10 June <br> 9 AM - 12 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) |  |
 | 7 | Monday 12 June <br> 6 PM - 8 PM EST | Shiny applications; Ethics, inequity and professional skills |  |
 | 8 | Thursday 15 June <br> 6 PM - 8 PM EST | Industry case study- Kamilah Ebrahim |  |
-| 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice |  |                                                                                                                                                                                                                                        	|
+| 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice |  |                                                                                                                                     
+### In-class code & summaries 
+| Class | Date | Code | Summary |
+| --- | --- | --- | --- |
+| 1 | Monday 29 May | [in-class coding examples](./Lessons-Rscripts/class_1.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class1_Summary.pdf) |
+| 2 | Thursday 1 June |  |  |
+| 3 | Saturday 3 June |  |  |
+| 4 | Monday 5 June |  |  |
+| 5 | Thursday 8 June |  |  |
+| 6 | Saturday 10 June |  |  |
+| 7 | Monday 12 June |  |  |
+| 8 | Thursday 15 June |  |  |
+| 9 | Saturday 17 June |  |  |
 
 ## Marking Scheme
 Grading is based on two components: 2 assignments, and class participation. The grading scheme is as follows:
