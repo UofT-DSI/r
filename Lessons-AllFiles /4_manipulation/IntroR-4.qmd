@@ -1,0 +1,910 @@
+---
+title: "4.4 Introduction to R: Manipulation"
+institute: "Data Science Institute, University of Toronto"
+author: "Julia Gallucci"
+date: "June, 3, 2023"
+format: beamer
+editor: visual
+---
+
+```{r setup, include=FALSE}
+def.chunk.hook <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  # Apply the default chunk hook
+  x <- def.chunk.hook(x, options)
+  
+  # Define the maximum line length
+  max_length <- 50
+  
+  # Split the lines of code
+  lines <- strsplit(x, "\n")[[1]]
+  
+  # Wrap long lines
+  wrapped_lines <- lapply(lines, function(line) {
+    if (nchar(line) > max_length) {
+      # Wrap the line if it exceeds the maximum length
+      wrapped_line <- paste(strwrap(line, width = max_length), collapse = "\n#")
+    } else {
+      line
+    }
+  })
+  
+  # Join the modified lines back together
+  modified_code <- paste(wrapped_lines, collapse = "\n")
+  
+  # Modify the font size
+  modified_code <- paste0("\n \\", "small", "\n\n", modified_code, "\n\n \\normalsize")
+  
+  # Return the modified code
+  modified_code
+})
+```
+
+## Acknowledgements
+
+Slides are adapted from Anjali Silva, originally from Amy Farrow under the supervision of Rohan Alexander, University of Toronto. Slides have been modified by Julia Gallucci, 2023.
+
+## Overview
+
+-   Filtering (Wickham and Grolemund, 2017 Chapter 5, Timbers et al. 2021, Chapter 3.6)
+-   Arranging (Wickham and Grolemund, 2017 Chapter 5)
+-   Selecting (Wickham and Grolemund, 2017 Chapter 5, Timbers et al. 2021, Chapter 3.5)
+-   The pipe (Wickham and Grolemund, 2017 Chapter 5 & 18; Timbers et al. 2021, Chapter 3.8)
+-   Mutating (Wickham and Grolemund, 2017 Chapter 5, Timbers et al. 2021, Chapter 3.7, 3.10)
+-   Summarising (Wickham and Grolemund, 2017 Chapter 5, Timbers et al. 2021, Chapter 3.9)
+-   Grouping (Wickham and Grolemund, 2017 Chapter 5)
+-   Cleaning (Alexander, 2022, Chapter 11)
+
+## Take a look
+
+```{r, echo = FALSE, warning=FALSE}
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(kableExtra)
+library(rgdal)
+```
+
+```{r, echo=F}
+ads_data <- haven::read_sav("ads_raw.sav")
+```
+
+`glimpse()` is like a transposed version of `print()`: columns run down the page, and data runs across. This makes it possible to see every column in a data frame.
+
+## Take a look
+
+```{r, echo = TRUE}
+glimpse(ads_data)
+```
+
+## Filtering
+
+`filter()`is used to subset a data frame, retaining only rows that satisfy your conditions.
+
+To be retained, the row must produce a value of `TRUE` for the condition(s).
+
+## Filtering
+
+For example, lets say we want to filter the data to only view rows with duration in seconds less than 100.
+
+```{r, echo=TRUE}
+filter(ads_data, Duration__in_seconds_ < 100)
+```
+
+## Arranging
+
+`arrange()` orders the rows of a data frame by the values of selected columns
+
+## Arranging
+
+For example, lets say we want to arrange the data to view rows with duration in seconds ascending.
+
+```{r,echo=TRUE}
+arrange(ads_data, Duration__in_seconds_)
+```
+
+## Selecting
+
+`select()` allows us to pick certain columns from a dataframe, using their names
+
+`select()` allows us to remove columns from a dataframe, using their names
+
+## Selecting
+
+For example, lets say we want to select the column "RecordedDate" from the data set.
+
+```{r,echo=TRUE}
+select(ads_data, RecordedDate)
+```
+
+## Selecting
+
+For example, lets say we want to remove the columns "Consent" and "Distribution Channel" from the data set.
+
+```{r,echo=TRUE}
+select(ads_data, -Consent, -DistributionChannel)
+```
+
+## The pipe
+
+So far, we have written our code like this:
+
+```{r,eval=FALSE,echo=TRUE}
+filter(ads_data, Duration__in_seconds_ < 100)
+```
+
+But what if we want to perform multiple operations in one go?
+
+## The pipe
+
+We can use the pipe `%>%`, which passes what we wrote on the previous line into the next function as the first argument:
+
+```{r,echo=TRUE,eval=FALSE}
+ads_data %>%
+  filter(Duration__in_seconds_ < 100) %>%
+  #filter the data set to only view rows with duration in seconds less than 100
+  arrange(Duration__in_seconds_) %>%
+  #arrange the data set to view rows with duration in seconds ascending
+  select(RecordedDate, Duration__in_seconds_)
+  #select the column "RecordedDate" and "Duration in seconds" from the data set
+```
+
+## The pipe
+
+```{r, eval=TRUE}
+ads_data %>%
+  filter(Duration__in_seconds_ < 100) %>%
+  arrange(Duration__in_seconds_) %>%
+  select(RecordedDate, Duration__in_seconds_)
+```
+
+## Mutating
+
+`mutate()` creates new columns that are functions of existing variables.
+
+It can also modify (if the name is the same as an existing column)
+
+## Mutating
+
+For example, lets say we want to create a new column named "Birthyear_add_day" that takes the column Birthyear and joins it with a provided string ("07-01").
+
+```{r,echo=TRUE}
+ads_data <- ads_data %>%
+  mutate(Birthyear_add_day = 
+           str_c(Birthyear, "07-01")) %>%
+  mutate(Birthyear_add_day = 
+           as_datetime(Birthyear_add_day))
+
+#modify the data to convert to date-time format
+```
+
+## Mutating
+
+```{r echo=FALSE}
+ads_data %>%
+  select(EndDate, Birthyear, Birthyear_add_day)
+```
+
+## Mutating
+
+For example, lets say we want to create a new column named "age" that takes the column EndDate and subtracts the column "Birthyear_add_day"
+
+```{r, echo=TRUE, results="hide"}
+ads_data %>%
+  mutate(age = EndDate - Birthyear_add_day) 
+```
+
+## Mutating
+
+```{r}
+ads_data %>%
+  mutate(age = EndDate - Birthyear_add_day) %>%
+  select(EndDate, Birthyear, Birthyear_add_day, age) 
+```
+
+## Summary
+
+`summary` is a function used to provide a concise overview of the central tendency, dispersion, and distribution of the data.
+
+```{r, echo = TRUE}
+summary(ads_data)
+```
+
+## Pulling a variable for calculations
+
+`pull()` is similar to `$`, used to extract a single column from a data frame as a vector.
+
+```{r, echo = TRUE}
+ads_data %>%
+  pull(Duration__in_seconds_)
+```
+
+## Using the pulled variable for descriptive statistics
+
+You can combine the **`pull()`** function with summary statistics and the pipe operator **`%>%`** to calculate summary statistics on a specific column of a data frame in a concise manner.
+
+I.e., Median
+
+```{r, echo = TRUE}
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  #extracts the column named "Duration__in_seconds_" from the data frame as a vector.
+  median(na.rm = TRUE)
+  #median() function applied to the vector obtained above
+```
+
+Note: We have to tell the median() function to disregard NAs by writing `na.rm = TRUE`
+
+## Using the pulled variable for descriptive statistics
+
+I.e., Mean
+
+```{r, echo=TRUE}
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  #extracts the column named "Duration__in_seconds_" from the data frame as a vector
+  mean(na.rm = TRUE)
+  #mean() function applied to the vector obtained above
+```
+
+## Using the pulled variable for descriptive statistics
+
+I.e., Minimum and maximum can be calculated using the `range()` function.
+
+```{r, echo=TRUE}
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  #extracts the column named "Duration__in_seconds_" from the data frame as a vector
+  range(na.rm = TRUE)
+  #range() function applied to the vector obtained above
+```
+
+## Using the pulled variable for descriptive statistics
+
+I.e., Variance can be calculated using the `var()` function.
+
+```{r,echo=TRUE}
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  #extracts the column named "Duration__in_seconds_" from the data frame as a vector
+  var(na.rm = TRUE)
+  ##var() function applied to the vector obtained above
+```
+
+## Using the pulled variable for descriptive statistics
+
+I.e., Standard Deviation can be calculated using the `sd()` function.
+
+```{r, echo=TRUE}
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  #extracts the column named "Duration__in_seconds_" from the data frame as a vector
+  sd(na.rm = TRUE)
+  #sd() function applied to the vector obtained above
+```
+
+## Summarise
+
+`summarise()` creates a new data frame. It returns a single row summarising all observations in the input.
+
+```{r, echo=TRUE}
+ads_data %>%
+  summarise(mean_time = mean(Duration__in_seconds_, na.rm = TRUE),
+            #mean of the "Duration__in_seconds_" column using the mean() function
+            sd_time = sd(Duration__in_seconds_, na.rm = TRUE))
+            #standard deviation of "Duration__in_seconds_" column using the sd() function
+```
+
+## Grouping
+
+Before summarising, we can group by a categorical variable. `summarise()` will create a new data frame and return one row for each combination of grouping variables;
+
+```{r, echo=TRUE, results="hide"}
+ads_data %>%
+  group_by(Gender) %>%
+  #groups the data frame by the "Gender" column using the group_by() function
+  #perform subsequent calculations separately for each unique value in the "Gender" column.
+  summarise(count = n(), 
+            #count of observations within each group,
+            mean_time = mean(Duration__in_seconds_, na.rm = TRUE),
+            #mean of the "Duration__in_seconds_" column using the mean() function
+            sd_time = sd(Duration__in_seconds_, na.rm = TRUE))
+            #standard deviation of "Duration__in_seconds_" column using the sd() function
+```
+
+## Grouping
+
+```{r, echo=FALSE}
+ads_data %>%
+  group_by(Gender) %>%
+  #groups the data frame by the "Gender" column using the group_by() function
+  #perform subsequent calculations separately for each unique value in the "Gender" column.
+  summarise(count = n(), 
+            mean_time = mean(Duration__in_seconds_, na.rm = TRUE),
+            sd_time = sd(Duration__in_seconds_, na.rm = TRUE))
+  #count of observations within each group,
+  #mean and standard deviation of "Duration__in_seconds_" column using the mean() and sd() function
+```
+
+## Manipulation application: data cleaning
+
+## Data cleaning
+
+```{r, include=F, echo=F, message=F, warning=F}
+ces_2019_raw <- read.csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-AllFiles%20/4_manipulation/ces_2019_raw.csv")
+
+CES_data <- ces_2019_raw %>%
+  filter(cps19_Q_TotalDuration < 60 * 60) %>%
+  mutate(cps19_province = fct_recode(factor(cps19_province),
+                                       "Alberta" = "14",
+                                       "British Columbia" = "15", 
+                                       "Manitoba" = "16",
+                                       "New Brunswick" = "17",
+                                       "Newfoundland and Labrador" = "18",
+                                       "Nova Scotia" = "20",
+                                       "Nunavut" = "21",
+                                       "Ontario" = "22",
+                                     "Northwest Territories" = "19",
+                                     "Prince Edward Island" = "23",
+                                     "Quebec" = "24",
+                                     "Saskatchewan" = "25",
+                                     "Yukon" = "26"),
+         cps19_votechoice = fct_recode(factor(cps19_votechoice),
+                                       "Liberal Party" = "1",
+                                       "Conservative Party" = "2", 
+                                       "NDP" = "3",
+                                       "Bloc Québécois" = "4",
+                                       "Green Party" = "5",
+                                       "People's Party" = "6",
+                                       "Another party" = "7",
+                                       "Don't know/ Prefer not to answer" = "9"),
+         cps19_fed_donate = fct_recode(factor(cps19_fed_donate),
+                                       "Yes" = "1",
+                                       "No" = "2", 
+                                       "Don't know/ Prefer not to answer" = "3"),
+         cps19_vote_2015 = fct_recode(factor(cps19_vote_2015),
+                                       "Liberal Party" = "1",
+                                       "Conservative Party" = "2", 
+                                       "NDP" = "3",
+                                       "Bloc Québécois" = "4",
+                                       "Green Party" = "5",
+                                       "Another party" = "6",
+                                       "Don't know/ Prefer not to answer" = "7"),
+         cps19_news_cons = fct_recode(factor(cps19_news_cons),
+                                       "0 minutes" = "1",
+                                       "1-10 minutes" = "2", 
+                                       "11-30 minutes" = "3",
+                                       "31-60 minutes" = "4",
+                                       "Between 1 and 2 hours" = "5",
+                                       "More than 2 hours" = "6",
+                                       "Don't know/ Prefer not to answer" = "7"),
+         cps19_gender = fct_recode(factor(cps19_gender),
+                                       "M" = "1",
+                                       "F" = "2", 
+                                       "NB" = "3"),
+         cps19_spend_educ = fct_recode(factor(cps19_spend_educ),
+                                       "Spend less" = "1",
+                                       "Spend about the same as now" = "2", 
+                                       "Spend more" = "3",
+                                   "Don't know/ Prefer not to answer" = "4"),
+         cps19_prov_gov_sat = fct_recode(factor(cps19_prov_gov_sat),
+                                     "Very satisfied" = "1",
+                                       "Fairly satisfied" = "2",
+                                       "Not very satisfied" = "3",
+                                       "Not at all satisfied" = "4",
+                                       "Don't know/prefer not to answer" = "5"),
+         cps19_prov_id = fct_recode(factor(cps19_prov_id),
+                                "Liberal" = "281",
+                                  "NDP" = "282",
+                                  "Green" = "283",
+                                  "Progressive Conservative" = "292",
+                                  "Another party" = "295",
+                                  "None" = "296",
+                                  "Don't know/prefer not to answer" = "297"),
+         cps19_union = fct_recode(factor(cps19_union),
+                                       "Yes" = "1",
+                                       "No" = "2", 
+                                       "Don't know/ Prefer not to answer" = "3"),
+         cps19_bornin_canada = fct_recode(factor(cps19_bornin_canada),
+                                       "Yes" = "1",
+                                       "No" = "2", 
+                                       "Don't know/ Prefer not to answer" = "3"),
+         cps19_income_number = ifelse(cps19_income_number > 1000000,
+                                      NA,
+                                      cps19_income_number),
+         cps19_turnout_2015 = fct_recode(factor(cps19_turnout_2015),
+                                     "Yes" = "1",
+                                       "No" = "2",
+                                       "Not eligible to vote in last election" = "3",
+                                        "Don't know/ Prefer not to answer" = "4"),
+         cps19_household = ifelse(cps19_household < 100, cps19_household, NA)
+         )
+```
+
+Graphing year of birth shows that it goes from 1 to about 80.
+
+```{r warning=FALSE, message=FALSE, fig.height=5, fig.width=11}
+ces_2019_raw %>%
+  ggplot(aes(x = cps19_yob)) +
+  geom_histogram()
+```
+
+## Data cleaning
+
+The codebook says that a value of 1 corresponds to a birth year of 1920, value of 2 to a birth year of 1921, and so on. We can create a new variable that reads more intuitively.
+
+```{r}
+CES_data <- ces_2019_raw %>%
+  mutate(cps19_yob_fix = cps19_yob + 1919)
+  #create new column called "cps19_yob_fix" where 1919 
+  #is added to the value in the column cps19 
+```
+
+## Data cleaning
+
+```{r warning=FALSE, message=FALSE, fig.height=5, fig.width=11}
+CES_data %>%
+  ggplot(aes(x = cps19_yob_fix)) +
+  geom_histogram()
+```
+
+Better!
+
+## Add a variable for age
+
+Now that we have an accurate birth year, maybe we would like to have the age of the individual as well.
+
+```{r}
+CES_data <- CES_data %>%
+  mutate(age = 2019 - cps19_yob_fix)
+  #create a new column "age" which is the current year of the data (2019)
+  #subtracted by the year of birth column "cps19_yob_fix"
+```
+
+## Add a variable for age
+
+```{r warning=FALSE, message=FALSE, fig.height=5, fig.width=11}
+CES_data %>%
+  ggplot(aes(x = age)) +
+  geom_histogram()
+```
+
+## Recoding the gender variable
+
+```{r warning=FALSE, message=FALSE, fig.height=5, fig.width=11}
+CES_data %>%
+  ggplot(aes(x = cps19_gender)) + 
+  geom_bar()
+```
+
+## Recoding the gender variable
+
+```{r}
+CES_data <- CES_data %>%
+  mutate(cps19_gender_fix = factor(cps19_gender)) %>%
+  #create a new column called "cps19_gender_fix" that takes the original
+  #column "cps19_gender" and recodes it into a factor
+  mutate(cps19_gender_fix = fct_recode(cps19_gender_fix,
+  #modify the column "cp19_gender_fix" so that 
+                                       "M" = "1", #1 is recoded as M
+                                       "F" = "2", #2 is recoded as F
+                                       "NB" = "3")) #3 is recoded as NB
+```
+
+## Recoding the gender variable
+
+```{r warning=FALSE, message=FALSE, fig.height=5, fig.width=11}
+CES_data %>%
+  ggplot(aes(x = cps19_gender_fix)) + 
+  geom_bar()
+```
+
+## Fixing household counts
+
+```{r warning=FALSE, message=FALSE, fig.height=5, fig.width=11}
+CES_data %>%
+  filter(cps19_household > 10) %>% 
+  #filter data frame to only display household counts above 10
+  arrange(-cps19_household) %>%
+  #arrange household counts in descending order (-)
+  pull(cps19_household)
+  #extract household counts from the data frame as a vector.
+```
+
+## Fixing household counts
+
+```{r}
+CES_data <- CES_data %>%
+  mutate(cps19_household = ifelse(cps19_household > 15, 
+                                  NA, 
+                                  cps19_household))
+  #modify cps19_household so that if household is > 15 replace with NA, or else leave unchanged
+CES_data %>%
+  filter(cps19_household > 10) %>%
+  #filter the data frame to keep only the rows where "cps19_household" is greater than 10. 
+  pull(cps19_household)
+  #extracts the "cps19_household" column from the filtered data frame and return vector
+```
+
+## Fixing income
+
+```{r warning=FALSE, message=FALSE, fig.height=5, fig.width=11}
+CES_data %>%
+  filter(cps19_income_number > 1000000) %>%
+  #filter the data frame to keep only the rows where "cps19_income_number" 
+  #is greater than 1 million
+  arrange(-cps19_income_number) %>%
+  #arrange "cps19_income_number" in descending order
+  pull(cps19_income_number)
+  #extracts the "cps19_income_number" column from the filtered data frame and return vector
+```
+
+## Fixing income
+
+```{r}
+CES_data <- CES_data %>%
+  mutate(cps19_income_number = ifelse(cps19_income_number >= 1000000000, 
+                                  NA, 
+                                  cps19_income_number))
+  #modify cps19_income number so that if income is > or equal to 100 million 
+  #replace with NA, or else leave unchanged
+CES_data %>%
+  filter(cps19_income_number > 1000000) %>%
+  #filter the data frame to keep only the rows where "cps19_income_number" 
+  #is greater than 1 million
+  pull(cps19_income_number)
+  #extracts the "cps19_income_number" column from the filtered data frame and return vector
+```
+
+## Manipulation application: Summarising data
+
+## Summarising data
+
+```{r, include=F, echo=F, message=F, warning=F}
+ces_2019_raw <- read.csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-AllFiles%20/4_manipulation/ces_2019_raw.csv")
+
+CES_data <- ces_2019_raw %>%
+  filter(cps19_Q_TotalDuration < 60 * 60) %>%
+  mutate(cps19_province = fct_recode(factor(cps19_province),
+                                       "Alberta" = "14",
+                                       "British Columbia" = "15", 
+                                       "Manitoba" = "16",
+                                       "New Brunswick" = "17",
+                                       "Newfoundland and Labrador" = "18",
+                                       "Nova Scotia" = "20",
+                                       "Nunavut" = "21",
+                                       "Ontario" = "22",
+                                     "Northwest Territories" = "19",
+                                     "Prince Edward Island" = "23",
+                                     "Quebec" = "24",
+                                     "Saskatchewan" = "25",
+                                     "Yukon" = "26"),
+         cps19_votechoice = fct_recode(factor(cps19_votechoice),
+                                       "Liberal Party" = "1",
+                                       "Conservative Party" = "2", 
+                                       "NDP" = "3",
+                                       "Bloc Québécois" = "4",
+                                       "Green Party" = "5",
+                                       "People's Party" = "6",
+                                       "Another party" = "7",
+                                       "Don't know/ Prefer not to answer" = "9"),
+         cps19_fed_donate = fct_recode(factor(cps19_fed_donate),
+                                       "Yes" = "1",
+                                       "No" = "2", 
+                                       "Don't know/ Prefer not to answer" = "3"),
+         cps19_vote_2015 = fct_recode(factor(cps19_vote_2015),
+                                       "Liberal Party" = "1",
+                                       "Conservative Party" = "2", 
+                                       "NDP" = "3",
+                                       "Bloc Québécois" = "4",
+                                       "Green Party" = "5",
+                                       "Another party" = "6",
+                                       "Don't know/ Prefer not to answer" = "7"),
+         cps19_news_cons = fct_recode(factor(cps19_news_cons),
+                                       "0 minutes" = "1",
+                                       "1-10 minutes" = "2", 
+                                       "11-30 minutes" = "3",
+                                       "31-60 minutes" = "4",
+                                       "Between 1 and 2 hours" = "5",
+                                       "More than 2 hours" = "6",
+                                       "Don't know/ Prefer not to answer" = "7"),
+         cps19_gender = fct_recode(factor(cps19_gender),
+                                       "M" = "1",
+                                       "F" = "2", 
+                                       "NB" = "3"),
+         cps19_spend_educ = fct_recode(factor(cps19_spend_educ),
+                                       "Spend less" = "1",
+                                       "Spend about the same as now" = "2", 
+                                       "Spend more" = "3",
+                                   "Don't know/ Prefer not to answer" = "4"),
+         cps19_prov_gov_sat = fct_recode(factor(cps19_prov_gov_sat),
+                                     "Very satisfied" = "1",
+                                       "Fairly satisfied" = "2",
+                                       "Not very satisfied" = "3",
+                                       "Not at all satisfied" = "4",
+                                       "Don't know/prefer not to answer" = "5"),
+         cps19_prov_id = fct_recode(factor(cps19_prov_id),
+                                "Liberal" = "281",
+                                  "NDP" = "282",
+                                  "Green" = "283",
+                                  "Progressive Conservative" = "292",
+                                  "Another party" = "295",
+                                  "None" = "296",
+                                  "Don't know/prefer not to answer" = "297"),
+         cps19_union = fct_recode(factor(cps19_union),
+                                       "Yes" = "1",
+                                       "No" = "2", 
+                                       "Don't know/ Prefer not to answer" = "3"),
+         cps19_bornin_canada = fct_recode(factor(cps19_bornin_canada),
+                                       "Yes" = "1",
+                                       "No" = "2", 
+                                       "Don't know/ Prefer not to answer" = "3"),
+         cps19_income_number = ifelse(cps19_income_number > 1000000,
+                                      NA,
+                                      cps19_income_number),
+         cps19_turnout_2015 = fct_recode(factor(cps19_turnout_2015),
+                                     "Yes" = "1",
+                                       "No" = "2",
+                                       "Not eligible to vote in last election" = "3",
+                                        "Don't know/ Prefer not to answer" = "4"),
+         cps19_household = ifelse(cps19_household < 100, cps19_household, NA)
+         )
+```
+
+First we can select only data for Ontario using `filter()`:
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario")
+  #filter the data frame to keep only the rows where the province is Ontario 
+```
+
+## Summarising data
+
+We don't need to be dealing with all the columns. We can specifically select the ones we want using `select()`:
+
+"How satisfied are you with the performance of your provincial government under \${e://Field/premier}?", "In provincial politics, do you usually think of yourself as a:", and income.
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  #filter the data frame to keep only the rows where the province is Ontario
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number)
+  #select only columns on interest from the data frame
+```
+
+## Summarising data
+
+Now that our data looks like what we would like it to, we can start creating a summary table. Since we have the income for each participant, we can look at median incomes. We also want to know how many participants are in each category.
+
+First, we can group the data by provincial political self-ID. To do this, we use `group_by()` to group the data and `summarise()` to produce values for each group we have created. We will start with calculating the `median()` for the incomes. We can add multiple arguments to the `summarise()` argument. `n()` adds a count for each group.
+
+## Summarising data
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  #filter the data frame to keep only the rows where the province is Ontario
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  #select only columns on interest from the data frame
+  group_by(cps19_prov_id) %>%
+  #group data by provincial identification (i.e., Liberal, NDP etc.)
+  summarise(median_income = median(cps19_income_number,
+                                   na.rm = TRUE),
+            #median income of each group using the median() function
+            count = n())
+            #count of observations within each group
+```
+
+## Grouping
+
+We could order the parties in a way that makes more sense:
+
+```{r, eval=F}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  #filter the data frame to keep only the rows where the province is Ontario
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  #select only columns on interest from the data frame
+  mutate(cps19_prov_id = factor(cps19_prov_id,
+                                     levels = c("Liberal",
+                                                "Progressive Conservative",
+                                                "NDP",
+                                                "Green",
+                                                "Another party",
+                                                "None",
+                                                "Don't know/prefer not to answer"))) %>%
+  #modify provincial self ID column so that it is releveled as factors in order
+  group_by(cps19_prov_id) %>%
+  #group data by provincial identification (i.e., Liberal, NDP etc.)
+  summarise(median_income = median(cps19_income_number,
+                                   na.rm = TRUE),
+            #median income of each group using the median() function
+            count = n())
+            #count of observations within each group
+```
+
+## Grouping
+
+What happens if we group by political satisfaction instead?
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  #filter the data frame to keep only the rows where the province is Ontario
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  #select only columns on interest from the data frame
+  group_by(cps19_prov_gov_sat) %>%
+  #group data by provincial satisfaction
+  summarise(median_income = median(cps19_income_number,
+                                   na.rm = TRUE),
+            #median income of each group using the median() function
+            count = n())
+            #count of observations within each group
+```
+
+## Grouping
+
+Or we could sort by median income. We can do that using `arrange()`:
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  #filter the data frame to keep only the rows where the province is Ontario
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  #select only columns on interest from the data frame
+  group_by(cps19_prov_id) %>%
+  #group data by provincial identification (i.e., Liberal, NDP etc.)
+  summarise(median_income = median(cps19_income_number,
+                                   na.rm = TRUE),
+            #median income of each group using the median() function
+            count = n()) %>%
+            #count of observations within each group
+  arrange(-median_income)
+  #arrange dataframe so that median income is in descending order
+```
+
+## Grouping
+
+`group_by()` can also have multiple arguments, so we can group by `cps19_prov_gov_sat` and `cps19_prov_id` at the same time:
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  #filter the data frame to keep only the rows where the province is Ontario
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  #select only columns on interest from the data frame
+  mutate(cps19_prov_id = factor(cps19_prov_id,
+                                     levels = c("Liberal",
+                                                "Progressive Conservative",
+                                                "NDP",
+                                                "Green",
+                                                "Another party",
+                                                "None",
+                                                "Don't know/prefer not to answer"))) %>%
+  #modify provincial self ID column so that it is releveled as factors in order
+  
+  mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat,
+                                     levels = c("Not at all satisfied",
+                                                "Not very satisfied",
+                                                "Fairly satisfied",
+                                                "Very satisfied",
+                                                "Don't know/prefer not to answer"))) %>%
+  #modify provincial satisfaction column so that it is releveled as factors in order
+  group_by(cps19_prov_gov_sat, cps19_prov_id) %>%
+  #group data by provincial identification and satisfaction
+  summarise(median_income = median(cps19_income_number,
+                                   na.rm = TRUE))
+  #median income of each group using the median() function
+```
+
+## Grouping
+
+This table is less easy to read, though. `spread()` can make a table that is wide rather than long. We specify the `key`, the variable that will become our column names, and the `value`, which will become the values in those columns:
+
+```{r, eval=F}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  #filter the data frame to keep only the rows where the province is Ontario
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  #select only columns on interest from the data frame
+  mutate(cps19_prov_id = factor(cps19_prov_id,
+                                     levels = c("Liberal",
+                                                "Progressive Conservative",
+                                                "NDP",
+                                                "Green",
+                                                "Another party",
+                                                "None",
+                                                "Don't know/prefer not to answer"))) %>%
+  #modify provincial self ID column so that it is releveled as factors in order
+  
+  mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat,
+                                     levels = c("Not at all satisfied",
+                                                "Not very satisfied",
+                                                "Fairly satisfied",
+                                                "Very satisfied",
+                                                "Don't know/prefer not to answer"))) %>%
+  #modify provincial satisfaction column so that it is releveled as factors in order
+  group_by(cps19_prov_gov_sat, cps19_prov_id) %>%
+  #group data by provincial identification and satisfaction
+  summarise(median_income = median(cps19_income_number,
+                                   na.rm = TRUE)) %>%
+  #median income of each group using the median() function
+  spread(key = cps19_prov_gov_sat, 
+         value = median_income) 
+  #function spreads the values from the key into separate columns, 
+  #resulting in a wide format data frame
+```
+
+# Exercises
+
+## Exercises
+
+1.  Filter the rows in the CES_data dataset where the survey-taker is between 30 and 50 (cps19_age).
+2.  Filter the rows in the CES_data dataset where the survey-taker answered the cps19_votechoice question (i.e. the cps19_votechoice variable is not NA).
+3.  Select the variables cps19_age and cps19_province from the CES_data dataset.
+4.  Select all variables except cps19_province from the CES_data dataset.
+
+# Exercises
+
+1.  Create a variable in the dataset CES_data that states if a person consumes news content or not (i.e. cps19_news_cons is equal to "0 minutes" or it is not).
+2.  Modify the variable cps19_income_number in the dataset CES_data so that it is measured in thousands (i.e. divide the income number by 1000).
+
+# Exercises
+
+1.  Use the CES_data dataset. Group by cps19_votechoice. Find both the median and mean rating of Trudeau (cps19_lead_rating_23):
+2.  Use the CES_data dataset. Group by cps19_imm and cps19_spend_educ. Find the count for each group.
+
+# Exercises
+
+-   1 - Fix this error:
+
+```{r, echo = TRUE, eval=F}
+CES_data %>%
+  summarise(mean = mean(cps19_age)) %>%
+  group_by(cps19_gender)
+```
+
+-   2 - Fix this error:
+
+```{r, echo = TRUE, eval=F}
+CES_data %>%
+  filter(cps19_vote_choice == "Green Party")
+```
+
+# Exercises
+
+-   3 - Fix this error:
+
+```{r, echo = TRUE, eval=F, }
+CES_data %>%
+  mutate(cps19_fed_donate = factor(cps19_fed_donate,
+                                     levels = c("Yes",
+                                                "No",
+                                                "Don't know/ Prefer not to answer"))
+```
+
+-   4 - Fix this error:
+
+```{r, echo = TRUE, eval=F}
+CES_data %>%
+  select(cps19_province
+         cps19_age
+         cps19_gender)
+```
+
+# Any questions?
