@@ -1,0 +1,304 @@
+---
+title: "class_2"
+author: "Julia"
+date: "2023-06-01"
+output: html_document
+---
+Class 2
+Lesson 02
+
+```{r}
+sessionInfo() # to see base packages in R
+library(help = "base")
+library(help = "stats")
+library(help = "datasets")
+data() # access built in functions in R
+```
+
+To download a package from CRAN
+```{r}
+#for example
+install.packages("tidyverse") # to download
+library("tidyverse") #to attach the package to the current R session
+?tidyverse
+ls("package:tidyverse") # to list all functions
+tidyverse_packages()
+
+```
+
+What to do if you come across an issue?
+```{r}
+log("a")
+```
+RStudio Community to get help
+https://community.rstudio.com/
+
+reprex: reproducible examples
+1. Environment; 
+```{r}
+sessionInfo()
+```
+
+2. Toy dataset if you're working with a large data frame, subset!
+
+3. Code
+```{r}
+#install.package("reprex)
+library(reprex)
+
+reprex({
+  ####paste code
+})
+
+reprex({
+  log("a")
+})
+```
+
+Lesson 03
+
+Different element types
+
+```{r}
+exampleElement <- "Hello word"
+typeof(exampleElement) # "character"
+```
+```{r}
+1 # is treated like 1.0
+typeof(1) # "double"
+```
+```{r}
+1L # 1
+typeof(1L) # "integer"
+```
+
+Logical type: TRUE and FALSE are reserved words denoting logical constants
+```{r}
+TRUE
+typeof(TRUE) # "logical"
+```
+
+complex consists of a real part and an imaginary part, 
+```{r}
+typeof(3 + 1i) # "complex"
+```
+
+atomic vectors
+c function: Combine Values into a Vector or List
+```{r}
+c()
+?c
+```
+
+numeric vector
+```{r}
+doubleVector <- c(1, 2, 3, 4)
+typeof(doubleVector) # "double"
+```
+```{r}
+integerVector <- c(1L, 2L, 3L, 4L)
+typeof(integerVector) # "integer"
+integerVector
+length(integerVector)
+```
+
+Note: Data that are of type double can store general numeric values. 
+An integer can only take whole number values and requires an L to be 
+added after the number to tell R you want the number stored as an integer
+
+logical vectors
+```{r}
+logicalVector <- c(TRUE, FALSE, TRUE, TRUE)
+typeof(logicalVector) # "logical"
+```
+
+The sum() function will treat TRUE as 1 and FALSE as 0
+```{r}
+logicalVector2 <- c(TRUE, FALSE, TRUE, TRUE, NA)
+typeof(logicalVector2)
+sum(logicalVector) #3 TRUES
+sum(logicalVector2, na.rm = TRUE) # 3 TRUES
+?sum
+```
+
+Character vectors
+```{r}
+characterVector <- c("hello", "world", "DSI")
+typeof(characterVector)
+```
+
+Coercion
+converting one type to another of vector
+1. Automatic - R decides
+2. Explicit - User decides
+
+Automatic /implicit coercion
+The general principle is that R tries to preserve as much information as possible during implicit coercion. 
+
+```{r}
+mixVector <- c("hello", TRUE, 1L, 2.5, 4+1i)
+mixVector
+typeof(mixVector) # "character"
+```
+```{r}
+mixVector2 <- c(TRUE, 1L, 2.5, 4+1i)
+typeof(mixVector2) # "complex"
+```
+
+Explicit coercion - as.* function
+
+```{r}
+characterVector2 <- c("1", "2", "3")
+typeof(characterVector2) # "character"
+```
+
+```{r}
+numericVector2 <- as.numeric(characterVector2)
+typeof(numericVector2) # "double"
+mean(numericVector2)
+```
+
+```{r}
+numericVector3 <- as.integer(characterVector2)
+typeof(numericVector3) # "integer"
+mean(numericVector3)
+```
+
+```{r}
+numericVector4 <- as.logical(characterVector2)
+typeof(numericVector4) # "logical"
+numericVector4 # NA NA NA
+
+```
+
+vector recycled
+```{r}
+1:5 + 6:10
+```
+# 1 2 3 4 5
+# 6 7 8 9 10
+
+```{r}
+1:2 + 1:4
+```
+# 1 2 1 2
+# 1 2 3 4
+
+```{r}
+1:2  + 1:5
+```
+# 1 2 1 2 1
+# 1 2 3 4 5
+
+
+Naming
+you can use the names() function to assign names to the elements of a vector or retrieve the names assigned to a vector
+```{r}
+?names
+exampleVector <- c(1:5)
+exampleVector
+names(exampleVector) # NULL
+length(exampleVector)
+# letters is reserved for alphabet letters
+names(exampleVector) <- letters[1:5]
+names(exampleVector) # "a" "b" "c" "d" "e"
+exampleVector
+
+namedVector <- c(a = 100, b = 200, c = 80)
+namedVector
+
+namedVector['c']
+namedVector[c('a','b')]
+namedVector[3]
+namedVector[c(-1,-2)]
+
+```
+
+```{r}
+namedVector[c(TRUE, TRUE, FALSE)]
+namedVector[namedVector == 100]
+```
+
+
+```{r}
+mylist <- list(7, "abc", FALSE)
+mylist
+str(mylist)
+
+mylist <- list(a = 1:4, b = "zyx", c = list(-1, -5))
+mylist[[2]]
+mylist$b
+```
+
+```{r}
+mytibble <- tibble(x = 1:5,
+       y = 1,
+       z = x ^ 2 + y)
+mytibble
+```
+```{r}
+library(tidyverse)
+library(dplyr)
+data("iris")
+head(iris)
+
+iris_tibble<- as_tibble(iris)
+iris_tibble
+```
+
+```{r}
+iris$Species
+
+iris[["Species"]]
+
+iris %>% 
+  .$Species
+
+iris %>%
+  .[["Species"]]
+```
+
+```{r}
+library(stringr)
+str_length("this is a string")
+
+str_c("this is a string", "6" ,sep = " ")
+
+str_sub("this is a string", 1, 4)
+
+str_to_lower("HI MY NAME IS JULIA")
+str_to_upper("hi my name is julia")
+str_to_title("hi my name is julia")
+
+myfruits <- c("apple", "banana",
+              "clementime", "dragonfruit")
+
+?str_view
+
+str_view(myfruits, "an")
+
+str_view(myfruits, ".a")
+
+mystring <- c(".", "x","y")
+str_view(mystring, "\\.")
+
+mystring <- c("Hello ! \\")
+str_view(mystring, "\\\\")
+
+str_view(myfruits, "^a")
+str_view(myfruits, "a$")
+
+mystring <- "abcccdeee"
+str_view(mystring, "cc?")
+str_view(mystring, "cc+")
+str_view(mystring, "c[de]+")
+
+mystring <- c("abab", "cdcd", "efgh")
+str_view(mystring, "(..)\\1", match = T)
+
+mystring <- c("banana", "dodo", "apple")
+str_detect(mystring, "(..)\\1")
+str_subset(mystring, "(..)\\1")
+str_count(mystring, "(..)\\1")
+str_locate(mystring, "(..)\\1")
+```
