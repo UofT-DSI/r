@@ -2,7 +2,7 @@
 title: "Live_coding"
 output: html_document
 author: Julia Gallucci
-date: "2023-05-29"
+date: "2023-06-03"
 ---
 Class 3
 Lesson 03
