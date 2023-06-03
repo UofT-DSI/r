@@ -1,0 +1,435 @@
+---
+title: "Live_coding"
+output: html_document
+author: Julia Gallucci
+date: "2023-05-29"
+---
+Class 3
+Lesson 03
+
+Question from class 2
+When would you use an integer over a double?
+
+In situations where you dont require a decimal, you might choose to use an integer over a double. 
+By using integers, you can save memory since they typically occupy less space than doubles. 
+This can be beneficial when working with large datasets or in scenarios where memory optimization is crucial. Also, mathemeatic operations on integers are generally faster than on doubles.
+
+```{r}
+age_int <- as.integer(1:100)
+typeof(age_int)
+
+age_double <- as.double(1:100)
+typeof(age_double)
+
+object.size(age_int)
+object.size(age_double)
+```
+
+Question from class 2: 
+str_view is likely useful for looking at nucleotide/protein sequences
+
+```{r}
+#protr package is an R package specifically designed for protein sequence analysis.
+library("protr")
+ls("package:protr") # list all the function
+?protr
+?readFASTA #FASTA format is a commonly used file format for storing biological sequences, including protein and nucleotide sequences.
+
+P00750 <- readFASTA(system.file("protseq/P00750.fasta",
+                                package = "protr"))
+P00750
+stringr::str_view_all(P00750, "CGA")
+stringr::str_view_all(P00750, "CG")
+stringr::str_count(P00750, "CG") # 4 
+```
+
+Factors
+```{r}
+library(forcats)
+month_levels <- month.abb
+month_levels
+typeof(month_levels)
+
+months <- c("Dec", "Apr", "Jan", "Mar")
+months
+
+month_fix <- factor(months, month_levels)
+month_fix
+view(month_fix)
+fct_recode(month_fix, "December" = "Dec")
+```
+
+Recoding a factor variable
+```{r}
+letters_ABC <- factor(c("A","B","C","A","B","C"))
+letters_ABC
+table(letters_ABC)
+
+letters_NEWABC <- fct_recode(letters_ABC,
+                             "New A" ="A",
+                             "New B" = "B",
+                             "New C" = "C")
+
+letters_NEWABC
+```
+
+```{r}
+today()
+now()
+lubridate::ymd("1998-05-18")
+lubridate::mdy("May 18th, 1998")
+lubridate::ymd(19980518)
+lubridate::dmy("18-May-1998")
+
+today()
+as_datetime(today())
+now()
+as_date(now())
+as_datetime(now())
+
+datetime <- ymd_hms("2016-07-08 12:34:56")
+year(datetime)
+month(datetime)
+mday(datetime)
+yday(datetime)
+
+wday(datetime)
+hour(datetime)
+minute(datetime)
+second(datetime)
+
+today() - ymd("2000-01-01")
+
+as.duration(today() - ymd("2000-01-01"))
+
+dseconds(120)
+
+dminutes(60)
+
+dhours(c(12,24))
+
+ddays(0:7)
+
+dweeks(4)
+
+dyears(10)
+
+today()+ years(2)
+
+today() + months(1)
+
+today()+ days(1)
+
+today() + hours(1)
+today() + minutes(1)
+today() + seconds(1)
+today() + hours(1) +minutes(1) + seconds(1)
+
+ymd_hms("2023-06-03 09:47:50", tz = "America/New_York")
+```
+
+Missing data
+```{r}
+NA > 5
+NA == 10
+NA + 5
+NA == NA
+
+is.na(NA)
+```
+
+Exercises
+1. Make a tibble where the vectors do not have equal length. What happens?
+```{r}
+mytibble <- tibble(
+  A = 1:10,
+  B = 1
+)
+mytibble
+```
+
+2. In the following tibble, extract variable B:
+```{r}
+mytibble <- tibble(
+  A = 1:10,
+  B = A * 2
+)
+mytibble
+
+mytibble$B
+mytibble[[2]]
+mytibble[["B"]]
+
+mytibble$A
+mytibble[[1]]
+mytibble[["A"]]
+
+# [row,column]
+mytibble[2,2]
+mytibble[2,]
+```
+Try using functions paste() and paste0(). Compare them to str_c(), how do they work differently?
+```{r}
+paste("Hi","my", "name","is","julia")
+paste0("Hi","my", "name","is","julia")
+str_c("Hi","my", "name","is","julia", sep = "-")
+```
+
+Look up the function str_trim() and demonstrate application.
+```{r}
+str_trim("Hi my name is Julia       ")
+```
+
+Given the text "Hello, world! \\." match the sequence "\" with a regular expression
+```{r}
+text <- "Hello, world! \\."
+str_view(text, "\\\\")
+```
+
+Given the text "x-ray" match words that start with x with a regular expression
+```{r}
+text <- c("x-ray", "cat", "excellent")
+str_view(text,"^x")
+```
+Given the text "cat, hat, dog, rat" match words that contain the regular expression at
+```{r}
+text <- c("cat", "hat", "dog", "rat")
+str_view(text, "at")
+```
+Given the text LETTERS (A-Z), match only those of vowels with a regular expression
+```{r}
+str_view(LETTERS, "[AEIOU]")
+```
+What does ^.*$ match?
+```{r}
+str_view(1:10, "^.*$")
+
+text <- "Hello world"
+
+str_view(text, "^.*$")
+```
+What would happen if we parse a string with invalid dates?
+```{r}
+ymd("2023-02-30")
+```
+
+Lesson 04
+```{r}
+library(haven)
+ads_data <- haven::read_sav("ads_raw.sav") #load dataset ads_raw
+```
+
+Let's view our data!
+```{r}
+library(dplyr)
+glimpse(ads_data) 
+```
+
+Let's manipulate our data!
+```{r}
+filter(ads_data, Duration__in_seconds_ < 200)
+#filter our data frame ads_data so that we are only extracting rows that satisfy the condition of "duration in seconds" less than 200
+
+arrange(ads_data, -Duration__in_seconds_) #descending order
+
+arrange(ads_data, Duration__in_seconds_) #ascending order
+
+#arrange our data frame ads_data, so that we are sorting our values from either increasing or decreasing duration in seconds
+
+select(ads_data, RecordedDate)
+#select from our data frame only the column RecordedDate.
+
+select(ads_data, -Consent, -DistributionChannel)
+#select from our data frame all columns EXCEPT (-) Consent and DistributionChannel columns
+
+```
+
+Let's use the %>% pipe function to perform multiple operations at once!
+```{r}
+ads_data %>%
+  filter(Duration__in_seconds_ < 100) %>%
+  arrange(Duration__in_seconds_) %>%
+  select(RecordedDate, Duration__in_seconds_)
+
+#from our data frame ads_data we want to 
+# 1. filter so that we only extract rows with a duration in seconds of less than 100
+# 2. arrange our data frame by duration in seconds in increasing order
+# 3. from our data frame ads_data, we want to only select the specified columns
+```
+
+Let's create a new column in our data frame
+```{r}
+ads_data_new <- 
+  ads_data %>%
+  mutate(Birthyear_add_day =
+           str_c(Birthyear, "07-01")) %>%
+  mutate(Birthyear_add_day =
+           as_datetime(Birthyear_add_day))
+
+
+ads_data_new %>%
+  mutate(age = EndDate - Birthyear_add_day) %>%
+  select(EndDate, Birthyear_add_day, age)
+
+#from ads data, create a new column named age, that takes the column end data and subtracts the column birthyear add day from it.
+#selecting only the specified columns
+```
+
+Let's use summary to summarize our data
+```{r}
+summary(ads_data)
+```
+
+Let's use pull() to extract a specific column from our data into a numeric vector
+```{r}
+ads_data %>%
+  pull(Duration__in_seconds_)
+
+
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  median(na.rm= TRUE)
+#from our data frame ads_data
+#we want to 
+#1. extract duration in seconds and vectorize the data
+#2. perform a mathemetical operation on the vectorized data to extract the median of the column
+
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  mean(na.rm = TRUE)
+
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  range(na.rm = TRUE)
+
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  var(na.rm = TRUE)
+
+ads_data %>%
+  pull(Duration__in_seconds_) %>%
+  sd(na.rm = TRUE)
+```
+
+Let's use summarise() to create a new data frame that summarizes our existing data with the specified mathemetical operations
+```{r}
+ads_data %>%
+  summarise(mean_Dur_in_S = mean(Duration__in_seconds_, 
+                             na.rm = TRUE),
+            sd_Dur_in_S = sd(Duration__in_seconds_, 
+                             na.rm= TRUE))
+```
+
+We can group by a categorical variable prior to creating a summary table
+```{r}
+ads_data %>%
+  group_by(Gender) %>%
+  summarise(count = n(),
+            mean_time = mean(Duration__in_seconds_,
+                             na.rm = TRUE),
+            sd_time = sd(Duration__in_seconds_,
+                         na.rm = TRUE))
+
+#given our data frame ads_data
+# 1. group our data by gender (1,2,3)
+# summarize our data
+# 2. get a count using n() of how many instances of each category there are
+# 3. get summary statistics for each of the categories (mean and sd for the column duration in seconds)
+
+
+#why do we use na.rm= TRUE
+test <- c(1:10,NA)
+test
+mean(test)
+mean(test, na.rm = TRUE)
+```
+
+Import data CES data
+```{r}
+CES_data <- read_csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-Data/ces_2019_cleaned.csv")
+
+range(CES_data$cps19_yob)
+
+#create a new column yob_fixed which adds 1919 to original yob column so it's more intuitive
+CES_data_updated <-
+  CES_data %>%
+  mutate(cps19_yob_fix = cps19_yob + 1919)
+
+range(CES_data_updated$cps19_yob_fix)
+
+#create a new column age
+CES_data_updated <-
+  CES_data_updated %>%
+  mutate(age = 2019 - cps19_yob_fix)
+
+CES_data_updated %>%
+  select(cps19_yob_fix, age) #select columns to compare
+```
+
+Recode gender column factors
+```{r}
+library(tidyverse)
+CES_data_updated$cps19_gender
+
+CES_data_updated <-
+  CES_data_updated %>%
+  mutate(cps19_gender_fix = factor(cps19_gender)) %>%
+  mutate(cps19_gender_fix = fct_recode(cps19_gender_fix,
+                                       "1" = "M",
+                                       "2" = "F",
+                                       "3"= "NB"))
+
+CES_data_updated %>%
+  select(cps19_gender_fix, cps19_gender)
+```
+
+perform multiple operations on our data
+1. filtering
+2. arranging
+3. selecting 
+
+```{r}
+CES_data_updated %>%
+  filter(cps19_household > 10) %>%
+  arrange(-cps19_household) %>%
+  select(cps19_household)
+```
+
+Mutate using an ifelse statement
+ifelse(condion, TRUE,FALSE)
+```{r}
+CES_data_updated <-
+  CES_data_updated %>%
+  mutate(cps19_household = ifelse(cps19_household > 15
+                                  , NA,cps19_household))
+CES_data_updated %>%
+  filter(cps19_household > 10) %>%
+  pull(cps19_household)
+```
+
+perform multiple operations on our data
+1. filtering
+2. arranging
+3. pulling
+```{r}
+CES_data_updated %>%
+  filter(cps19_income_number > 100000) %>%
+  arrange(-cps19_income_number) %>%
+  pull(cps19_income_number)
+
+```
+
+Mutate using an ifelse statement
+ifelse(condion, TRUE,FALSE)
+then 
+1. filter
+2. pull
+```{r}
+CES_data_updated <- CES_data_updated %>%
+  mutate(cps19_income_number = ifelse(cps19_income_number>= 100000000, NA,
+                  cps19_income_number))
+
+CES_data_updated %>%
+  filter(cps19_income_number > 100000) %>%
+  pull(cps19_income_number)
+```
