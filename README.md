@@ -113,7 +113,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 5 | Thursday 8 June |  |  |
 | 6 | Saturday 10 June |  |  |
 | 7 | Monday 12 June |  |  |
-| 8 | Thursday 15 June |  |  |
+| 8 | Thursday 15 June | NA  | NA |
 | 9 | Saturday 17 June |  |  |
 
 ## Marking Scheme
