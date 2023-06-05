@@ -86,7 +86,6 @@ Please respond to all the questions sequentially. You have the option to utilize
 
     ```{r}
     #code here
-    #hint, use function from package loaded above for pattern detection!
     ```
 
 12. \[2 marks\] How would you identify which positions contain missing values in 'missing_values_vector' ? (Hint: There could be multiple ways to perform this. One method would be to use the which() and is.na() functions).
