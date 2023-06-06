@@ -1,0 +1,303 @@
+---
+title: "Live coding"
+author: "Julia"
+date: "2023-06-05"
+output: html_document
+---
+Class 3
+Lesson 04 cont'd
+```{r}
+CES_data <- read_csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-Data/ces_2019_cleaned.csv")
+```
+
+```{r}
+table(CES_data$cps19_province)
+
+CES_data %>%
+  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) # selecting only the specified columns of interest
+```
+
+```{r}
+table(CES_data$cps19_prov_id)
+
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  group_by(cps19_prov_id) %>%
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE),
+            count = n())
+```
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  mutate(cps19_prov_id = factor(cps19_prov_id, 
+         levels = c("Liberal", "Progressive Conservative","NDP","Green","Another party","None", "Don't know/prefer not to answer"))) %>%
+  group_by(cps19_prov_id) %>%
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE),
+            count = n())
+```
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  group_by(cps19_prov_gov_sat) %>%
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE),
+            count = n())
+```
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  group_by(cps19_prov_id) %>%
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE) ,
+            count = n()) %>%
+  arrange(-median_income)
+```
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c(
+    "Liberal",
+    "Progressive Conservative",
+    "NDP",
+    "Green",
+    "Another party",
+    "None",
+    "Don't know/prefer not to answer"
+  ))) %>%
+  mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat, levels = c(
+    "Not at all satisfies",
+    "Not very satisfied",
+    "Fairly satisfied",
+    "Very satisfied",
+    "Don't know/prefer not to answer"
+  ))) %>%
+  group_by(cps19_prov_gov_sat, cps19_prov_id) %>%
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE))
+```
+
+```{r}
+CES_data %>%
+  filter(cps19_province == "Ontario") %>%
+  select(cps19_prov_gov_sat,
+         cps19_prov_id,
+         cps19_income_number) %>%
+  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c(
+    "Liberal",
+    "Progressive Conservative",
+    "NDP",
+    "Green",
+    "Another party",
+    "None",
+    "Don't know/prefer not to answer"
+  ))) %>%
+  mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat, levels = c(
+    "Not at all satisfies",
+    "Not very satisfied",
+    "Fairly satisfied",
+    "Very satisfied",
+    "Don't know/prefer not to answer"
+  ))) %>%
+  group_by(cps19_prov_gov_sat, cps19_prov_id) %>%
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE)) %>%
+  spread(key = cps19_prov_gov_sat,
+         value = median_income)
+```
+
+1. Filter the rows in the CES_data where survey taker is between 30 and 50 years old 
+
+```{r}
+CES_data %>%
+  filter(cps19_age > 30 & cps19_age < 50) %>%
+  select(cps19_age) %>%
+  pull(cps19_age) %>%
+  range()
+```
+
+2. Filter the rows in the CES_data where the survey taker answered the cps19_votechoice question (not NA)
+```{r}
+CES_data %>%
+  filter(!(is.na(cps19_votechoice))) %>%
+  select(cps19_votechoice)
+```
+
+3. Selecting the columns cps19_age and cps19_province from CES_data
+```{r}
+CES_data %>%
+  select(cps19_age, cps19_province)
+```
+
+4. Select all but cps19
+```{r}
+CES_data %>%
+  select(-cps19_province)
+```
+
+1. Create new variable in CES_data that tells us whether or not a person consumes news content (cps19_news_cons == 0 minutes OR not)
+```{r}
+CES_data %>%
+  mutate(news_watcher = ifelse(cps19_news_cons == "0 minutes", "Not watcher", "Watcher")) %>%
+  select(cps19_news_cons, news_watcher)
+```
+
+2. Modify the variable cps19_income_number so that its measured in 1000s 
+```{r}
+CES_data %>%
+  mutate(cps19_income_number = cps19_income_number / 1000)
+```
+
+1. CES_data data; group by cps19_votechoice. find median and mean rating for Trudeau
+```{r}
+CES_data %>%
+  select(cps19_lead_rating_23, cps19_votechoice) %>%
+  group_by(cps19_votechoice) %>%
+  summarise(median_rating = median(cps19_lead_rating_23, na.rm = TRUE), mean_rating = mean(cps19_lead_rating_23, na.rm = TRUE))
+```
+
+1. fix error
+```{r}
+CES_data %>%
+  group_by(cps19_gender) %>%
+  summarise(mean = mean(cps19_age)) 
+```
+
+2. fix error
+```{r}
+CES_data %>% filter(cps19_votechoice == "Green Party")
+```
+
+3. fix error
+```{r}
+CES_data %>%
+  mutate(cps19_fed_donate = factor(cps19_fed_donate,
+                                   levels = c("Yes",
+                                              "No",
+                                              "Don't know/ Prefer not to answer")))
+```
+
+4. fix error
+```{r}
+CES_data %>%
+  select(cps19_province,
+         cps19_age,
+         cps19_gender)
+```
+
+Class 3
+Lesson 05 
+
+```{r}
+wide_data <- tibble(
+  year = c(2017, 2018, 2019, 2020, 2021, 2022),
+  milo = c(4,6.3,8,7.9,8.1,8.1),
+  kitty = c(15.6,15.9,14,12.2,10.9, 9.9)
+)
+wide_data
+```
+
+```{r}
+long_data <- wide_data %>%
+  pivot_longer(cols = c("milo", "kitty"),
+               names_to= "cat",
+               values_to = "weight")
+long_data
+```
+
+```{r}
+long_data %>%
+  pivot_wider(names_from = "cat", 
+              values_from = "weight")
+```
+
+```{r}
+employment <- tibble(
+  year = c(1990, 1991, 1992, 1994),
+  rate = c(.05,.02,.04,.02)
+)
+employment
+```
+
+```{r}
+housing <- tibble(
+  date = c(1991, 1992, 1993, 1994, 1995),
+  rate = c(.89,.6,.75,.88,.9)
+)
+
+housing
+```
+
+Inner join
+```{r}
+employment %>%
+  inner_join(housing, by = c("year" = "date"))
+```
+
+Left join
+```{r}
+employment %>%
+  left_join(housing, by = c("year" = "date"))
+```
+
+Right join
+```{r}
+employment %>%
+  right_join(housing, by = c("year" = "date"))
+```
+
+Full join
+```{r}
+employment %>%
+  full_join(housing, by = c("year" = "date"))
+```
+
+Semi-join
+```{r}
+employment %>%
+  semi_join(housing, by= c("year" = "date"))
+```
+Anti-join
+```{r}
+employment %>%
+  anti_join(housing, by = c("year" = "date"))
+```
+
+Data.tables
+```{r}
+library(data.table)
+data("iris")
+dt_iris <- as.data.table(iris)
+dt_iris
+tables()
+
+sapply(dt_iris, class)
+haskey(dt_iris)
+setkey(dt_iris, Species)
+haskey(dt_iris)
+```
+
+```{r}
+dt_iris[Petal.Width > 0.5]
+
+dt_iris[,Species]
+
+dt_iris[,list(Species)]
+```
