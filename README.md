@@ -109,7 +109,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 1 | Monday 29 May | [in-class coding examples](./Lessons-Rscripts/class_1.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class1_Summary.pdf) |
 | 2 | Thursday 1 June | [in-class coding examples](./Lessons-Rscripts/class_2.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class2_Summary.pdf) |
 | 3 | Saturday 3 June | [in-class coding examples](./Lessons-Rscripts/class_3.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class3_Summary.pdf) |
-| 4 | Monday 5 June | [in-class coding examples](./Lessons-Rscripts/class_4.Rmd) |  |
+| 4 | Monday 5 June | [in-class coding examples](./Lessons-Rscripts/class_4.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class4_Summary.pdf)  |
 | 5 | Thursday 8 June |  |  |
 | 6 | Saturday 10 June |  |  |
 | 7 | Monday 12 June |  |  |
