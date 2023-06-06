@@ -6,76 +6,80 @@ output: html_document
 ---
 Class 3
 Lesson 04 cont'd
+
+
+Read in CES data
 ```{r}
 CES_data <- read_csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-Data/ces_2019_cleaned.csv")
 ```
 
+Look at factors in cps19 province using table function 
 ```{r}
 table(CES_data$cps19_province)
 
 CES_data %>%
   filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat,
+  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
          cps19_prov_id,
-         cps19_income_number) # selecting only the specified columns of interest
+         cps19_income_number) 
 ```
 
 ```{r}
 table(CES_data$cps19_prov_id)
 
 CES_data %>%
-  filter(cps19_province == "Ontario") %>%
-  select(cps19_prov_gov_sat,
+  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
+  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
          cps19_prov_id,
          cps19_income_number) %>%
-  group_by(cps19_prov_id) %>%
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE),
+  group_by(cps19_prov_id) %>% #group by province id 
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE), #summary table of median income and count per group
             count = n())
 ```
 
 ```{r}
 CES_data %>%
-  filter(cps19_province == "Ontario") %>%
-  select(cps19_prov_gov_sat,
+  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
+  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
          cps19_prov_id,
          cps19_income_number) %>%
-  mutate(cps19_prov_id = factor(cps19_prov_id, 
+  mutate(cps19_prov_id = factor(cps19_prov_id, #convert province id to factor and level categories to something that makes logical sense
          levels = c("Liberal", "Progressive Conservative","NDP","Green","Another party","None", "Don't know/prefer not to answer"))) %>%
-  group_by(cps19_prov_id) %>%
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE),
+  group_by(cps19_prov_id) %>% #group by province id
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE), #summary table of median income and count per group
             count = n())
 ```
 
 ```{r}
 CES_data %>%
-  filter(cps19_province == "Ontario") %>%
-  select(cps19_prov_gov_sat,
+  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
+  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
          cps19_prov_id,
          cps19_income_number) %>%
-  group_by(cps19_prov_gov_sat) %>%
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE),
+  group_by(cps19_prov_gov_sat) %>% #group by province satisfaction
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE), #summary table of median income and count per group
             count = n())
 ```
 
 ```{r}
 CES_data %>%
-  filter(cps19_province == "Ontario") %>%
-  select(cps19_prov_gov_sat,
+  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
+  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
          cps19_prov_id,
          cps19_income_number) %>%
-  group_by(cps19_prov_id) %>%
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE) ,
-            count = n()) %>%
-  arrange(-median_income)
+  group_by(cps19_prov_id) %>% #group by province satisfaction
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE) ,  #summary table of median income and count per group
+            count = n()) %>% 
+  arrange(-median_income) # arrange by median income in descending order
 ```
 
 ```{r}
 CES_data %>%
-  filter(cps19_province == "Ontario") %>%
-  select(cps19_prov_gov_sat,
+  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
+  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
          cps19_prov_id,
          cps19_income_number) %>%
-  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c(
+  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c( 
     "Liberal",
     "Progressive Conservative",
     "NDP",
@@ -83,25 +87,25 @@ CES_data %>%
     "Another party",
     "None",
     "Don't know/prefer not to answer"
-  ))) %>%
+  ))) %>% #convert province id to factor and level categories to something that makes logical sense
   mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat, levels = c(
     "Not at all satisfies",
     "Not very satisfied",
     "Fairly satisfied",
     "Very satisfied",
     "Don't know/prefer not to answer"
-  ))) %>%
-  group_by(cps19_prov_gov_sat, cps19_prov_id) %>%
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE))
+  ))) %>% #convert province satisfaction to factor and level categories to something that makes logical sense
+  group_by(cps19_prov_gov_sat, cps19_prov_id) %>% #group by both province satisfaction and id
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE)) #summary table of median income per group
 ```
 
 ```{r}
 CES_data %>%
-  filter(cps19_province == "Ontario") %>%
-  select(cps19_prov_gov_sat,
+  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
+  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
          cps19_prov_id,
          cps19_income_number) %>%
-  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c(
+  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c( 
     "Liberal",
     "Progressive Conservative",
     "NDP",
@@ -109,22 +113,23 @@ CES_data %>%
     "Another party",
     "None",
     "Don't know/prefer not to answer"
-  ))) %>%
+  ))) %>% #convert province id to factor and level categories to something that makes logical sense
   mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat, levels = c(
     "Not at all satisfies",
     "Not very satisfied",
     "Fairly satisfied",
     "Very satisfied",
     "Don't know/prefer not to answer"
-  ))) %>%
-  group_by(cps19_prov_gov_sat, cps19_prov_id) %>%
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE)) %>%
-  spread(key = cps19_prov_gov_sat,
+  ))) %>% #convert province satisfaction to factor and level categories to something that makes logical sense
+  group_by(cps19_prov_gov_sat, cps19_prov_id) %>% #group by both province satisfaction and id
+  summarise(median_income = median(cps19_income_number, na.rm = TRUE)) %>% #summary table of median income per group %>%
+  spread(key = cps19_prov_gov_sat, #spread cps19 province satisfaction column across columns
          value = median_income)
 ```
 
-1. Filter the rows in the CES_data where survey taker is between 30 and 50 years old 
+Exercises
 
+1. Filter the rows in the CES_data where survey taker is between 30 and 50 years old 
 ```{r}
 CES_data %>%
   filter(cps19_age > 30 & cps19_age < 50) %>%
@@ -174,6 +179,7 @@ CES_data %>%
 ```
 
 1. fix error
+ ORDERING OF OPERATIONS
 ```{r}
 CES_data %>%
   group_by(cps19_gender) %>%
@@ -181,11 +187,13 @@ CES_data %>%
 ```
 
 2. fix error
+ERROR IN SPELLING OF COLUMN
 ```{r}
 CES_data %>% filter(cps19_votechoice == "Green Party")
 ```
 
 3. fix error
+MISSING CLOSING BRACKET
 ```{r}
 CES_data %>%
   mutate(cps19_fed_donate = factor(cps19_fed_donate,
@@ -195,6 +203,7 @@ CES_data %>%
 ```
 
 4. fix error
+MISSING COMMA
 ```{r}
 CES_data %>%
   select(cps19_province,
@@ -202,9 +211,9 @@ CES_data %>%
          cps19_gender)
 ```
 
-Class 3
 Lesson 05 
 
+Pivots
 ```{r}
 wide_data <- tibble(
   year = c(2017, 2018, 2019, 2020, 2021, 2022),
@@ -213,7 +222,7 @@ wide_data <- tibble(
 )
 wide_data
 ```
-
+Long data
 ```{r}
 long_data <- wide_data %>%
   pivot_longer(cols = c("milo", "kitty"),
@@ -221,13 +230,14 @@ long_data <- wide_data %>%
                values_to = "weight")
 long_data
 ```
-
+Wide data
 ```{r}
 long_data %>%
   pivot_wider(names_from = "cat", 
               values_from = "weight")
 ```
 
+Join
 ```{r}
 employment <- tibble(
   year = c(1990, 1991, 1992, 1994),
