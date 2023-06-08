@@ -1,0 +1,393 @@
+---
+title: "4.6 Introduction to R: Programming"
+institute: "Data Science Institute, University of Toronto"
+author: "Julia Gallucci"
+date: "June, 8, 2023"
+format: beamer
+editor: visual
+---
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(janitor)
+library(kableExtra)
+library(rgdal)
+```
+
+```{r}
+def.chunk.hook <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  # Apply the default chunk hook
+  x <- def.chunk.hook(x, options)
+  
+  # Define the maximum line length
+  max_length <- 40
+  
+  # Split the lines of code
+  lines <- strsplit(x, "\n")[[1]]
+  
+  # Wrap long lines
+  wrapped_lines <- lapply(lines, function(line) {
+    if (nchar(line) > max_length) {
+      # Wrap the line if it exceeds the maximum length
+      wrapped_line <- paste(strwrap(line, width = max_length), collapse = "\n")
+    } else {
+      line
+    }
+  })
+  
+  # Join the modified lines back together
+  modified_code <- paste(wrapped_lines, collapse = "\n")
+  
+  # Modify the font size
+  modified_code <- paste0("\n \\", "small", "\n\n", modified_code, "\n\n \\normalsize")
+  
+  # Return the modified code
+  modified_code
+})
+
+```
+
+## Acknowledgements
+
+Slides are adapted from Anjali Silva, originally from Amy Farrow under the supervision of Rohan Alexander, University of Toronto. Slides have been modified by Julia Gallucci, 2023.
+
+## Overview
+
+-   Functions (Wickham and Grolemund, 2017, Chapter 19)
+-   Loops (Wickham and Grolemund, 2017, Chapter 21)
+-   if/else logic (Alexander (eds), 2021, Chapter 47)
+-   purr
+-   Simulation (Alexander (eds), 2021, Chapter 47)
+
+## What you need
+
+Packages:
+
+-   `library(ggplot2)`
+
+-   `library(purr)`
+
+-   `library(tidyverse)`
+
+Data:
+
+-   `iris`
+
+# Functions
+
+### Introduction
+
+You can write your own functions in R, and you should consider doing so when you have copy-pasted a chunk of code twice.
+
+## Structure
+
+You provide a name, inputs (also known as arguments), and the body of the function that performs the operation.
+
+```{r, echo = TRUE, eval=F}
+function_name <- function(inputs) {
+  <calculations using inputs>
+  return(outputs)
+}
+```
+
+When naming, try not to use names that already have meaning in R.
+
+## Loops
+
+### Basic form
+
+Loops are another tool for reducing the need to duplicate code, this time by repeatedly performing a task.
+
+1.  For loops iterate over a set amount:
+
+```{r,echo = TRUE, eval=F}
+for (sequence to iterate over) {
+  <code to execute>
+}
+```
+
+2.  While loops iterate based on a stopping condition:
+
+```{r,echo = TRUE, eval=F}
+while (iterator condition) {
+  <code to execute>
+}
+```
+
+## For loop example
+
+```{r, echo = TRUE}
+for (i in 1:10){
+  print(i*5)
+}
+```
+
+## For loops to modify an existing object
+
+To create new column that adds the Sepal.Length in each row with the Sepal.Length from the previous row:
+
+```{r, echo = TRUE}
+for (i in 2:nrow(iris)) {
+  iris$previous_combo[i] <- iris$Sepal.Length[i] + iris$Sepal.Length[i-1]
+}
+iris
+```
+
+## Different ways to loop:
+
+You can loop over elements:
+
+```{r, echo = TRUE}
+for (i in c("a", "b", "c")){
+  print(i)
+}
+```
+
+You can loop over numeric indices:
+
+```{r, echo = TRUE}
+for (i in 1:3) {
+  print(now( ) + i)
+}
+```
+
+## Using a vector to collect outputs
+
+```{r, echo = TRUE}
+outputs <- c()
+
+for (i in 1:5) {
+  outputs <- c(outputs, i) * i
+}
+
+outputs
+```
+
+## While loop example
+
+Note that we initiate the iterator i outside the loop and increment it in the loop. If the iterator never increases in the loop, then the loop will never end.
+
+```{r, echo = TRUE}
+i = 1
+while(i <= 10){
+  print(i*5)
+  i = i + 1
+}
+```
+
+## If/else Logic
+
+### Basic structure
+
+```{r,echo = T, eval=F}
+if(condition1) {
+  <code to execute if condition1 is TRUE>
+} elif (condition2) {
+  <code to execute if condition1 is FALSE and conditions2 is TRUE>
+} else {
+  <code to execute if condition1 and condition2 are both FALSE>
+}
+```
+
+## Conditions
+
+Conditions must either evaluate to TRUE or FALSE.
+
+You can combine multiple conditions using the 'or' operator:
+
+-   (condition1) \|\| (condition2)
+
+You can combine multiple conditions using the 'and' operator:
+
+-   (condition1) && (condition2)
+
+To find out if any of a list of conditions is TRUE, use any().
+
+To find out if all of a list of conditions is TRUE, use all().
+
+## if else function
+
+The function if_else writes out a conditional statement in one line.
+
+```{r, echo=TRUE, eval=F}
+if_else(condition, output if condition is TRUE, output if condition is FALSE)
+```
+
+## Case when
+
+When you have a list of possible conditions, you can use case_when instead.
+
+```{r,echo=TRUE, eval=F}
+case_when(condition1 ~ output1,
+          condition2 ~ output2,
+          condition3 ~ output3,
+          ...
+          )
+```
+
+## Example
+
+```{r, echo=TRUE}
+grades <- tibble(grade = c(94, 87, 73))
+
+grades %>%
+  mutate(letter = case_when(
+    grade >= 80 ~ "A",
+    grade >= 70 ~ "B",
+    TRUE ~ "F"))
+```
+
+Note that each condition is checked in order: if condition1 is TRUE, output1 will be chosen and condition2 will not be checked.
+
+## purr
+
+Iteration is made more straightforward with the purr library.
+
+## Mapping functions
+
+Each type of output has a different function:
+
+-   map() for lists
+
+-   map_lgl() for logical vectors
+
+-   map_int() for integer vectors
+
+-   map_dbl() for double vectors
+
+-   map_chr() for character vectors
+
+## Looping over columns in a dataset
+
+```{r, echo=TRUE}
+iris %>%
+  map_dbl(mean)
+```
+
+```{r, echo=TRUE}
+iris %>%
+  map_chr(typeof)
+```
+
+## Looping over columns in a dataset
+
+```{r, echo=TRUE}
+iris %>%
+  map(summary)
+```
+
+## Mapping over multiple arguments
+
+```{r, echo=TRUE}
+x <- list(1, 1, 1)
+y <- list(10, 20, 30)
+
+map2(x, y, ~ .x + .y)
+```
+
+# Questions?
+
+# Simulation
+
+## Simulation
+
+We can generate random data in R.
+
+```{r, echo=TRUE}
+runif(5)
+runif(5)
+```
+
+The outcomes will be different every time.
+
+## Simulation
+
+If you want the results to be consistent, you must set a seed. The seed can be any number.
+
+```{r, echo=TRUE}
+set.seed(1818)
+runif(5)
+```
+
+```{r, echo=TRUE}
+set.seed(1838)
+runif(5)
+```
+
+```{r, echo=TRUE}
+set.seed(1818)
+runif(5)
+```
+
+## The uniform distribution
+
+```{r, echo = TRUE, eval=F}
+runif(number, min, max)
+```
+
+```{r, echo=TRUE}
+set.seed(1818)
+runif(10, 1, 20)
+```
+
+## The normal distribution
+
+```{r, echo=TRUE, eval=F}
+rnorm(number, mean, sd)
+```
+
+```{r, echo=TRUE}
+set.seed(1818)
+rnorm(10, 5, 1)
+```
+
+## Sampling
+
+```{r,echo =TRUE, eval=F}
+sample(thing to sample from, size = number, replace, prob = vector of probability weights)
+```
+
+```{r, echo=TRUE}
+set.seed(1818)
+sample(c("a", "b", "c"),
+       size = 10,
+       replace = TRUE,
+       prob = c(0.1, 0.2, 0.7))
+```
+
+The probability weights are optional. If you do not specify, all the results will be equally probable.
+
+If you specify replace = FALSE, there must be as many or more in the thing that you sample from as the desired sample size.
+
+## Simulating datasets
+
+We can put our randomization skills to use and create toy datasets.
+
+```{r, echo=TRUE}
+set.seed(1818)
+simulated_data <- tibble(X = runif(10, 0, 20),
+       Y = 3*X + rnorm(10, 0, 1)) 
+
+simulated_data
+```
+
+## Simulating datasets
+
+```{r, echo=TRUE}
+simulated_data %>%
+  ggplot(aes(x = X, y = Y)) +
+  geom_point()
+```
+
+# Exercises
+
+## Exercises
+
+1-Write a greeting function that says "good morning", "good afternoon", or "good evening", depending on the time of day.
+
+2-Simulate a dataset using a normal distribution with mean 100 and standard deviation 15 as variable X, and a quadratic transformation of X as variable Y. Graph your data.
+
+# Questions?
