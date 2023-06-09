@@ -1,11 +1,12 @@
 ---
-title: "class_5"
+title: "Live_coding"
 author: "Julia"
 date: "2023-06-08"
 output: html_document
 ---
 
-Lesson 5
+Class 5
+Lesson 05 cont'd
 
 Working with data tables
 ```{r}
@@ -83,7 +84,7 @@ flights_dt <- as.data.table(flights)
 flights_dt[, .N, .(dep_delay < 0, arr_delay > 0)]
 ```
 
-Lesson 6
+Lesson 06
 
 Functions
 examples of functions:
