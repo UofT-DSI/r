@@ -9,39 +9,39 @@ Lesson 5
 
 Working with data tables
 ```{r}
-library(data.table)
-data(iris)
+library(data.table) #load library data.table
+data(iris) #load data iris into our session
 
-dt_iris <- as.data.table(iris)
-setkey(dt_iris, Species)
+dt_iris <- as.data.table(iris) #convert iris to a data table
+setkey(dt_iris, Species) #set key as species 
 
 dt_iris
 
-dt_iris[,sum((Petal.Length + Petal.Width >2))]
+dt_iris[,sum((Petal.Length + Petal.Width >2))] #Counting the number of cases where Petal.Length plus Petal.Width is greater than 2
 
-dt_iris[Species == "setosa", sum((Petal.Length + Petal.Width > 2))]
+dt_iris[Species == "setosa", sum((Petal.Length + Petal.Width > 2))] #Counting the number of cases where Species is “setosa” and Petal.Length plus Petal.Width is greater than 2
 
-dt_iris[Species == "setosa" , .N]
+dt_iris[Species == "setosa" , .N] #Counting observations in current group
 
-table(dt_iris$Species)
+table(dt_iris$Species) #Can use table() function to count how many species of each group there are
 
-dt_iris[, .N, by = (Species)]
+dt_iris[, .N, by = (Species)] #alternative way to count how many species of each group
 
 dt_iris[Petal.Width > 1,
-        .(mean(Petal.Length)), keyby = .(Species)]
+        .(mean(Petal.Length)), keyby = .(Species)] #select only rows with petal length > 1 , calculate mean petal length for selected rows for each species
 
-dt_iris[order(Species, -Petal.Width)]
+dt_iris[order(Species, -Petal.Width)] #Ordering by Species and then by reverse Petal.Width:
 
-dt_iris[, .N, .(Petal.Length > 4, Petal.Width >1)]
+dt_iris[, .N, .(Petal.Length > 4, Petal.Width >1)] #Grouping those that have Petal.Length greater/not than 4, and Petal.Width greater/not than 1
 
-dt_iris[, lapply(.SD, mean), by = Species]
+dt_iris[, lapply(.SD, mean), by = Species] #taking the mean of all columns (except the grouping column, Species) using lapply and .SD
 
-dt_iris[, head(.SD, 4), by = Species]
+dt_iris[, head(.SD, 4), by = Species] #getting the first four rows for all columns, for each Species
 ```
 
 
 Exercise
-1.
+1. Tidy the data below:
 ```{r}
 data <- tibble(
   group = c("treat", "control"),
@@ -55,7 +55,7 @@ data_longer <- pivot_longer(data, cols = c("survival", "deceased"), names_to = "
 
 pivot_wider(data_longer, names_from = "sur/deceased", values_from = "counts")
 ```
-2.
+2. Join the dataset flights to the dataset airlines. What should the key(s) be? What do the different types of joins look like?
 ```{r}
 library(nycflights13)
 data("flights")
@@ -64,7 +64,7 @@ data("airlines")
 dim(flights)
 dim(airlines)
 
-airlines_2 <- airlines[-3,]
+airlines_2 <- airlines[-1,] #removed row 1 to demonstrate antijoin subsetting
 
 flights %>%
   inner_join(airlines, by ="carrier")
@@ -76,15 +76,20 @@ flights  %>%
   anti_join(airlines_2, by = "carrier")
 ```
 
-3.
+3. Using flights and data.table, group based on cases that have dep_delay < 0 and those that have arr_delay > 0 and count the number in each group. 
+How many groups/rows are there? How many in each group?
 ```{r}
 flights_dt <- as.data.table(flights) 
 flights_dt[, .N, .(dep_delay < 0, arr_delay > 0)]
 ```
 
 Lesson 6
+
 Functions
+examples of functions:
 ```{r}
+
+##function that calculates the standard error
 standard_error_mean <- function(numeric_vector){
   SEM <- sd(numeric_vector) /  sqrt(length(numeric_vector)-1)
   return(SEM)
@@ -94,6 +99,7 @@ standard_error_mean <- function(numeric_vector){
 x <- seq(1,10)
 standard_error_mean(x)
 
+##function that prints a string
 print_string <-
   function(character){
     print(character)
@@ -102,12 +108,14 @@ print_string <-
 print_string("Hello, my name is Julia")
 
 
+#function that replaces setosa with NA in the iris dataset
 rename_species <- function(data_set){
   ifelse(data_set$Species == "setosa", NA, data_set$Species)
 }
 
 rename_species(iris)
 ```
+
 
 For Loops
 ```{r}
@@ -167,7 +175,7 @@ grades %>%
     grade >= 80 ~ "A",
     grade >= 70 ~ "B",
     grade >= 60 ~ "C",
-    TRUE ~ "F"
+    TRUE ~ "F" #If all other conditions are false
   ))
 ```
 
@@ -195,7 +203,7 @@ map2(x,y, ~.x + .y)
 Simulation
 ```{r}
 
-hist(runif(1000))
+hist(runif(1000)) #uniform distribution
 
 runif(5)
 runif(5)
@@ -209,7 +217,7 @@ runif(5)
 runif(10, min = 1, max = 20)
 
 
-hist(rnorm(1000))
+hist(rnorm(1000)) #normal distribution
 
 set.seed(123)
 rnorm(10, mean = 5, sd = 1)
