@@ -99,7 +99,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 3 | Saturday 3 June <br> 9 AM - 12 PM EST | Manipulation <br> (filtering, arranging, selecting, mutating, piping, grouping, summarizing) |[4-Manipulating](./Lessons-PDF/04-manipulation_deck.pdf)|
 | 4 | Monday 5 June <br> 6 PM - 8 PM EST | Wrangling <br> (importing data, pivot, joining data, data tables) | [5-Wrangling](./Lessons-PDF/05-wrangling_deck.pdf)  |
 | 5 | Thursday 8 June <br> 6 PM - 8 PM EST | Programming <br> (custom functions, loops, logic statements, purr, simulations) | [6-Programming](./Lessons-PDF/06-programming_deck.pdf) |
-| 6 | Saturday 10 June <br> 9 AM - 12 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) |  |
+| 6 | Saturday 10 June <br> 9 AM - 12 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) | [7-Visualization](./Lessons-PDF/07-visualization_deck.pdf) |
 | 7 | Monday 12 June <br> 6 PM - 8 PM EST | Shiny applications; Ethics, inequity and professional skills |  |
 | 8 | Thursday 15 June <br> 6 PM - 8 PM EST | Industry case study- Kamilah Ebrahim |  |
 | 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice |  |                                                                                                                                     
