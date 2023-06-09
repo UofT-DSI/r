@@ -6,6 +6,8 @@ output: html_document
 ---
 
 Lesson 5
+
+Working with data tables
 ```{r}
 library(data.table)
 data(iris)
@@ -36,6 +38,8 @@ dt_iris[, lapply(.SD, mean), by = Species]
 
 dt_iris[, head(.SD, 4), by = Species]
 ```
+
+
 Exercise
 1.
 ```{r}
