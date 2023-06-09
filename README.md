@@ -131,7 +131,7 @@ Assignments will be introduced in class, can be discussed in tutorial, and quest
 | Assessment	|  Due Date | 
 | --- | --- | 
 | [Assignment 1](./Assessments/04-Assignment_1.pdf) <br> [Rmd modifiable template](./Assessments/Assessment1_template.Rmd)|	 Sunday 11 June, by 11:59 PM EST| 
-| Assignment 2|	 Sunday 18 June, by 11:59 PM EST| 
+| [Assignment 2](./Assessments/04-Assignment_2.pdf) <br> [Rmd modifiable template](./Assessments/Assessment2_template.Rmd)||	 Sunday 18 June, by 11:59 PM EST| 
 
 # Course Policies
 
