@@ -1,0 +1,236 @@
+---
+title: "class_5"
+author: "Julia"
+date: "2023-06-08"
+output: html_document
+---
+
+Lesson 5
+```{r}
+library(data.table)
+data(iris)
+
+dt_iris <- as.data.table(iris)
+setkey(dt_iris, Species)
+
+dt_iris
+
+dt_iris[,sum((Petal.Length + Petal.Width >2))]
+
+dt_iris[Species == "setosa", sum((Petal.Length + Petal.Width > 2))]
+
+dt_iris[Species == "setosa" , .N]
+
+table(dt_iris$Species)
+
+dt_iris[, .N, by = (Species)]
+
+dt_iris[Petal.Width > 1,
+        .(mean(Petal.Length)), keyby = .(Species)]
+
+dt_iris[order(Species, -Petal.Width)]
+
+dt_iris[, .N, .(Petal.Length > 4, Petal.Width >1)]
+
+dt_iris[, lapply(.SD, mean), by = Species]
+
+dt_iris[, head(.SD, 4), by = Species]
+```
+Exercise
+1.
+```{r}
+data <- tibble(
+  group = c("treat", "control"),
+  survival = c(17, 11),
+  deceased = c(3, 9)
+)
+
+data
+
+data_longer <- pivot_longer(data, cols = c("survival", "deceased"), names_to = "sur/deceased", values_to= "counts")
+
+pivot_wider(data_longer, names_from = "sur/deceased", values_from = "counts")
+```
+2.
+```{r}
+library(nycflights13)
+data("flights")
+data("airlines")
+
+dim(flights)
+dim(airlines)
+
+airlines_2 <- airlines[-3,]
+
+flights %>%
+  inner_join(airlines, by ="carrier")
+
+flights %>%
+  left_join(airlines, by = "carrier")
+
+flights  %>%
+  anti_join(airlines_2, by = "carrier")
+```
+
+3.
+```{r}
+flights_dt <- as.data.table(flights) 
+flights_dt[, .N, .(dep_delay < 0, arr_delay > 0)]
+```
+
+Lesson 6
+Functions
+```{r}
+standard_error_mean <- function(numeric_vector){
+  SEM <- sd(numeric_vector) /  sqrt(length(numeric_vector)-1)
+  return(SEM)
+}
+
+
+x <- seq(1,10)
+standard_error_mean(x)
+
+print_string <-
+  function(character){
+    print(character)
+  }
+
+print_string("Hello, my name is Julia")
+
+
+rename_species <- function(data_set){
+  ifelse(data_set$Species == "setosa", NA, data_set$Species)
+}
+
+rename_species(iris)
+```
+
+For Loops
+```{r}
+for (num in 1:10) {
+  print(num*5)
+}
+
+nrow(iris)
+iris$Sepal.Length[1] + iris$Sepal.Length[2]
+iris$Sepal.Length[2] + iris$Sepal.Length[3]
+
+
+for (i in 2:nrow(iris)){
+  iris$previous_combo[i] <-
+    iris$Sepal.Length[i] + 
+    iris$Sepal.Length[i-1]
+}
+iris
+```
+
+Ways to loop
+```{r}
+letters
+
+for (letter in letters){
+  print(letter)
+}
+
+for (num in 1:3){
+  print(now() + num)
+}
+
+outputs <- c()
+
+for (i in 1:5){
+  outputs <- c(outputs, i)
+}
+outputs
+```
+
+while loops
+```{r}
+i = 1
+
+while (i <= 10){
+  print(i)
+  print(i * 5)
+  i = i + 1
+}
+```
+
+if/else
+```{r}
+grades <- tibble(grade = c(94,87,73,60))
+grades %>%
+  mutate(letter = case_when(
+    grade >= 80 ~ "A",
+    grade >= 70 ~ "B",
+    grade >= 60 ~ "C",
+    TRUE ~ "F"
+  ))
+```
+
+```{r}
+iris %>%
+  map_dbl(mean)
+
+iris %>%
+  map_chr(typeof)
+
+iris %>%
+  map(summary)
+```
+
+```{r}
+x <- list(1,1,1)
+y <- list(10,20,30)
+
+x
+y
+
+map2(x,y, ~.x + .y)
+```
+
+Simulation
+```{r}
+
+hist(runif(1000))
+
+runif(5)
+runif(5)
+
+set.seed(123)
+runif(5)
+
+set.seed(100)
+runif(5)
+
+runif(10, min = 1, max = 20)
+
+
+hist(rnorm(1000))
+
+set.seed(123)
+rnorm(10, mean = 5, sd = 1)
+
+
+set.seed(103)
+sample(c("a","b","c"),
+       size = 10,
+       replace = TRUE)
+
+set.seed(103)
+sample(c("a","b","c"),
+       size = 10,
+       replace = TRUE)
+
+
+set.seed(123)
+
+simulated_data <- tibble(
+  X = runif(10,min = 0, max = 20),
+  Y = 3 *X + rnorm(10, mean = 0, sd = 1)
+)
+
+simulated_data
+
+simulated_data %>%
+  ggplot(aes( x = X, y = Y)) + geom_point()
+```
