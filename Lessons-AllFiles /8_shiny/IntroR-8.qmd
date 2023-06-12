@@ -1,0 +1,192 @@
+---
+title: "4.8 Introduction to R: Shiny"
+institute: "Data Science Institute, University of Toronto"
+author: "Julia Gallucci"
+date: "June, 12, 2023"
+format: beamer
+editor: visual
+---
+
+```{r}
+def.chunk.hook <- knitr::knit_hooks$get("chunk")
+knitr::knit_hooks$set(chunk = function(x, options) {
+  # Apply the default chunk hook
+  x <- def.chunk.hook(x, options)
+  
+  # Define the maximum line length
+  max_length <- 40
+  
+  # Split the lines of code
+  lines <- strsplit(x, "\n")[[1]]
+  
+  # Wrap long lines
+  wrapped_lines <- lapply(lines, function(line) {
+    if (nchar(line) > max_length) {
+      # Wrap the line if it exceeds the maximum length
+      wrapped_line <- paste(strwrap(line, width = max_length), collapse = "\n")
+    } else {
+      line
+    }
+  })
+  
+  # Join the modified lines back together
+  modified_code <- paste(wrapped_lines, collapse = "\n")
+  
+  # Modify the font size
+  modified_code <- paste0("\n \\", "small", "\n\n", modified_code, "\n\n \\normalsize")
+  
+  # Return the modified code
+  modified_code
+})
+```
+
+## Acknowledgements
+
+Slides are adapted from Anjali Silva, originally from Amy Farrow under the supervision of Rohan Alexander, University of Toronto. Slides have been modified by Julia Gallucci, 2023.
+
+## Overview
+
+-   Creating your first Shiny app (Wickham, 2021, Chapter 1)
+
+## What you need
+
+Packages:
+
+-   `library(shiny)`
+
+-   `library(ggplot2)`
+
+## Creating an App Directory and File
+
+-   File \> New File \> Shiny Web App \> Single File \> Create
+-   Hit Run App. What happens?
+
+```{r echo=FALSE, out.height=450, out.width= 300}
+knitr::include_graphics("shinybasic.png")
+```
+
+Note where it says "Listening on http://127.0.0.1:<port number>. This is the URL where your app can be found, which is local at this point.
+
+## App Layout
+
+```{r, eval=F, echo = TRUE}
+library(shiny)
+
+ui <- fluidPage(
+    <Define UI for application to draw graphs etc>
+)
+
+server <- function(input, output) {
+    <Define the server logic necessary for the graphs above>
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+## A Basic App
+
+```{r, eval=F, echo=TRUE}
+ui <- fluidPage(
+  "Hello, world!"
+  )
+
+server <- function(input, output, session) {
+}
+
+shinyApp(ui, server)
+```
+
+## Adding UI Controls
+
+```{r, eval=F, echo=TRUE}
+ui <- fluidPage(
+  selectInput("dataset",
+              label = "Dataset",
+              choices = ls("package:datasets")),
+  verbatimTextOutput("summary"),
+  tableOutput("table")
+)
+```
+
+-   fluidPage specifies the basic visual layout of the page
+-   selectInput is what makes it so the user can interact with the app by providing a value, for example in a dropdown menu.
+-   verbatimTextOutput and tableOutput specify where to put the outputs
+
+## Adding Behavior
+
+Shiny apps use reactive programming, which tells the app how to perform an action but does not instruct it to perform the action.
+
+```{r, eval=F, echo=TRUE}
+server <- function(input, output, session) {
+  
+  output$summary <- renderPrint({
+    dataset <- get(input$dataset,
+                   "package:datasets")
+    summary(dataset)
+  })
+  
+  output$table <- renderTable({
+    dataset <- get(input$dataset,
+                   "package:datasets")
+      dataset
+    })
+  }
+```
+
+This tells the app how to construct the table and summary outputs.
+
+Note that verbatimTextOutput("summary") above matches output\$summary, and tableOutput("table") above matches output\$table.
+
+Each type of output has a different render function.
+
+## Reducing Duplication with Reactive Expressions
+
+```{r, eval=F, echo=TRUE}
+server <- function(input, output, session) {
+  dataset <- reactive({ # reactive expression is created
+    get(input$dataset, "package:datasets")
+  })
+  
+  output$summary <- renderPrint({
+    summary(dataset()) #reactive expression is called
+  })
+  
+  output$table <- renderTable({
+    dataset()
+  })
+}
+```
+
+## Exercises
+
+Experiment with the code below until you have an app that produces a table and histogram(s) for each of the datasets on the dropdown.
+
+```{r, eval=F, echo=TRUE}
+library(shiny)
+library(ggplot2)
+
+datasets <- c("economics", "seals")
+
+ui <- fluidPage(
+  selectInput("dataset", "Dataset", choices = datasets),
+  verbatimTextOutput("summary"),
+  tableOutput("plot")
+)
+
+server <- function(input, output, session) {
+  dataset <- reactive({
+    get(input$dataset, "package:ggplot2")
+  })
+  output$summary <- renderPrint({
+    summary(dataset())
+  })
+  output$plot <- renderPlot({
+    plot(dataset)
+  }, res = 96)
+}
+
+shinyApp(ui, server)
+```
+
+# Questions?
