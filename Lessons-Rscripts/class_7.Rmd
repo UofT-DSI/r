@@ -10,6 +10,7 @@ library(kableExtra)
 
 ```
 
+##using kable package to make well-formatted tables 
 ```{r}
 my_table <- tibble(
   categoryA = c(1,2,3,4),
