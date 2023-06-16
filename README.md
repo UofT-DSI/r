@@ -101,7 +101,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 5 | Thursday 8 June <br> 6 PM - 8 PM EST | Programming <br> (custom functions, loops, logic statements, purr, simulations) | [6-Programming](./Lessons-PDF/06-programming_deck.pdf) |
 | 6 | Saturday 10 June <br> 9 AM - 12 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) | [7-Visualization](./Lessons-PDF/07-visualization_deck.pdf) |
 | 7 | Monday 12 June <br> 6 PM - 8 PM EST | Shiny applications; Ethics, inequity and professional skills |[8-Shiny](./Lessons-PDF/08-shiny_deck.pdf) <br> [9-Ethics](./Lessons-PDF/09-ethics_deck.pdf) <br> [10-Inequity](./Lessons-PDF/10-inequity_deck.pdf) <br> [11-Professional Skills](./Lessons-PDF/11-professional-skills_deck.pdf) |
-| 8 | Thursday 15 June <br> 6 PM - 8 PM EST | Industry case study- Kamilah Ebrahim |  |
+| 8 | Thursday 15 June <br> 6 PM - 8 PM EST | Industry case study- Kamilah Ebrahim | NA |
 | 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice | [12-Review](./Lessons-PDF/12-review_deck.pdf) |                                                                                                                                     
 ### In-class code & summaries 
 | Class | Date | Code | Summary |
