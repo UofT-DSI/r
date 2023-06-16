@@ -102,7 +102,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 6 | Saturday 10 June <br> 9 AM - 12 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) | [7-Visualization](./Lessons-PDF/07-visualization_deck.pdf) |
 | 7 | Monday 12 June <br> 6 PM - 8 PM EST | Shiny applications; Ethics, inequity and professional skills |[8-Shiny](./Lessons-PDF/08-shiny_deck.pdf) <br> [9-Ethics](./Lessons-PDF/09-ethics_deck.pdf) <br> [10-Inequity](./Lessons-PDF/10-inequity_deck.pdf) <br> [11-Professional Skills](./Lessons-PDF/11-professional-skills_deck.pdf) |
 | 8 | Thursday 15 June <br> 6 PM - 8 PM EST | Industry case study- Kamilah Ebrahim |  |
-| 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice |  |                                                                                                                                     
+| 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice | [12-Review](./Lessons-PDF/12-review_deck.pdf) |                                                                                                                                     
 ### In-class code & summaries 
 | Class | Date | Code | Summary |
 | --- | --- | --- | --- |
