@@ -114,7 +114,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 6 | Saturday 10 June | [in-class coding examples](./Lessons-Rscripts/class_6.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class6_Summary.pdf) |
 | 7 | Monday 12 June | [in-class coding examples](./Lessons-Rscripts/class_7.Rmd) <br> [in-class app example](./Lessons-Rscripts/class_7_app.R) | [summary sheet](./Lessons-%20Summary_Sheets/Class7_Summary.pdf) |
 | 8 | Thursday 15 June | NA  | NA |
-| 9 | Saturday 17 June |  |  |
+| 9 | Saturday 17 June | [in-class coding examples](./Lessons-Rscripts/class_9.Rmd) <br> [in-class app example](./Lessons-Rscripts/class_9_app.R) | NA |
 
 ## Marking Scheme
 Grading is based on two components: 2 assignments, and class participation. The grading scheme is as follows:
