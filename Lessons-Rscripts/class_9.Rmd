@@ -1,0 +1,114 @@
+---
+title: "Class_9"
+output: html_document
+date: "2023-06-17"
+---
+
+```{r}
+library(readr)
+library(tibble)
+library(purrr)
+library(lubridate)
+library(ggplot2)
+library(forcats)
+
+WYS_data <- read_csv("WYS Stationary monthly summary.csv")
+
+WYS_data <- as_tibble(WYS_data)
+
+WYS_data
+glimpse(WYS_data) #too see all of the column names
+
+#what types are present in the data?
+str(WYS_data)
+
+#alternative 
+map(WYS_data, typeof) #loops over columns in a dataset and performs a function
+
+map(WYS_data, summary) #loop over columns in WYS data to get our summary distribution 
+
+WYS_data$month <- as.Date(WYS_data$month)
+#explicit coercion from char to date
+
+#three different ways to check for NA values
+which(is.na(WYS_data))
+
+sum(is.na(WYS_data))
+
+map(WYS_data, is.na)
+
+#na.omit() #to remove NA values
+
+
+##manipulating our data
+WYS_data <-
+  WYS_data %>%
+  mutate(year = year(month)) #created a new column named year that extract the year from the data
+  
+WYS_data_2018 <-
+WYS_data %>%
+  filter(year == 2018) #filtered our data to extract only year 2018
+
+WYS_data #original data
+WYS_data_2018 # subset data
+
+WYS_data_2018 <-
+  WYS_data_2018 %>%
+  filter(spd_100_and_above != 0) #extract only rows that speed 100 and above is not equal to 0
+
+WYS_data_2018 <-
+  WYS_data_2018 %>%
+  arrange(pct_40, `_id`)
+
+  
+table(WYS_data_2018$sign_id)
+
+WYS_data_2018 %>%
+  group_by(sign_id) %>% #grouped by sign id 
+  summarise(sum_veh = sum(spd_100_and_above))
+#summed counts of spd 100 and above
+
+##wrangle our data
+
+WYS_data_2018 #currently in wider format
+#if we wanted to make our dataset longer, we could use the pivot longer function!
+
+pivot_longer(WYS_data_2018,
+             cols = pct_05:pct_95,
+             names_to = "pct",
+             values_to = "percentages/average")
+
+map(WYS_data_2018,mean) #loop over columns in data set and extract mean
+
+for (column_name in WYS_data_2018){
+  print(mean(column_name))
+}
+
+WYS_data_2018 <- 
+  WYS_data_2018 %>%
+  mutate(month = as.Date(month)) %>%
+  mutate(month_only = month(month)) %>%
+  mutate(month_only = as.character(month_only)) %>%
+  mutate(month_fix = fct(month_only))%>%
+  mutate(month_fix = fct_recode(month_fix,
+                                "Jan" = "1",
+                                "Feb" = "2",
+                                 "Mar" = "3",
+                                 "Apr" = "4",
+                                 "May" = "5",
+                                 "Jun" = "6",
+                                 "Jul" = "7",
+                                 "Aug" = "8",
+                                 "Sep" = "9",
+                                 "Oct" = "10",
+                                 "Nov" = "11",
+                                 "Dec" = "12"
+                                ))
+
+WYS_data_2018 
+
+WYS_data_2018 %>%
+  ggplot(aes(x = spd_100_and_above, fill = month)) +
+  geom_histogram() +
+  facet_wrap(facets = "month_fix") 
+```
