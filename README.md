@@ -61,16 +61,16 @@ Folder structure is as follows:
      * **Lessons-Data**: <br>
      This folder contains data only and is designed for the learners. Learners should download and copy this folder as 'data' folder within their R Project.
      * **Lessons-PDF**: <br>
-     This folder contains slide-PDFs only and is designed for the learners. Learners should download the slides. Slides should be referenced before class to prepare or after class to review. During class, there will be mostly live-coding. The end of each slide deck will contain homework for that particular lesson. It is highly recommend that learners attempt these and attend tutorial sessions to seek help.
+     This folder contains slide-PDFs only and is designed for the learners. Learners should download the slides. Slides should be referenced before class to prepare or after class to review. During class, there will be mostly live-coding. The end of each slide deck will contain homework for that particular lesson. It is highly recommended that learners attempt these and attend tutorial sessions to seek help.
      * Lessons-Rscripts: <br>
-     This folder contains R scripts used by the instructor. It will be udpated after each class and learners may download it for reference. 
+     This folder contains R scripts used by the instructor. It will be updated after each class and learners may download it for reference. 
      * Teaching-Notes: <br>
      This folder contains lesson plans only and is designed to guide the instructor.
      * README: README file.
      * .gitignore: List of files to ignore specified by instructor.
      
 ## Materials
-* **Learners must have internet connection, and a computer with administrative privileges, a microphone, and all required software installed in order to participate in online activities.** 
+* **Learners must have internet connection, a computer with administrative privileges, a microphone, and all required software installed in order to participate in online activities.** 
 * **Learners must have R (http://www.r-project.org/). We will help with downloading.**
 * **Learners must have RStudio (Previously: http://www.rstudio.com/; now: https://posit.co/download/rstudio-desktop/). We will help with downloading.**
 * **GitHub account (https://github.com/).**
@@ -124,14 +124,14 @@ Grading is based on two components: 2 assignments, and class participation. The 
 | Participation | NA | NA | 10% |
 
 **Assignments**
-Assignments will be introduced in class, can be discussed in tutorial, and questions can be ask of the Instructor over email. Assignments are due by midnight on Sundays. Please arrange for extensions in advance with the Instructor. Please email submissions, as an RMarkdown PDF, to the Instructor titled DSI-IntroR: Assignment X, Name. The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as."
+Assignments will be introduced in class, can be discussed in tutorial, and questions can be asked of the Instructor over email. Assignments are due by midnight on Sundays. Please arrange for extensions in advance with the Instructor. Please email submissions, as an RMarkdown PDF, to the Instructor titled DSI-IntroR: Assignment X, Name. The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as."
 
 ### Assignment Due-dates
 
 | Assessment	|  Due Date | 
 | --- | --- | 
 | [Assignment 1](./Assessments/04-Assignment_1.pdf) <br> [Rmd modifiable template](./Assessments/Assessment1_template.Rmd) <br> [Solutions](./Assessments/Assignment_1_ANSWERS.pdf)|	 Sunday 11 June, by 11:59 PM EST| 
-| [Assignment 2](./Assessments/04-Assignment_2.pdf) <br> [Rmd modifiable template](./Assessments/Assessment2_template.Rmd)| Sunday 18 June, by 11:59 PM EST| 
+| [Assignment 2](./Assessments/04-Assignment_2.pdf) <br> [Rmd modifiable template](./Assessments/Assessment2_template.Rmd) <br> [Solutions](./Assessments/Assignment_2_ANSWERS.pdf)| Sunday 18 June, by 11:59 PM EST| 
 
 # Course Policies
 
