@@ -101,7 +101,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 4 | Thursday 14 December <br> 6 PM - 8:30 PM EST | Wrangling <br> (importing data, pivot, joining data, data tables) | [5-Wrangling](./Lessons-PDF/05-wrangling_deck.pdf)  |
 | 5 | Saturday 16 December <br> 9 AM - 11:30 AM EST | Programming <br> (custom functions, loops, logic statements, purr, simulations) | [6-Programming](./Lessons-PDF/06-programming_deck.pdf) |
 | 6 | Monday 18 December <br> 6 PM - 8:30 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) | [7-Visualization](./Lessons-PDF/07-visualization_deck.pdf) |
-| 7 | Tuesday 19 December <br> 6 PM - 8:30 PM EST | Ethics, inequity and professional skills; Review and practice | [8-Ethics](./Lessons-PDF/09-ethics_deck.pdf) <br> [9-Inequity](./Lessons-PDF/10-inequity_deck.pdf) <br> [10-Professional Skills](./Lessons-PDF/11-professional-skills_deck.pdf) [11-Review](./Lessons-PDF/12-review_deck.pdf)|
+| 7 | Tuesday 19 December <br> 6 PM - 8:30 PM EST | Shiny, ethics, inequity and professional skills |[8-Shiny](./Lessons-PDF/08-shiny_deck.pdf) [9-Ethics](./Lessons-PDF/09-ethics_deck.pdf) <br> [10-Inequity](./Lessons-PDF/10-inequity_deck.pdf) <br> [11-Professional Skills](./Lessons-PDF/11-professional-skills_deck.pdf)|
 | 8 | Wednesday 20 December <br> 6 PM - 8:30 PM EST | Industry case study- Kevin Ha | NA |
 
 
