@@ -40,7 +40,7 @@ By the end of this course, learners will be able to:
 
 ## Course Contact
 -  Instructor for this course is Julia Gallucci, PhD student (she/her). For emails to the instructor, use julia.gallucci@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: 48 hrs on week days, 48-72 hrs on weekends.
--  Course Support for this course is Jessie Wang, *____fill in______*. For emails to the course support, use jae.wang@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: *____fill in______*
+-  Course Support for this course is Jessie Wang, PhD student (she/her). For emails to the course support, use jae.wang@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: *____fill in______*
   
 
 
