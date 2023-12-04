@@ -16,9 +16,9 @@ Welcome! This course, offered by the University of Toronto's Data Sciences Insti
 ## Course Overview
 
 ## Description
-This course is designed as an immersive learning experience. The estimated time commitment consists of approximately 7 hours of in-class instruction, 3 hours of optional but highly recommended tutorials, and 5 hours dedicated to self-study and completing homework assignments. In total, learners can expect to dedicate approximately 15 hours per week over a span of 3 weeks to successfully complete the course.
+This course is designed as an immersive learning experience. The estimated time commitment consists of approximately 16 hours of in-class instruction, 4 hours of optional but highly recommended tutorials. In total, learners can expect to dedicate approximately 20 hours over a span of 10 days to successfully complete the course.
 
-The first part of this course teaches R with a focus on manipulating and visualizing data. Learners will get set up with a functional RStudio workflow, use different file types, transform data tables, import and manipulate data, use functions and loops, create data visualizations, make a Shiny app, and learn how to solve problems with their programming. Both base R and tidyverse methods are taught. To work reproducibly, learners will create R Projects. The second part of the course will cover the ethics of consent, Equity, Diversity & Inclusion (EDI) training, and professional skills including presentation, project management, and data security. Finally, the course will conclude with an industry case study. 
+The first part of this course teaches R with a focus on manipulating and visualizing data. Learners will get set up with a functional RStudio workflow, use different file types, transform data tables, import and manipulate data, use functions and loops, create data visualizations, and learn how to solve problems with their programming. Both base R and tidyverse methods are taught. To work reproducibly, learners will create R Projects. The second part of the course will cover the ethics of consent, Equity, Diversity & Inclusion (EDI) training, and professional skills including presentation, project management, and data security. Finally, the course will conclude with an industry case study. 
 
 This course is designed for those who have a degree in something other than Computer Science/Statistics who are looking to enhance their data science skills for their career.
 
@@ -39,16 +39,17 @@ By the end of this course, learners will be able to:
 # Logistical Information
 
 ## Course Contact
--  Instructor for this course is Julia Gallucci, PhD student (she/her). For emails to the instructor, use julia.gallucci@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. 
--  Response times: 48 hrs on week days, 48-72 hrs on weekends.
+-  Instructor for this course is Julia Gallucci, PhD student (she/her). For emails to the instructor, use julia.gallucci@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: 48 hrs on week days, 48-72 hrs on weekends.
+-  Course Support for this course is Jessie Wang, *____fill in______*. For emails to the course support, use jae.wang@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: *____fill in______*
+  
 
 
 ## Delivery Instructions
 ### Classes
-- The course will span three weeks, with classes scheduled for three days each week. Classes are 6 PM - 8 PM EST on Mondays and Thursdays, and 9 AM - 12 PM EST on Saturdays. The format of the course will be online and synchronous, conducted through Zoom (Meeting ID and passcode provided in the email subject 'Data Sciences Institute, UofT – Welcome & Pre-Class info'). Being mindful of online fatigue, there will be one or two brief breaks during each class. In the event that you encounter any difficulties joining the live lectures, it is essential to email the Instructor. Provide a description of the issue, along with the time and date of occurrence (including a screenshot if available), to ensure that participation marks are not affected. If, due to unforeseen circumstances, the live (synchronous) lecture is disrupted or cannot be conducted, the instructor will upload a recording and notify the students via email. It is the responsibility of the learners to view the recording.
+- The course will span 10 days, with classes scheduled from December 11-20th, 2023. Classes are 6 PM - 8:30 PM EST on Mondays-Thursdays, and 9 AM - 11:30 PM EST on Saturdays. The format of the course will be online and synchronous, conducted through Zoom (Meeting ID and passcode provided in the email subject 'Data Sciences Institute, UofT – Welcome & Pre-Class info'). Being mindful of online fatigue, there will be one or two brief breaks during each class. In the event that you encounter any difficulties joining the live lectures, it is essential to email the Instructor. Provide a description of the issue, along with the time and date of occurrence (including a screenshot if available), to ensure that participation marks are not affected. If, due to unforeseen circumstances, the live (synchronous) lecture is disrupted or cannot be conducted, the instructor will upload a recording and notify the students via email. It is the responsibility of the learners to view the recording.
 
 ### Tutorials
-- Tutorial sessions will be conducted on the same dates as the regular classes. These tutorials are scheduled for Mondays and Thursdays, from 5 PM to 6 PM EST, as well as Saturdays from 8:30 AM to 9 AM EST and 12 PM to 12:30 PM EST. Attendance at the tutorials is optional, and the structure is flexible. Tutorials provide an opportunity to seek clarification on software-related inquiries, homework, and assignments. The course instructor will also be leading the tutorial sessions.
+- Tutorial sessions will be conducted on the same dates as the regular classes. These tutorials are scheduled for Mondays- Thursdays, from 8 PM to 8:30 PM EST, as well as Saturdays from 9 AM to 9:30 AM EST. Attendance at the tutorials is optional, and the structure is flexible. Tutorials provide an opportunity to seek clarification on software-related inquiries, homework, and assignments. The course support will also be leading the tutorial sessions.
 
 ## Course Notes
 -   All course material will be available via [IntroductionToR](https://github.com/UofT-DSI/04-intro_r) GitHub repository. 
@@ -94,27 +95,27 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | Class | Date | Topic | Slides |
 | --- | --- | --- | --- |
 | 0 | Before Class 1 | Getting set up! <br> (R/RStudio Installation) | [Instructions](./Lessons-PDF/GetSetUp_R_RStudio.pdf)|
-| 1 | Monday 29 May <br> 6 PM - 8 PM EST | Hello World! And Work practices <br> (R basics; file types; errors) | [0- Introduction](./Lessons-PDF/00-introduction_deck.pdf) <br> [1- Hello World](./Lessons-PDF/01-hello-world_deck.pdf) <br> [2- Work Practices](./Lessons-PDF/02-work-practices_deck.pdf)|
-| 2 | Thursday 1 June <br> 6 PM - 8 PM EST | Data in R <br> (tibbles, strings, factors, times, missing values) | [3- Data in R](./Lessons-PDF/03-data-in-r_deck.pdf)|
-| 3 | Saturday 3 June <br> 9 AM - 12 PM EST | Manipulation <br> (filtering, arranging, selecting, mutating, piping, grouping, summarizing) |[4-Manipulating](./Lessons-PDF/04-manipulation_deck.pdf)|
-| 4 | Monday 5 June <br> 6 PM - 8 PM EST | Wrangling <br> (importing data, pivot, joining data, data tables) | [5-Wrangling](./Lessons-PDF/05-wrangling_deck.pdf)  |
-| 5 | Thursday 8 June <br> 6 PM - 8 PM EST | Programming <br> (custom functions, loops, logic statements, purr, simulations) | [6-Programming](./Lessons-PDF/06-programming_deck.pdf) |
-| 6 | Saturday 10 June <br> 9 AM - 12 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) | [7-Visualization](./Lessons-PDF/07-visualization_deck.pdf) |
-| 7 | Monday 12 June <br> 6 PM - 8 PM EST | Shiny applications; Ethics, inequity and professional skills |[8-Shiny](./Lessons-PDF/08-shiny_deck.pdf) <br> [9-Ethics](./Lessons-PDF/09-ethics_deck.pdf) <br> [10-Inequity](./Lessons-PDF/10-inequity_deck.pdf) <br> [11-Professional Skills](./Lessons-PDF/11-professional-skills_deck.pdf) |
-| 8 | Thursday 15 June <br> 6 PM - 8 PM EST | Industry case study- Kamilah Ebrahim | NA |
-| 9 | Saturday 17 June <br> 9 AM - 12 PM EST | R Review and practice | [12-Review](./Lessons-PDF/12-review_deck.pdf) |                                                                                                                                     
+| 1 | Monday 11 December <br> 6 PM - 8:30 PM EST | Hello World! And Work practices <br> (R basics; file types; errors) | [0- Introduction](./Lessons-PDF/00-introduction_deck.pdf) <br> [1- Hello World](./Lessons-PDF/01-hello-world_deck.pdf) <br> [2- Work Practices](./Lessons-PDF/02-work-practices_deck.pdf)|
+| 2 | Tuesday 12 December <br> 6 PM - 8:30 PM EST | Data in R <br> (tibbles, strings, factors, times, missing values) | [3- Data in R](./Lessons-PDF/03-data-in-r_deck.pdf)|
+| 3 | Wednesday 13 December <br> 6 PM - 8:30 PM EST | Manipulation <br> (filtering, arranging, selecting, mutating, piping, grouping, summarizing) |[4-Manipulating](./Lessons-PDF/04-manipulation_deck.pdf)|
+| 4 | Thursday 14 December <br> 6 PM - 8:30 PM EST | Wrangling <br> (importing data, pivot, joining data, data tables) | [5-Wrangling](./Lessons-PDF/05-wrangling_deck.pdf)  |
+| 5 | Saturday 16 December <br> 9 AM - 11:30 AM EST | Programming <br> (custom functions, loops, logic statements, purr, simulations) | [6-Programming](./Lessons-PDF/06-programming_deck.pdf) |
+| 6 | Monday 18 December <br> 6 PM - 8:30 PM EST | Visualization <br> (initialization, choosing chart types, ggplot, customizing) | [7-Visualization](./Lessons-PDF/07-visualization_deck.pdf) |
+| 7 | Tuesday 19 December <br> 6 PM - 8:30 PM EST | Ethics, inequity and professional skills; Review and practice | [8-Ethics](./Lessons-PDF/09-ethics_deck.pdf) <br> [9-Inequity](./Lessons-PDF/10-inequity_deck.pdf) <br> [10-Professional Skills](./Lessons-PDF/11-professional-skills_deck.pdf) [11-Review](./Lessons-PDF/12-review_deck.pdf)|
+| 8 | Wednesday 20 December <br> 6 PM - 8:30 PM EST | Industry case study- Kevin Ha | NA |
+
+
 ### In-class code & summaries 
 | Class | Date | Code | Summary |
 | --- | --- | --- | --- |
-| 1 | Monday 29 May | [in-class coding examples](./Lessons-Rscripts/class_1.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class1_Summary.pdf) |
-| 2 | Thursday 1 June | [in-class coding examples](./Lessons-Rscripts/class_2.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class2_Summary.pdf) |
-| 3 | Saturday 3 June | [in-class coding examples](./Lessons-Rscripts/class_3.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class3_Summary.pdf) |
-| 4 | Monday 5 June | [in-class coding examples](./Lessons-Rscripts/class_4.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class4_Summary.pdf)  |
-| 5 | Thursday 8 June | [in-class coding examples](./Lessons-Rscripts/class_5.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class5_Summary.pdf) |
-| 6 | Saturday 10 June | [in-class coding examples](./Lessons-Rscripts/class_6.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class6_Summary.pdf) |
-| 7 | Monday 12 June | [in-class coding examples](./Lessons-Rscripts/class_7.Rmd) <br> [in-class app example](./Lessons-Rscripts/class_7_app.R) | [summary sheet](./Lessons-%20Summary_Sheets/Class7_Summary.pdf) |
-| 8 | Thursday 15 June | NA  | NA |
-| 9 | Saturday 17 June | [in-class coding examples](./Lessons-Rscripts/class_9.Rmd) <br> [in-class app example](./Lessons-Rscripts/class_9_app.R) | NA |
+| 1 | Monday 11 December | [in-class coding examples] | [summary sheet] |
+| 2 | Tuesday 12 December | [in-class coding examples] | [summary sheet] |
+| 3 | Wednesday 13 December | [in-class coding examples] | [summary sheet] |
+| 4 | Thursday 14 December | [in-class coding examples] | [summary sheet] |
+| 5 | Saturday 16 December | [in-class coding examples] | [summary sheet] |
+| 6 | Monday 18 December | [in-class coding examples] | [summary sheet] |
+| 7 | Tuesday 19 December | [in-class coding examples] | [summary sheet] |
+| 8 | Wednesday 20 December | [in-class coding examples] NA | [summary sheet] NA |
 
 ## Marking Scheme
 Grading is based on two components: 2 assignments, and class participation. The grading scheme is as follows:
@@ -124,19 +125,20 @@ Grading is based on two components: 2 assignments, and class participation. The 
 | Participation | NA | NA | 10% |
 
 **Assignments**
-Assignments will be introduced in class, can be discussed in tutorial, and questions can be asked of the Instructor over email. Assignments are due by midnight on Sundays. Please arrange for extensions in advance with the Instructor. Please email submissions, as an RMarkdown PDF, to the Instructor titled DSI-IntroR: Assignment X, Name. The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as."
+Assignments will be introduced in class, can be discussed in tutorial, and questions can be asked of the Instructor or Course Support over email. Assignments are due by midnight. Please arrange for extensions in advance with the Instructor or Course Support. Please email submissions, as an RMarkdown PDF, to the Course Support titled DSI-IntroR: Assignment X, Name. The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as." Please note, assignments will be graded as **Pass/Fail** based on learner's demonstration of [learning outcomes](#Learning-Outcomes) (see Rubrics for further details). 
 
 ### Assignment Due-dates
 
 | Assessment	|  Due Date | 
 | --- | --- | 
-| [Assignment 1](./Assessments/04-Assignment_1.pdf) <br> [Rmd modifiable template](./Assessments/Assessment1_template.Rmd) <br> [Solutions](./Assessments/Assignment_1_ANSWERS.pdf)|	 Sunday 11 June, by 11:59 PM EST| 
-| [Assignment 2](./Assessments/04-Assignment_2.pdf) <br> [Rmd modifiable template](./Assessments/Assessment2_template.Rmd) <br> [Solutions](./Assessments/Assignment_2_ANSWERS.pdf)| Sunday 18 June, by 11:59 PM EST| 
+| [Assignment 1] <br> [Rmd modifiable template] <br> [Solutions]| Sunday 17 December, by 11:59 PM EST| 
+| [Assignment 2] <br> [Rmd modifiable template] <br> [Solutions]| Friday 22 December, by 11:59 PM EST| 
 
 # Course Policies
 
 ## During Class
--   The course will include mainly live-coding classes. Learners are expected to follow along with the coding. Be mindful of online fatigue. Be respectful and only one speaker at a time. Use name provided in the course when participating in Zoom. You may use chat or microphone to ask questions. Keep microphones muted, unless you need to speak. Use raise hand feature, and indicate your name before speaking. Keeping your video on is optional, however, if you choose to leave it on, be mindful of what your peers can see. Course communications will take place via email. Learners with diverse learning styles and needs are welcome in this course. 
+-   The course will include mainly live-coding classes. During the first 10-15 minutes of every class, learners will be encouraged to engage in discussion about any challenges they encountered in the previous session. The purpose of this is to foster an open dialogue among learners regarding areas that require further clarification or review, guaranteeing a thorough comprehension of the material before progressing to the next topic.
+-   Learners are expected to follow along with the coding. Be mindful of online fatigue. Be respectful and only one speaker at a time. Use name provided in the course when participating in Zoom. You may use chat or microphone to ask questions. Keep microphones muted, unless you need to speak. Use raise hand feature, and indicate your name before speaking. Keeping your video on is optional, however, if you choose to leave it on, be mindful of what your peers can see. Course communications will take place via email. Learners with diverse learning styles and needs are welcome in this course. 
 
 ## Assignment Submission Policy
 -   See above for assessment weights, deadlines and guidelines. All assessment submissions must be done via email, unless stated otherwise. When submitting assessment files, label using this format: LASTNAME_FirstInitial_Assessment.format. E.g., GALLUCCI_J_A1.PDF. Instructions of each assessment will specify the ‘Assessment’ name and format. Students must follow this label format. The student is responsible for emailing correct files on time, in the format specified.
