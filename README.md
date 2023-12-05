@@ -125,14 +125,15 @@ Grading is based on two components: 2 assignments, and class participation. The 
 | Participation | NA | NA | 10% |
 
 **Assignments**
-Assignments will be introduced in class, can be discussed in tutorial, and questions can be asked of the Instructor or Course Support over email. Assignments are due by midnight. Please arrange for extensions in advance with the Instructor or Course Support. Please email submissions, as an RMarkdown PDF, to the Course Support titled DSI-IntroR: Assignment X, Name. The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as." Please note, assignments will be graded as **Pass/Fail** based on learner's demonstration of [learning outcomes](#Learning-Outcomes) (see Rubrics for further details). 
+Assignments will be introduced in class, can be discussed in tutorial, and questions can be asked of the Instructor or Course Support over email. Assignments are due by midnight. Please arrange for extensions in advance with the Instructor or Course Support. Please submit assignments via Google Form, as an RMarkdown PDF, titled DSI-IntroR: Assignment X, Name. 
+The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as." Please note, assignments will be graded as **Pass/Fail** based on learner's demonstration of [learning outcomes](#Learning-Outcomes) (see Rubrics for further details). 
 
 ### Assignment Due-dates
 
-| Assessment	|  Due Date | 
+| Assessment	|  Due Date | Submission Link | 
 | --- | --- | 
-| [Assignment 1] <br> [Rmd modifiable template] <br> [Solutions]| Sunday 17 December, by 11:59 PM EST| 
-| [Assignment 2] <br> [Rmd modifiable template] <br> [Solutions]| Friday 22 December, by 11:59 PM EST| 
+| [Assignment 1] <br> [Rmd modifiable template] <br> [Solutions]| Sunday 17 December, by 11:59 PM EST| https://forms.gle/ssLQEDirnKEQZuSv7 | 
+| [Assignment 2] <br> [Rmd modifiable template] <br> [Solutions]| Friday 22 December, by 11:59 PM EST| https://forms.gle/UheooTnEzUPRZAQY9 | 
 
 # Course Policies
 
