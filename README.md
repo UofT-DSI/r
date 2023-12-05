@@ -131,7 +131,7 @@ The assignments can be located in the Assessment directory, or below. You will f
 ### Assignment Due-dates
 
 | Assessment	|  Due Date | Submission Link | 
-| --- | --- | 
+| --- | --- | --- | 
 | [Assignment 1] <br> [Rmd modifiable template] <br> [Solutions]| Sunday 17 December, by 11:59 PM EST| https://forms.gle/ssLQEDirnKEQZuSv7 | 
 | [Assignment 2] <br> [Rmd modifiable template] <br> [Solutions]| Friday 22 December, by 11:59 PM EST| https://forms.gle/UheooTnEzUPRZAQY9 | 
 
