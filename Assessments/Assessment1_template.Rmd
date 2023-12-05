@@ -1,6 +1,9 @@
 ---
-title: "DSI Data Science: Introduction to R Assessment 1"
-output: pdf_document
+title: 'DSI Data Science: Introduction to R Assessment 1'
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -9,35 +12,39 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction and Goals
 
-Please carefully review all instructions provided. Throughout the course, we had the opportunity to familiarize ourselves with the RStudio environment, gain knowledge about its structure, utilize R syntax, discover methods for obtaining assistance, and make use of pre-existing functions. Additionally, we acquired the necessary skills to install R packages from CRAN, Bioconductor, and GitHub. Our exploration encompassed R data types and structures, followed by the installation of the tidyverse package (Wickham, H. et al, 2019) and an examination of its functions. The purpose of this assessment is to ensure that learners can accomplish the following:
+Please carefully review all instructions provided. Throughout the course, we had the opportunity to familiarize ourselves with the RStudio environment, gain knowledge about its structure, utilize R syntax, discover methods for obtaining assistance, and make use of pre-existing functions. Additionally, we acquired the necessary skills to install R packages from CRAN, Bioconductor, and GitHub. Our exploration encompassed R data types and structures, followed by the installation of the tidyverse package (Wickham, H. et al, 2019) and an examination of its functions.
 
-• Recognize the structure of RStudio and navigate its environment proficiently.
+## Grading Rubric
 
-• Comprehend the distinctions among various R data types and structures.
+This assignment will be graded as Pass/Fail. The purpose of this assessment is to ensure that learners can accomplish the following:
 
-• Apply the rules of R coercion.
-
-• Identify and handle missing values.
-
-• Utilize built-in functions as well as functions from downloaded R packages.
-
-#### The questions in the assessment carry a total of 30 marks, while an additional 3 marks are allocated for formatting (see Submission Instructions on page 5).
-
-#### **Total potential marks: /33**
++----------------------------------------------------------------------------------------------------------------------+-----------+--------------+
+| Component                                                                                                            | Yes       | No           |
++======================================================================================================================+===========+==============+
+| 1.  Learner exhibits proficiency in identifying the structure of RStudio and navigating its environment effectively. |           |              |
++----------------------------------------------------------------------------------------------------------------------+-----------+--------------+
+| 2.  Learner understands the differences among different R data types and structures.                                 |           |              |
++----------------------------------------------------------------------------------------------------------------------+-----------+--------------+
+| 3.  Learner demonstrates the ability to apply the rules of R coercion.                                               |           |              |
++----------------------------------------------------------------------------------------------------------------------+-----------+--------------+
+| 4.  Learner possesses the capability to identify and address missing values in data.                                 |           |              |
++----------------------------------------------------------------------------------------------------------------------+-----------+--------------+
+| 5.  Learner effectively employs both built-in functions and functions obtained from downloaded R packages.           |           |              |
++----------------------------------------------------------------------------------------------------------------------+-----------+--------------+
 
 ## Tasks
 
 Please respond to all the questions sequentially. You have the option to utilize a PDF editor, the provided R markdown template, or any other platform/software of your preference to generate the PDF document containing both the questions and answers. Alternatively, you can open your R script using a text editor and export it as a PDF document. When submitting your answers, make sure to include both the question number and the question itself, along with your responses. This requirement is in place to ensure that no questions are skipped and that all sub-questions within each main question are addressed. When copying and pasting the questions, you may disregard any formatting such as italics.
 
-1.  \[1 mark\] In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where objects/variables and functions that are currently available in the R session are displayed.
+1.  In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where objects/variables and functions that are currently available in the R session are displayed.
 
-2.  \[1 mark\] In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where users can input R commands, and it is where R displays the corresponding results of those commands.
+2.  In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where users can input R commands, and it is where R displays the corresponding results of those commands.
 
-3.  \[1 mark\] In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where you can edit and run scripts.
+3.  In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where you can edit and run scripts.
 
-4.  \[1 mark\] In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where you can view plots, files and help documentation.
+4.  In RStudio, the (top/bottom , left/right) \_\_\_\_\_\_\_ is where you can view plots, files and help documentation.
 
-5.  \[5 marks\] From the table below, state the type (character, logical, integer, double, raw, complex) for each element.
+5.  From the table below, state the type (character, logical, integer, double, raw, complex) for each element.
 
     | element | type                                         |
     |---------|----------------------------------------------|
@@ -47,136 +54,164 @@ Please respond to all the questions sequentially. You have the option to utilize
     | 1.7     | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
     | TRUE    | \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ |
 
-6.  \[1 mark\] Create a vector named 'my_vector' containing numbers 1 to 10.
+6.  Create a vector named 'my_vector' containing numbers 1 to 10.
 
     ```{r}
     #code here
     ```
 
-7.  \[1 mark\] Perform a mathematical operation that would double each number in 'my_vector' from the question above. Save this as a new variable named 'my_vector_doubled'
+7.  Perform a mathematical operation that would double each number in 'my_vector' from the question above. Save this as a new variable named 'my_vector_doubled'
 
     ```{r}
     #code here
     ```
 
-8.  \[1 mark\] Look up help for R base function mean() (Hint: type ?mean in the console). Exhibit the application of the mean function by utilizing it on the variable 'my_vector_doubled'.
+8.  Look up help for R base function mean() (Hint: type ?mean in the console). Exhibit the application of the mean function by utilizing it on the variable 'my_vector_doubled'.
 
     ```{r}
     #code here
     ```
 
-9.  \[2 mark\] Coerce 'my_vector_doubled' into a character and store it as a new variable named 'character_vector'. What type of coercion occurs when creating the vector 'character_vector'; implicit or explicit?
+```{=html}
+<!-- -->
+```
+9.  Coerce 'my_vector_doubled' into a character and store it as a new variable named 'character_vector'. What type of coercion occurs when creating the vector 'character_vector'; implicit or explicit?
 
     ```{r}
     #code here
     ```
 
-10. \[1 mark\] The "stringr" package is a popular package in R that provides a set of powerful functions for manipulating and working with strings. The package includes functions for tasks such as pattern matching, string extraction, replacement, splitting, and merging. The "stringr" package is a part of the "tidyverse" collection of R packages and widely used in data wrangling, text mining, and data analysis tasks in R. To use the "stringr" package along with other tidyverse packages, you can install and load the entire tidyverse package to your current R session. Alternatively, you can simply install and load the "stringr" package.
+```{=html}
+<!-- -->
+```
+10. The "stringr" package is a popular package in R that provides a set of powerful functions for manipulating and working with strings. The package includes functions for tasks such as pattern matching, string extraction, replacement, splitting, and merging. The "stringr" package is a part of the "tidyverse" collection of R packages and widely used in data wrangling, text mining, and data analysis tasks in R. To use the "stringr" package along with other tidyverse packages, you can install and load the entire tidyverse package to your current R session. Alternatively, you can simply install and load the "stringr" package.
 
     ```{r}
     #code here
     ```
 
-11. \[1 mark\] The following vector named 'missing_values_vector' has been created. This vector was built using reserved term LETTERS, which contain all letters of the alphabet. Using the c() function, which is for concatenation, the letters have been combined with 3 missing values indicated by NA, as shown below. Write a code to detect missing values.
+```{=html}
+<!-- -->
+```
+11. The following vector named 'missing_values_vector' has been created. This vector was built using reserved term LETTERS, which contain all letters of the alphabet. Using the c() function, which is for concatenation, the letters have been combined with 3 missing values indicated by NA, as shown below. Write a code to detect missing values.
 
     ```{r}
     missing_values_vector <- c(LETTERS, NA,NA,NA) 
     missing_values_vector
+
+
+    #code here
+    #hint, use function from package loaded above for pattern detection!
     ```
+
+```{=html}
+<!-- -->
+```
+12. How would you identify which positions contain missing values in 'missing_values_vector' ? (Hint: There could be multiple ways to perform this. One method would be to use the which() and is.na() functions).
 
     ```{r}
     #code here
     ```
 
-12. \[2 marks\] How would you identify which positions contain missing values in 'missing_values_vector' ? (Hint: There could be multiple ways to perform this. One method would be to use the which() and is.na() functions).
+```{=html}
+<!-- -->
+```
+13. Fix the following errors:
+
+```{r, echo=TRUE, error=TRUE}
+#create a vector named my_numbers and autoprint it.
+my_numbers <- c(1:5)
+my_Numbers
+```
+
+```{r, echo=TRUE, error=TRUE}
+#add two to vector named my_numbers
+my_numbers <- c("1", "2", "3")
+my_numbers + 2
+```
+
+```{r, echo=TRUE, error=TRUE}
+#create a vector named my_numbers
+my_numbers <- c(1, 2, 3, 4,)
+```
+
+```{r, echo=TRUE, error=TRUE}
+#index the last element in my_numbers
+my_numbers <- c(1, 2, 3)
+my_numbers[4]
+```
+
+14. R comes with its own datasets, which you can access using command data() in the console. Take a look at the dataset, "HairEyeColor" and convert it into a tibble. Hint, if you have not already done so, install and load package "tibble".
 
     ```{r}
     #code here
     ```
 
-13. \[4 marks\] Fix the following errors:
-
-    ```{r, echo=TRUE, error=TRUE}
-    #create a vector named my_numbers and autoprint it.
-    my_numbers <- c(1:5)
-    my_Numbers
-    ```
-
-    ```{r, echo=TRUE, error=TRUE}
-    #add two to vector named my_numbers
-    my_numbers <- c("1", "2", "3")
-    my_numbers + 2
-    ```
-
-    ```{r, echo=TRUE, error=TRUE}
-    #create a vector named my_numbers
-    my_numbers <- c(1, 2, 3, 4,)
-    ```
-
-    ```{r, echo=TRUE, error=TRUE}
-    #index the last element in my_numbers
-    my_numbers <- c(1, 2, 3)
-    my_numbers[4]
-    ```
-
-14. \[2 marks\] R comes with its own datasets, which you can access using command data() in the console. Take a look at the dataset, "HairEyeColor" and convert it into a tibble. Hint, if you have not already done so, install and load package "tibble".
+```{=html}
+<!-- -->
+```
+15. From HairEyeColor, index the "Eye" column.
 
     ```{r}
     #code here
     ```
 
-15. \[1 mark\] From HairEyeColor, index the "Eye" column.
+```{=html}
+<!-- -->
+```
+16. From HairEyeColor, sort by column "n"
 
     ```{r}
     #code here
     ```
 
-16. \[1 mark\] From HairEyeColor, sort by column "n"
+```{=html}
+<!-- -->
+```
+17. From HairEyeColor, select only Hair, Eye and Sex columns (alternatively, you can remove column n).
 
     ```{r}
     #code here
     ```
 
-17. \[1 mark\] From HairEyeColor, select only Hair, Eye and Sex columns (alternatively, you can remove column n).
+```{=html}
+<!-- -->
+```
+18. From HairEyeColor, filter the "Hair" column for Red only, save as "red_hair_data".
 
     ```{r}
     #code here
     ```
 
-18. \[1 mark\] From HairEyeColor, filter the "Hair" column for Red only, save as "red_hair_data".
+```{=html}
+<!-- -->
+```
+19. From red_hair_data, recode the "Sex" column as Male = 1, Female = 2.
 
     ```{r}
     #code here
     ```
 
-19. \[1 mark\] From red_hair_data, recode the "Sex" column as Male = 1, Female = 2.
+```{=html}
+<!-- -->
+```
+20. Plot the "Sex" column within red_hair_data. (Hint: use ggplot + geom_bar)
 
     ```{r}
     #code here
     ```
-
-20. \[1 mark\] Plot the "Sex" column within red_hair_data. (Hint: use ggplot + geom_bar)
-
-    ```{r}
-    #code here
-    ```
-
-## Grading Scheme
-
-The mark assigned for each question is indicated with the question. Use that to guide the answers. There
-will be additional marks assigned for submitting the Assessment in correct format.
 
 ## Submission Instructions
 
-\[1 mark\] Remember: Submissions should only be in PDF format. When emailing the instructor, name PDF using format: LASTNAME_FirstInitial_A1.PDF.
+Remember: Submissions should only be in PDF format. When emailing the instructor, name PDF using format: LASTNAME_FirstInitial_A1.PDF.
 
-E.g., GALLUCCI_J\_A1.PDF.
+E.g., GALLUCCI_J_A1.PDF.
 
-\[2 marks\] In your submission to the instructor, you must provide both the question number AND the question,in addition to your answers. Answer all the questions, in order.
+In your submission to the instructor, you must provide both the question number AND the question,in addition to your answers. Answer all the questions, in order.
 
 ## How to Use R Markdown To Create A PDF With Answers
 
-R Markdown is a formatting system that enables the creation of reproducible and dynamic reports using R. These reports allow for the inclusion of R code and its corresponding results in various formats such as slideshows, PDFs, HTML files, Word documents, and more. If you opt to use R Markdown to generate PDF files with solutions, it will require some time to familiarize yourself with R Markdown's syntax and capabilities. To simplify this process, a template named 'Assessment1_template.Rmd' has been provided, which you can utilize. To locate the provided R Markdown template, please navigate to the Assessments folder on GitHub: https://github.com/UofT-DSI/04-intro_r/tree/main/Assessments
+R Markdown is a formatting system that enables the creation of reproducible and dynamic reports using R. These reports allow for the inclusion of R code and its corresponding results in various formats such as slideshows, PDFs, HTML files, Word documents, and more. If you opt to use R Markdown to generate PDF files with solutions, it will require some time to familiarize yourself with R Markdown's syntax and capabilities. To simplify this process, a template named 'Assessment1_template.Rmd' has been provided, which you can utilize. To locate the provided R Markdown template, please navigate to the Assessments folder on GitHub: <https://github.com/UofT-DSI/04-intro_r/tree/main/Assessments>
 
 Open this template file in RStudio
 
@@ -205,5 +240,4 @@ The provided template already includes all the question numbers and the correspo
 2.  Locate the 'Knit' icon in RStudio.
 3.  Click on the 'Knit' icon and select 'Knit to PDF' to generate a PDF output.
 
-You are recommended to add small chunks of code at a time and 'Knit' the document. For more information
-including basics, see https://rmarkdown.rstudio.com/lesson-1.html or seek help during tutorial early.
+You are recommended to add small chunks of code at a time and 'Knit' the document. For more information including basics, see <https://rmarkdown.rstudio.com/lesson-1.html> or seek help during tutorial early.
