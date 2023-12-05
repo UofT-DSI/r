@@ -16,7 +16,7 @@ Welcome! This course, offered by the University of Toronto's Data Sciences Insti
 ## Course Overview
 
 ## Description
-This course is designed as an immersive learning experience. The estimated time commitment consists of approximately 16 hours of in-class instruction, 4 hours of optional but highly recommended tutorials. In total, learners can expect to dedicate approximately 20 hours over a span of 10 days to successfully complete the course.
+This course is designed as an immersive learning experience. The estimated time commitment consists of approximately 20 hours of in-class instruction, 8 hours of optional but highly recommended tutorials. In total, learners can expect to dedicate approximately 28 hours over a span of 10 days to successfully complete the course.
 
 The first part of this course teaches R with a focus on manipulating and visualizing data. Learners will get set up with a functional RStudio workflow, use different file types, transform data tables, import and manipulate data, use functions and loops, create data visualizations, and learn how to solve problems with their programming. Both base R and tidyverse methods are taught. To work reproducibly, learners will create R Projects. The second part of the course will cover the ethics of consent, Equity, Diversity & Inclusion (EDI) training, and professional skills including presentation, project management, and data security. Finally, the course will conclude with an industry case study. 
 
@@ -40,7 +40,7 @@ By the end of this course, learners will be able to:
 
 ## Course Contact
 -  Instructor for this course is Julia Gallucci, PhD student (she/her). For emails to the instructor, use julia.gallucci@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: 48 hrs on week days, 48-72 hrs on weekends.
--  Course Support for this course is Jessie Wang, PhD student (she/her). For emails to the course support, use jae.wang@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: *____fill in______*
+-  Course Support for this course is Jessie Wang, PhD student (she/her). For emails to the course support, use jae.wang@mail.utoronto.ca. Must use the subject line DSI-IntroR. E.g., DSI-IntroR: Inquiry about Lecture I. Response time: 48 hrs on week days, 48-72 hrs on weekends.
   
 
 
@@ -49,7 +49,7 @@ By the end of this course, learners will be able to:
 - The course will span 10 days, with classes scheduled from December 11-20th, 2023. Classes are 6 PM - 8:30 PM EST on Mondays-Thursdays, and 9 AM - 11:30 PM EST on Saturdays. The format of the course will be online and synchronous, conducted through Zoom (Meeting ID and passcode provided in the email subject 'Data Sciences Institute, UofT – Welcome & Pre-Class info'). Being mindful of online fatigue, there will be one or two brief breaks during each class. In the event that you encounter any difficulties joining the live lectures, it is essential to email the Instructor. Provide a description of the issue, along with the time and date of occurrence (including a screenshot if available), to ensure that participation marks are not affected. If, due to unforeseen circumstances, the live (synchronous) lecture is disrupted or cannot be conducted, the instructor will upload a recording and notify the students via email. It is the responsibility of the learners to view the recording.
 
 ### Tutorials
-- Tutorial sessions will be conducted on the same dates as the regular classes. These tutorials are scheduled for Mondays- Thursdays, from 8 PM to 8:30 PM EST, as well as Saturdays from 9 AM to 9:30 AM EST. Attendance at the tutorials is optional, and the structure is flexible. Tutorials provide an opportunity to seek clarification on software-related inquiries, homework, and assignments. The course support will also be leading the tutorial sessions.
+- Tutorial sessions will be conducted on the same dates as the regular classes. These tutorials are scheduled for Mondays- Thursdays, from 5:30 PM to 6 PM EST, as well as Saturdays from 8:30 AM to 9 AM EST and 11:30 AM to 12 PM. Attendance at the tutorials is optional, and the structure is flexible. Tutorials provide an opportunity to seek clarification on software-related inquiries, homework, and assignments. The course support will also be leading the tutorial sessions.
 
 ## Course Notes
 -   All course material will be available via [IntroductionToR](https://github.com/UofT-DSI/04-intro_r) GitHub repository. 
