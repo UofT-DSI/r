@@ -118,15 +118,11 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 8 | Wednesday 20 December | [in-class coding examples] NA | [summary sheet] NA |
 
 ## Marking Scheme
-Grading is based on two components: 2 assignments, and class participation. The grading scheme is as follows:
-| Assessment | Number | Individual Weight | Cumulative Weight |
-| --- | --- | --- | --- |
-| Assignments | 2 | 45% | 90% |
-| Participation | NA | NA | 10% |
+Grading is **Pass/Fail** based on learner's demonstration of [learning outcomes](#Learning-Outcomes). This will be assessed based on two components: 2 assignments and class participation. 
 
 **Assignments**
 Assignments will be introduced in class, can be discussed in tutorial, and questions can be asked of the Instructor or Course Support over email. Assignments are due by midnight. Please arrange for extensions in advance with the Instructor or Course Support. Please submit assignments via Google Form, as an RMarkdown PDF, titled DSI-IntroR: Assignment X, Name. 
-The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as." Please note, assignments will be graded as **Pass/Fail** based on learner's demonstration of [learning outcomes](#Learning-Outcomes) (see Rubrics for further details). 
+The assignments can be located in the Assessment directory, or below. You will find an .pdf file (knitted Markdown file) for convenient reading purposes, as well as an .Rmd file that can be modified and submitted. To download the files, click on "Raw" and select "Save as." Please note, assignments will be graded as **Pass/Fail** based on learner's demonstration of learning outcomes (see Assignment's grading rubrics for further details). 
 
 ### Assignment Due-dates
 
