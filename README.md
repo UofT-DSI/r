@@ -145,7 +145,7 @@ The assignments can be located in the Assessment directory, or below. You will f
 -   See above for assessment weights, deadlines and guidelines. All assessment submissions must be done via email, unless stated otherwise. When submitting assessment files, label using this format: LASTNAME_FirstInitial_Assessment.format. E.g., GALLUCCI_J_A1.PDF. Instructions of each assessment will specify the ‘Assessment’ name and format. Students must follow this label format. The student is responsible for emailing correct files on time, in the format specified.
 
 ## Late Penalty Policy
--   10% of the mark will be deducted for each day late, up to 30%. Assignments will NOT be accepted after three days. Be sure to plan well in advance.
+-   Assignments will NOT be accepted after three days. Be sure to plan well in advance.
 
 ## Academic Integrity and Honesty
 -   In this course you are expected to follow full disclosure policy: If it’s not your own, new idea, it has a source. All sources must be referenced. For advice on how not to plagiarize, read: https://advice.writing.utoronto.ca/using-sources/, https://www.academicintegrity.utoronto.ca/, and https://guides.library.utoronto.ca/plagiarism. You are responsible for understanding University policies on academic integrity. 
