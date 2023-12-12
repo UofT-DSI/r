@@ -1,11 +1,12 @@
 ---
-title: "Live_coding"
+title: "Live Coding"
+author: "Julia Gallucci"
+date: "2023-12-11"
 output: html_document
-author: Julia Gallucci
-date: "2023-05-29"
 ---
 Class 1
-Lesson 00,01
+Lesson 00,01,02
+
 
 Get working directory
 ```{r}
@@ -29,6 +30,7 @@ exampleVariable <- 1 # <- is the assignment operator
 exampleVariable = 1 # not recommended
 exampleVariable # autoprinting
 ```
+
 you can remove variables so they no longer appear in your environment
 ```{r}
 rm(exampleVariable) 
@@ -48,6 +50,7 @@ exampleVariable2 <- 2
 
 rm(exampleVariable, exampleVariable2)
 ```
+
 You can also overwrite variables or 'reassign' them 
 ```{r}
 exampleVariable <- 1
@@ -57,7 +60,6 @@ exampleVariable
 exampleVariable <- "a"
 exampleVariable
 ```
-
 
 
 Variable convention
@@ -89,7 +91,7 @@ F
 Write and run your own variable!
 ```{r}
 my_name <- "Julia"
-todays_date <- "May 29, 2023"
+todays_date <- "December 11, 2023"
 ```
 
 Mathematical operations
@@ -133,4 +135,52 @@ help(mean)
 ```
 
 
-# End of class 29 May 
+In-class exercises
+Lesson 01 slide 43
+
+1. load our libraries
+```{r}
+library(tidyverse)
+library(faraway)
+```
+
+2. load the datatset "broccoli"
+```{r}
+data("broccoli")
+broccoli
+```
+
+
+In-class exercises
+Lesson 02 
+
+1. Create toy dataset
+```{r}
+toy_data <- data.frame(ID = 1:4,
+                       name = c("Abe", "Becca", "Calvin", "Danica"),
+                                age = c(27,32,63,55), membership = c("yes","no","yes","yes"))
+
+toy_data
+```
+
+2. Create a reprex
+```{r}
+#install.packages("reprex")
+library(reprex)
+
+reprex({
+  toy_data$Name
+})
+```
+# End of class 11 December
+
+
+
+
+
+
+
+
+
+
+
