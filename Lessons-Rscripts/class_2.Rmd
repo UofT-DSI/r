@@ -1,304 +1,435 @@
 ---
-title: "class_2"
-author: "Julia"
-date: "2023-06-01"
+title: "in class coding"
+author: "Julia Gallucci"
+date: "12/12/2023"
 output: html_document
 ---
-Class 2
-Lesson 02
 
+Types in R
 ```{r}
-sessionInfo() # to see base packages in R
-library(help = "base")
-library(help = "stats")
-library(help = "datasets")
-data() # access built in functions in R
+typeof("welcome") #character
+
+typeof(FALSE) #logical
+
+typeof(3.14) #double
+
+typeof(10L) #integer
+
+typeof(10) #double
+
+typeof(10+3i) #complex
 ```
 
-To download a package from CRAN
+Logical Vectors
 ```{r}
-#for example
-install.packages("tidyverse") # to download
-library("tidyverse") #to attach the package to the current R session
-?tidyverse
-ls("package:tidyverse") # to list all functions
-tidyverse_packages()
+logical_vector <- c(TRUE, TRUE, FALSE)
+typeof(logical_vector)
 
+compare_vector <- 1:5 %% 2 == 0
+typeof(compare_vector)
+compare_vector
 ```
 
-What to do if you come across an issue?
+Numeric Vectors
 ```{r}
-log("a")
-```
-RStudio Community to get help
-https://community.rstudio.com/
+double_vector <- c(3.1, -73, 2700)
+typeof(double_vector)
+length(double_vector)
 
-reprex: reproducible examples
-1. Environment; 
-```{r}
-sessionInfo()
-```
+integer_vector <- c(3L, -73L, 2700L)
+typeof(integer_vector)
+length(integer_vector)
 
-2. Toy dataset if you're working with a large data frame, subset!
+special_values <- c(-1, 0 , 1 , NA) / 0
+special_values
 
-3. Code
-```{r}
-#install.package("reprex)
-library(reprex)
+is.finite(special_values)
 
-reprex({
-  ####paste code
-})
+is.infinite(special_values)
 
-reprex({
-  log("a")
-})
+is.na(special_values)
+
+is.nan(special_values)
 ```
 
-Lesson 03
+Character Vectors
+```{r}
+character_vector <- c("hello", "world", "2,000")
+character_vector
 
-Different element types
-
-```{r}
-exampleElement <- "Hello word"
-typeof(exampleElement) # "character"
-```
-```{r}
-1 # is treated like 1.0
-typeof(1) # "double"
-```
-```{r}
-1L # 1
-typeof(1L) # "integer"
+length(character_vector)
+typeof(character_vector)
 ```
 
-Logical type: TRUE and FALSE are reserved words denoting logical constants
+Explicit Coercion
 ```{r}
-TRUE
-typeof(TRUE) # "logical"
+character_vector <- c("1","0","1")
+typeof(character_vector)
+numeric_vector <- as.numeric(character_vector)
+typeof(numeric_vector)
+
+as.double(character_vector)
+as.integer(character_vector)
+
+logical_vector <- as.logical(numeric_vector)
+logical_vector
 ```
 
-complex consists of a real part and an imaginary part, 
+Implicit coercion
 ```{r}
-typeof(3 + 1i) # "complex"
+numeric_vector <- 1:10
+numeric_vector
+
+#which are greater than 4
+
+logical_vector <- numeric_vector > 4
+typeof(logical_vector)
+
+#1 is coded as TRUE, 0 as FALSE
+
+sum(logical_vector)
+mean(logical_vector)
 ```
 
-atomic vectors
-c function: Combine Values into a Vector or List
+Mix type of vectors
 ```{r}
-c()
-?c
+mix_vector <- c(TRUE, FALSE, 10L)
+typeof(mix_vector)
+
+mix_vector <- c(1L,4L, 1.5)
+typeof(mix_vector)
+
+mix_vector <- c(1.5,-3.5, "a")
+typeof(mix_vector)
 ```
 
-numeric vector
+Using tidyverse
 ```{r}
-doubleVector <- c(1, 2, 3, 4)
-typeof(doubleVector) # "double"
-```
-```{r}
-integerVector <- c(1L, 2L, 3L, 4L)
-typeof(integerVector) # "integer"
-integerVector
-length(integerVector)
+library(tidyverse)
+is_logical(c(TRUE,FALSE))
+is_double(c(1.2,1.5))
+is_integer(c(5L,10L))
+is_character(c("cat","dog"))
 ```
 
-Note: Data that are of type double can store general numeric values. 
-An integer can only take whole number values and requires an L to be 
-added after the number to tell R you want the number stored as an integer
-
-logical vectors
+vector recycling
 ```{r}
-logicalVector <- c(TRUE, FALSE, TRUE, TRUE)
-typeof(logicalVector) # "logical"
-```
+1:5
+1:10
 
-The sum() function will treat TRUE as 1 and FALSE as 0
-```{r}
-logicalVector2 <- c(TRUE, FALSE, TRUE, TRUE, NA)
-typeof(logicalVector2)
-sum(logicalVector) #3 TRUES
-sum(logicalVector2, na.rm = TRUE) # 3 TRUES
-?sum
-```
-
-Character vectors
-```{r}
-characterVector <- c("hello", "world", "DSI")
-typeof(characterVector)
-```
-
-Coercion
-converting one type to another of vector
-1. Automatic - R decides
-2. Explicit - User decides
-
-Automatic /implicit coercion
-The general principle is that R tries to preserve as much information as possible during implicit coercion. 
-
-```{r}
-mixVector <- c("hello", TRUE, 1L, 2.5, 4+1i)
-mixVector
-typeof(mixVector) # "character"
-```
-```{r}
-mixVector2 <- c(TRUE, 1L, 2.5, 4+1i)
-typeof(mixVector2) # "complex"
-```
-
-Explicit coercion - as.* function
-
-```{r}
-characterVector2 <- c("1", "2", "3")
-typeof(characterVector2) # "character"
-```
-
-```{r}
-numericVector2 <- as.numeric(characterVector2)
-typeof(numericVector2) # "double"
-mean(numericVector2)
-```
-
-```{r}
-numericVector3 <- as.integer(characterVector2)
-typeof(numericVector3) # "integer"
-mean(numericVector3)
-```
-
-```{r}
-numericVector4 <- as.logical(characterVector2)
-typeof(numericVector4) # "logical"
-numericVector4 # NA NA NA
+1:5 + 1:10
 
 ```
 
-vector recycled
+Name vectors
 ```{r}
-1:5 + 6:10
-```
-# 1 2 3 4 5
-# 6 7 8 9 10
+name_vectors<- c(
+  a = 100,
+  b = 90,
+  c = 80,
+  d = 70,
+  e = 60
+)
 
-```{r}
-1:2 + 1:4
-```
-# 1 2 1 2
-# 1 2 3 4
+name_vectors
 
-```{r}
-1:2  + 1:5
-```
-# 1 2 1 2 1
-# 1 2 3 4 5
+name_vectors[3]
+name_vectors[c(3,3,4)]
+name_vectors[c(-1,-2,-5)]
+name_vectors[c(TRUE,TRUE,FALSE,TRUE,FALSE)]
+name_vectors[name_vectors %% 20 == 0 ]
 
-
-Naming
-you can use the names() function to assign names to the elements of a vector or retrieve the names assigned to a vector
-```{r}
-?names
-exampleVector <- c(1:5)
-exampleVector
-names(exampleVector) # NULL
-length(exampleVector)
-# letters is reserved for alphabet letters
-names(exampleVector) <- letters[1:5]
-names(exampleVector) # "a" "b" "c" "d" "e"
-exampleVector
-
-namedVector <- c(a = 100, b = 200, c = 80)
-namedVector
-
-namedVector['c']
-namedVector[c('a','b')]
-namedVector[3]
-namedVector[c(-1,-2)]
-
+name_vectors[c("a","c")]
 ```
 
+List
 ```{r}
-namedVector[c(TRUE, TRUE, FALSE)]
-namedVector[namedVector == 100]
-```
-
-
-```{r}
-mylist <- list(7, "abc", FALSE)
+mylist <- list(7,"abc",FALSE)
 mylist
-str(mylist)
 
-mylist <- list(a = 1:4, b = "zyx", c = list(-1, -5))
+str(mylist) #structure of our list
+
+mylist <- list(a = 1:4,
+               b = "zyx",
+               c = list(-1,-5))
+mylist
+
 mylist[[2]]
+mylist[["b"]]
 mylist$b
 ```
 
+Tibble
 ```{r}
 mytibble <- tibble(x = 1:5,
-       y = 1,
-       z = x ^ 2 + y)
+                   y = 1, 
+                   z = x^2 + y)
 mytibble
 ```
 ```{r}
-library(tidyverse)
-library(dplyr)
 data("iris")
 head(iris)
 
-iris_tibble<- as_tibble(iris)
+iris_tibble <- as_tibble(iris)
 iris_tibble
 ```
 
+subset a data frame
 ```{r}
 iris$Species
-
 iris[["Species"]]
 
-iris %>% 
+iris %>%
   .$Species
 
 iris %>%
   .[["Species"]]
 ```
 
+Strings
 ```{r}
 library(stringr)
-str_length("this is a string")
 
-str_c("this is a string", "6" ,sep = " ")
+"this"
+'this'
 
-str_sub("this is a string", 1, 4)
+str_length("This is a string")
+str_c("This is a string","6")
+str_sub("This is a string",start = 7,end = 12)
 
-str_to_lower("HI MY NAME IS JULIA")
-str_to_upper("hi my name is julia")
-str_to_title("hi my name is julia")
+str_to_lower("UPPER CASE")
+str_to_upper("lower case")
+str_to_title("no capitalization")
 
-myfruits <- c("apple", "banana",
-              "clementime", "dragonfruit")
+mystring <- c("apple","banana",
+              "clementime","dragonfruit")
+str_view(mystring, pattern = "an")
 
-?str_view
+str_view(mystring, pattern = ".a.")
 
-str_view(myfruits, "an")
-
-str_view(myfruits, ".a")
-
-mystring <- c(".", "x","y")
-str_view(mystring, "\\.")
-
-mystring <- c("Hello ! \\")
-str_view(mystring, "\\\\")
-
-str_view(myfruits, "^a")
-str_view(myfruits, "a$")
+str_view(mystring, pattern = "^a")
+str_view(mystring, pattern = "a$")
+str_view(mystring, pattern = "[^a,e,u]")
 
 mystring <- "abcccdeee"
-str_view(mystring, "cc?")
-str_view(mystring, "cc+")
-str_view(mystring, "c[de]+")
+str_view(mystring, pattern = "cc*")
 
 mystring <- c("abab", "cdcd", "efgh")
-str_view(mystring, "(..)\\1", match = T)
+str_view(mystring, pattern = "(..)\\1", match = TRUE)
 
 mystring <- c("banana", "dodo", "apple")
-str_detect(mystring, "(..)\\1")
-str_subset(mystring, "(..)\\1")
-str_count(mystring, "(..)\\1")
-str_locate(mystring, "(..)\\1")
+
+?str_detect()
+str_detect(mystring, pattern = "(..)\\1")
+str_subset(mystring, pattern = "(..)\\1")
+
+str_count(mystring, pattern = "(..)\\1") # TRUES are coded as 1, FALSE as 0 
+```
+
+
+Factors
+```{r}
+library(forcats)
+months <- c("Dec","Apr", "Jan","Mar")
+months
+
+month_levels <- c(
+  "Jan","Feb","Mar","Apr",
+  "May", "Jun","Jul","Aug",
+  "Sep","Oct","Nov","Dec"
+)
+
+month_fix <- factor(months, levels = month_levels)
+month_fix
+
+#fct_recode(data, New name = Old name)
+fct_recode(month_fix, "December" = "Dec")
+```
+
+Dates
+```{r}
+today()
+now()
+
+library(lubridate)
+#as_datetime(<POSIXct item>)
+
+ymd("2017-01-31")
+ymd(20170131)
+mdy("January 31st, 2017")
+dmy("31-Jan-2017")
+
+today()
+as_datetime(today())
+now()
+as_date(now())
+
+datetime <- ymd_hms("2016-07-08 12:34:56")
+
+year(datetime)
+month(datetime)
+mday(datetime)
+yday(datetime)
+wday(datetime)
+hour(datetime)
+minute(datetime)
+second(datetime)
+```
+
+Time spans
+```{r}
+today() - ymd(20000101)
+as.duration(today() - ymd(20000101))
+dseconds(120)
+dminutes(60)
+dhours(c(12,24))
+ddays(0:7)
+dweeks(4)
+dyears(10)
+
+#time periods
+today() + years(1)
+today() + months(1)
+today() + days(1)
+today() + hours(1)
+today() + minutes(1)
+today() + seconds(1)
+
+#time zones
+ymd_hms("2021-01-01 12:00:00", tz = "America/New_York")
+
+ymd_hms("2021-01-01 12:00:00", tz = "Europe/Copenhagen")
+
+ymd_hms("2021-01-01 12:00:00", tz = "Pacific/Auckland")
+```
+
+Missing data
+```{r}
+NA > 5
+NA == 10 
+NA + 5
+NA == NA 
+
+#How we detect missing values
+is.na(NA)
+```
+
+Exercises
+1. Make a tibble where the vectors do not have equal length. What happens?
+
+```{r}
+mytibble <- tibble(
+  A = 1:10,
+  B = 1:2
+)
+mytibble
+#Tibbles always have to have vectors (columns) of equal lengths
+```
+
+2. In the following tibble, extract variable B:
+```{r}
+mytibble <- tibble(
+  A = 1:10,
+  B = A * 2
+)
+mytibble
+
+#using the column name "B"
+mytibble[["B"]]
+mytibble$B
+mytibble %>%
+  .$B
+
+#use the column index 2
+mytibble[[2]]
+
+
+
+mytibble$A
+mytibble[[1]]
+mytibble[["A"]]
+
+
+mytibble
+# data[row,column]
+mytibble[2,2]
+mytibble[2,]
+mytibble[,2]
+mytibble[c(1:4),]
+mytibble[-c(1:4),]
+```
+
+3. Try using functions paste() and paste0(). Compare them to str_c(), how do they work differently?
+```{r}
+?paste
+?paste0
+?str_c
+
+paste("Hi","my", "name","is","julia", sep = " ")
+
+paste0("Hi","my", "name","is","julia")
+#similarly
+paste("Hi","my","name","is","julia", sep = "")
+
+str_c("Hi","my", "name","is","julia")
+#default separator is nothing, same as paste0
+```
+
+4. Look up the function str_trim() and demonstrate application.
+```{r}
+#Michael's example:
+#remove white space on both sides
+
+teststring <-"the string"
+newstring <-str_pad(teststring,50,side=c("both"))
+newstring
+str_trim(newstring)
+
+
+#Julia's example:
+str_trim("Hi my name is Julia       ")
+
+#FM's example:
+str_trim("  Hello world ")
+```
+
+5. Given the text "Hello, world! \\." match the sequence "\" with a regular expression
+```{r}
+text <- "Hello, world! \\."
+#Henry's answer:
+str_view(text, pattern = "\\\\")
+
+```
+
+6. Given the text "x-ray" match words that start with x with a regular expression
+```{r}
+text <- c("x-ray", "cat", "excellent")
+str_view(text,pattern = "^x")
+```
+7. Given the text "cat, hat, dog, rat" match words that contain the regular expression at
+```{r}
+text <- c("cat", "hat", "dog", "rat")
+str_view(text, pattern = ".at")
+str_view(text, pattern = "at")
+```
+8. Given the text LETTERS (A-Z), match only those of vowels with a regular expression
+```{r}
+LETTERS
+letters
+
+str_view(LETTERS, pattern = "[A,E,I,O,U]") #vowels
+str_view(LETTERS, pattern = "[^A,E,I,O,U]") #everything except vowels
+```
+9. What does ^.*$ match?
+```{r}
+str_view(1:10, "^.*$")
+
+text <- "Hello world"
+
+str_view(text, "^.*$")
+#EVERYTHING!
+```
+10. What would happen if we parse a string with invalid dates?
+```{r}
+ymd("2023-02-30")
 ```
