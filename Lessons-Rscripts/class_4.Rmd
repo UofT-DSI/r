@@ -1,189 +1,17 @@
 ---
-title: "Live coding"
-author: "Julia"
-date: "2023-06-05"
+title: "in-class coding"
+author: "Julia Gallucci"
+date: "13/12/2023"
 output: html_document
 ---
-Class 4
-Lesson 04 cont'd
-
-
-Read in CES data
-```{r}
-CES_data <- read_csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-Data/ces_2019_cleaned.csv")
-```
-
-Look at factors in cps19 province using table function 
-```{r}
-table(CES_data$cps19_province)
-
-CES_data %>%
-  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
-         cps19_prov_id,
-         cps19_income_number) 
-```
-
-```{r}
-table(CES_data$cps19_prov_id)
-
-CES_data %>%
-  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
-         cps19_prov_id,
-         cps19_income_number) %>%
-  group_by(cps19_prov_id) %>% #group by province id 
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE), #summary table of median income and count per group
-            count = n())
-```
-
-```{r}
-CES_data %>%
-  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
-         cps19_prov_id,
-         cps19_income_number) %>%
-  mutate(cps19_prov_id = factor(cps19_prov_id, #convert province id to factor and level categories to something that makes logical sense
-         levels = c("Liberal", "Progressive Conservative","NDP","Green","Another party","None", "Don't know/prefer not to answer"))) %>%
-  group_by(cps19_prov_id) %>% #group by province id
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE), #summary table of median income and count per group
-            count = n())
-```
-
-```{r}
-CES_data %>%
-  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
-         cps19_prov_id,
-         cps19_income_number) %>%
-  group_by(cps19_prov_gov_sat) %>% #group by province satisfaction
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE), #summary table of median income and count per group
-            count = n())
-```
-
-```{r}
-CES_data %>%
-  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
-         cps19_prov_id,
-         cps19_income_number) %>%
-  group_by(cps19_prov_id) %>% #group by province satisfaction
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE) ,  #summary table of median income and count per group
-            count = n()) %>% 
-  arrange(-median_income) # arrange by median income in descending order
-```
-
-```{r}
-CES_data %>%
-  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
-         cps19_prov_id,
-         cps19_income_number) %>%
-  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c( 
-    "Liberal",
-    "Progressive Conservative",
-    "NDP",
-    "Green",
-    "Another party",
-    "None",
-    "Don't know/prefer not to answer"
-  ))) %>% #convert province id to factor and level categories to something that makes logical sense
-  mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat, levels = c(
-    "Not at all satisfies",
-    "Not very satisfied",
-    "Fairly satisfied",
-    "Very satisfied",
-    "Don't know/prefer not to answer"
-  ))) %>% #convert province satisfaction to factor and level categories to something that makes logical sense
-  group_by(cps19_prov_gov_sat, cps19_prov_id) %>% #group by both province satisfaction and id
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE)) #summary table of median income per group
-```
-
-```{r}
-CES_data %>%
-  filter(cps19_province == "Ontario") %>% #filtering data so that we only select rows containing the value "Ontario"
-  select(cps19_prov_gov_sat, # selecting only the specified columns of interest
-         cps19_prov_id,
-         cps19_income_number) %>%
-  mutate(cps19_prov_id = factor(cps19_prov_id, levels = c( 
-    "Liberal",
-    "Progressive Conservative",
-    "NDP",
-    "Green",
-    "Another party",
-    "None",
-    "Don't know/prefer not to answer"
-  ))) %>% #convert province id to factor and level categories to something that makes logical sense
-  mutate(cps19_prov_gov_sat = factor(cps19_prov_gov_sat, levels = c(
-    "Not at all satisfies",
-    "Not very satisfied",
-    "Fairly satisfied",
-    "Very satisfied",
-    "Don't know/prefer not to answer"
-  ))) %>% #convert province satisfaction to factor and level categories to something that makes logical sense
-  group_by(cps19_prov_gov_sat, cps19_prov_id) %>% #group by both province satisfaction and id
-  summarise(median_income = median(cps19_income_number, na.rm = TRUE)) %>% #summary table of median income per group %>%
-  spread(key = cps19_prov_gov_sat, #spread cps19 province satisfaction column across columns
-         value = median_income)
-```
-
-Exercises
-
-1. Filter the rows in the CES_data where survey taker is between 30 and 50 years old 
-```{r}
-CES_data %>%
-  filter(cps19_age > 30 & cps19_age < 50) %>%
-  select(cps19_age) %>%
-  pull(cps19_age) %>%
-  range()
-```
-
-2. Filter the rows in the CES_data where the survey taker answered the cps19_votechoice question (not NA)
-```{r}
-CES_data %>%
-  filter(!(is.na(cps19_votechoice))) %>%
-  select(cps19_votechoice)
-```
-
-3. Selecting the columns cps19_age and cps19_province from CES_data
-```{r}
-CES_data %>%
-  select(cps19_age, cps19_province)
-```
-
-4. Select all but cps19
-```{r}
-CES_data %>%
-  select(-cps19_province)
-```
-
-1. Create new variable in CES_data that tells us whether or not a person consumes news content (cps19_news_cons == 0 minutes OR not)
-```{r}
-CES_data %>%
-  mutate(news_watcher = ifelse(cps19_news_cons == "0 minutes", "Not watcher", "Watcher")) %>%
-  select(cps19_news_cons, news_watcher)
-```
-
-2. Modify the variable cps19_income_number so that its measured in 1000s 
-```{r}
-CES_data %>%
-  mutate(cps19_income_number = cps19_income_number / 1000)
-```
-
-1. CES_data data; group by cps19_votechoice. find median and mean rating for Trudeau
-```{r}
-CES_data %>%
-  select(cps19_lead_rating_23, cps19_votechoice) %>%
-  group_by(cps19_votechoice) %>%
-  summarise(median_rating = median(cps19_lead_rating_23, na.rm = TRUE), mean_rating = mean(cps19_lead_rating_23, na.rm = TRUE))
-```
 
 1. fix error
  ORDERING OF OPERATIONS
+ GOOD PRACTICE - NAMING OF COLUMNS
 ```{r}
 CES_data %>%
   group_by(cps19_gender) %>%
-  summarise(mean = mean(cps19_age)) 
+  summarise(mean_age = mean(cps19_age)) 
 ```
 
 2. fix error
@@ -196,10 +24,7 @@ CES_data %>% filter(cps19_votechoice == "Green Party")
 MISSING CLOSING BRACKET
 ```{r}
 CES_data %>%
-  mutate(cps19_fed_donate = factor(cps19_fed_donate,
-                                   levels = c("Yes",
-                                              "No",
-                                              "Don't know/ Prefer not to answer")))
+  mutate(cps19_fed_donate = factor(cps19_fed_donate, levels = c("Yes", "No","Don't know/ Prefer not to answer")))
 ```
 
 4. fix error
@@ -211,103 +36,314 @@ CES_data %>%
          cps19_gender)
 ```
 
-Lesson 05 
+DATA IMPORTING
+```{r}
+#different packages to read in different data file types
 
-Pivots
+#package::function_name()
+
+readr::read_csv("ces_2019_cleaned.csv")
+readxl::read_excel() #reading in an excel
+haven::read_sav("ads_raw.sav")
+
+#specification
+read_csv("ces_2019_cleaned.csv", sep= ";")
+read_csv("ces_2019_cleaned.csv",skip = 2)
+read_csv("ces_2019_cleaned.csv", col_names = FALSE)
+
+
+write_csv(object_name, "object_name.csv")
+```
+PIVOTING
 ```{r}
 wide_data <- tibble(
   year = c(2017, 2018, 2019, 2020, 2021, 2022),
   milo = c(4,6.3,8,7.9,8.1,8.1),
-  kitty = c(15.6,15.9,14,12.2,10.9, 9.9)
+  kitty = c(15.6,15.9,14,12.2,10.9,9.9)
 )
 wide_data
-```
-Long data
-```{r}
+
 long_data <- wide_data %>%
-  pivot_longer(cols = c("milo", "kitty"),
-               names_to= "cat",
+  pivot_longer(cols = c("milo","kitty"),
+               names_to ="cat",
                values_to = "weight")
 long_data
-```
-Wide data
-```{r}
+
 long_data %>%
-  pivot_wider(names_from = "cat", 
+  pivot_wider(names_from = "cat",
               values_from = "weight")
 ```
-
-Join
+JOIN
 ```{r}
 employment <- tibble(
-  year = c(1990, 1991, 1992, 1994),
+  year = c(1990,1991,1992,1994),
   rate = c(.05,.02,.04,.02)
 )
 employment
-```
 
-```{r}
 housing <- tibble(
   date = c(1991, 1992, 1993, 1994, 1995),
-  rate = c(.89,.6,.75,.88,.9)
+  rate = c(0.89,0.6,0.75,0.88,0.9)
 )
-
 housing
-```
 
-Inner join
-```{r}
+#inner join
 employment %>%
-  inner_join(housing, by = c("year" = "date"))
-```
+  inner_join(housing, by= c("year" = "date"))
 
-Left join
-```{r}
+#left join
 employment %>%
   left_join(housing, by = c("year" = "date"))
-```
 
-Right join
-```{r}
+#right join
 employment %>%
   right_join(housing, by = c("year" = "date"))
-```
 
-Full join
-```{r}
+#full join
 employment %>%
-  full_join(housing, by = c("year" = "date"))
+  full_join(housing, by = c("year"="date"))
 ```
+FILTERING JOINS
+```{r}
+employment
+housing
 
-Semi-join
-```{r}
 employment %>%
-  semi_join(housing, by= c("year" = "date"))
-```
-Anti-join
-```{r}
+  semi_join(housing, by = c("year" = "date"))
+
+housing %>%
+  semi_join(employment, by = c("date" = "year"))
+
 employment %>%
   anti_join(housing, by = c("year" = "date"))
 ```
-
-Data.tables
+DATA TABLES
 ```{r}
+#install.package(data.table)
 library(data.table)
 data("iris")
+iris
 dt_iris <- as.data.table(iris)
 dt_iris
-tables()
 
+tables()
 sapply(dt_iris, class)
 haskey(dt_iris)
 setkey(dt_iris, Species)
 haskey(dt_iris)
+
+#data_table[i,j,k]
+dt_iris[Petal.Width > 0.5]
+dt_iris[,Species]
+dt_iris[,list(Species)]
+#alternatively
+dt_iris[,.(Species)]
+
+dt_iris[,sum((Petal.Length + Petal.Width) > 2)]
+
+dt_iris[Species == "setosa", sum((Petal.Length + Petal.Width)>2)]
+
+dt_iris[Species == "setosa", .N]
+
+dt_iris[, .N, by = .(Species)]
+
+dt_iris[Petal.Width > 1, .(mean(Petal.Length)), by = Species]
+
+dt_iris[order(Species, -Petal.Width)]
+
+dt_iris[,.N, .(Petal.Length > 4, Petal.Width > 1)]
+
+dt_iris[, lapply(.SD,mean), by = Species]
+#.SD refers to subset of data
+dt_iris[, head(.SD, 2), by = Species]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exercise
+1. Tidy the data below:
+```{r}
+data_q1 <- tibble(
+  group = c("treat","control"),
+  survival = c(17, 11),
+  deceased = c(3,9)
+)
+
+data_q1
+data_q1 <- 
+  data_q1 %>%
+  pivot_longer(cols = c("survival","deceased"),
+               names_to = "Status",
+               values_to = "Patient")
+data_q1
+data_q1 %>%
+  pivot_wider(names_from = "Status",
+              values_from = "Patient")
+```
+
+2. Join the dataset flights to the dataset airlines. What should the key(s) be? What do the different types of joins look like?
+```{r}
+library(nycflights13)
+data("flights")
+data("airlines")
+
+glimpse(flights)
+glimpse(airlines)
+
+#common variable in both data sets is carrier - use that as our key
+
+flights %>%
+  inner_join(airlines, by = "carrier")
+
+flights %>%
+  full_join(airlines, by = "carrier")
+
+airlines_2 <- airlines[-1,] #removed row 1 to demonstrate antijoin subsetting
+
+flights  %>%
+  anti_join(airlines_2, by = "carrier")
+```
+
+
+3. Using flights and data.table, group based on cases that have dep_delay < 0 and those that have arr_delay > 0 and count the number in each group. 
+How many groups/rows are there? How many in each group?
+
+```{r}
+dt_flight <- as.data.table(flights)
+
+dt_flight[, .N, .(dep_delay < 0 , arr_delay > 0)]
+```
+PROGRAMMING
+```{r}
+library(ggplot2)
+library(purrr)
+library(tidyverse)
+data("iris")
+```
+FUNCTION
+```{r}
+vowels_in_string <- function(string) {
+  identified_vowels <- str_view(string, pattern = "[a,A,e,E,i,I,o,O,u,U]")
+  return(identified_vowels)
+}
+
+vowels_in_string("CAT")
+
+sum_numbers <- function(max_number) {
+  return(sum(seq(1,max_number)))
+}
+
+sum_numbers(191238109238)
 ```
 
 ```{r}
-dt_iris[Petal.Width > 0.5]
+#for loops
+for (i in 1:10){
+  print(i * 5)
+}
 
-dt_iris[,Species]
+nrow(iris)
 
-dt_iris[,list(Species)]
+
+for(i in 2:nrow(iris)) {
+  iris$previous_combo[i] <- iris$Sepal.Length[i] + iris$Sepal.Length[i - 1]
+}
+iris
+
+for(i in c("a","b","c")){
+  print(paste(i,str_to_upper(i)))
+}
+
+for (i in 1:3){
+  print(now() + i)
+}
+
+#collect our outputs
+outputs <- c()
+
+for (i in 1:5){
+  outputs<- c(outputs, i)
+}
+
+mean(outputs)
+
+i = 1
+
+#while loop
+while (i <= 10){
+  print(i)
+  i = i + 1
+}
 ```
+
+if/else logic combined with for loop
+```{r}
+
+for(i in 1:nrow(iris)){
+ if (iris[i,"Petal.Length"] > 6){
+   print("large petal length") } 
+  else if(iris[i,"Petal.Width"] > 1){
+    print("large petal width")
+  }
+  else{
+    print("small petal")
+    } 
+}
+
+```
+
+```{r}
+grades <- tibble(marks = c(94,87, 73, 69))
+
+?case_when
+grades %>%
+  mutate(letter = case_when(
+    marks >= 80 ~ "A",
+    marks >= 70 ~ "B",
+    marks >= 60 ~ "C",
+    TRUE ~"F"
+  ))
+```
+
+PURR
+```{r}
+iris %>%
+  map_dbl(mean)
+iris
+
+iris %>%
+  map_chr(typeof)
+
+iris %>%
+  map(summary)
+
+iris$Species <- as.character(iris$Species)
+
+iris$Species
+vowels_in_string(iris$Species)
+
+
+#multiple arguments
+x <- list(1,1,1)
+y <- list(10,20,30)
+
+map2(x,y, ~ .x +.y)
+```
+
+
+
