@@ -1,249 +1,89 @@
 ---
-title: "Live_coding"
-author: "Julia"
-date: "2023-06-08"
+title: "in-class coding"
+author: "Julia Gallucci"
+date: "16/12/2023"
 output: html_document
 ---
 
-Class 5
-Lesson 05 cont'd
-
-Working with data tables
+From last class
+We can also iterate over two lists simultaneously and apply a function to each corresponding pair of elements.
 ```{r}
-library(data.table) #load library data.table
-data(iris) #load data iris into our session
+library(purrr)
+x <- list(1, 1, 1)
+y <- list(10, 20, 30)
+map2(x, y, ~ .x + .y)
 
-dt_iris <- as.data.table(iris) #convert iris to a data table
-setkey(dt_iris, Species) #set key as species 
+#Note, anonymous function is a function defined without a specific name. Instead, it is defined inline within the code where it is needed. In the function above, we used the ~ (tilde) symbol followed by the expression .x + .y . The .x + .y represents the input parameter of the function
 
-dt_iris
-
-dt_iris[,sum((Petal.Length + Petal.Width >2))] #Counting the number of cases where Petal.Length plus Petal.Width is greater than 2
-
-dt_iris[Species == "setosa", sum((Petal.Length + Petal.Width > 2))] #Counting the number of cases where Species is “setosa” and Petal.Length plus Petal.Width is greater than 2
-
-dt_iris[Species == "setosa" , .N] #Counting observations in current group
-
-table(dt_iris$Species) #Can use table() function to count how many species of each group there are
-
-dt_iris[, .N, by = (Species)] #alternative way to count how many species of each group
-
-dt_iris[Petal.Width > 1,
-        .(mean(Petal.Length)), keyby = .(Species)] #select only rows with petal length > 1 , calculate mean petal length for selected rows for each species
-
-dt_iris[order(Species, -Petal.Width)] #Ordering by Species and then by reverse Petal.Width:
-
-dt_iris[, .N, .(Petal.Length > 4, Petal.Width >1)] #Grouping those that have Petal.Length greater/not than 4, and Petal.Width greater/not than 1
-
-dt_iris[, lapply(.SD, mean), by = Species] #taking the mean of all columns (except the grouping column, Species) using lapply and .SD
-
-dt_iris[, head(.SD, 4), by = Species] #getting the first four rows for all columns, for each Species
+#the anonymous function ( ~ .x + .y ) takes two arguments, .x and .y , which represent the corresponding elements from x and y in each iteration. The function adds .x and .y to calculate the sum.
 ```
-
-
-Exercise
-1. Tidy the data below:
-```{r}
-data <- tibble(
-  group = c("treat", "control"),
-  survival = c(17, 11),
-  deceased = c(3, 9)
-)
-
-data
-
-data_longer <- pivot_longer(data, cols = c("survival", "deceased"), names_to = "sur/deceased", values_to= "counts")
-
-pivot_wider(data_longer, names_from = "sur/deceased", values_from = "counts")
-```
-2. Join the dataset flights to the dataset airlines. What should the key(s) be? What do the different types of joins look like?
-```{r}
-library(nycflights13)
-data("flights")
-data("airlines")
-
-dim(flights)
-dim(airlines)
-
-airlines_2 <- airlines[-1,] #removed row 1 to demonstrate antijoin subsetting
-
-flights %>%
-  inner_join(airlines, by ="carrier")
-
-flights %>%
-  left_join(airlines, by = "carrier")
-
-flights  %>%
-  anti_join(airlines_2, by = "carrier")
-```
-
-3. Using flights and data.table, group based on cases that have dep_delay < 0 and those that have arr_delay > 0 and count the number in each group. 
-How many groups/rows are there? How many in each group?
-```{r}
-flights_dt <- as.data.table(flights) 
-flights_dt[, .N, .(dep_delay < 0, arr_delay > 0)]
-```
-
-Lesson 06
-
-Functions
-examples of functions:
-```{r}
-
-##function that calculates the standard error
-standard_error_mean <- function(numeric_vector){
-  SEM <- sd(numeric_vector) /  sqrt(length(numeric_vector)-1)
-  return(SEM)
-}
-
-
-x <- seq(1,10)
-standard_error_mean(x)
-
-##function that prints a string
-print_string <-
-  function(character){
-    print(character)
-  }
-
-print_string("Hello, my name is Julia")
-
-
-#function that replaces setosa with NA in the iris dataset
-rename_species <- function(data_set){
-  ifelse(data_set$Species == "setosa", NA, data_set$Species)
-}
-
-rename_species(iris)
-```
-
-
-For Loops
-```{r}
-for (num in 1:10) {
-  print(num*5)
-}
-
-nrow(iris)
-iris$Sepal.Length[1] + iris$Sepal.Length[2]
-iris$Sepal.Length[2] + iris$Sepal.Length[3]
-
-
-for (i in 2:nrow(iris)){
-  iris$previous_combo[i] <-
-    iris$Sepal.Length[i] + 
-    iris$Sepal.Length[i-1]
-}
-iris
-```
-
-Ways to loop
-```{r}
-letters
-
-for (letter in letters){
-  print(letter)
-}
-
-for (num in 1:3){
-  print(now() + num)
-}
-
-outputs <- c()
-
-for (i in 1:5){
-  outputs <- c(outputs, i)
-}
-outputs
-```
-
-while loops
-```{r}
-i = 1
-
-while (i <= 10){
-  print(i)
-  print(i * 5)
-  i = i + 1
-}
-```
-
-if/else
-```{r}
-grades <- tibble(grade = c(94,87,73,60))
-grades %>%
-  mutate(letter = case_when(
-    grade >= 80 ~ "A",
-    grade >= 70 ~ "B",
-    grade >= 60 ~ "C",
-    TRUE ~ "F" #If all other conditions are false
-  ))
-```
-
-```{r}
-iris %>%
-  map_dbl(mean)
-
-iris %>%
-  map_chr(typeof)
-
-iris %>%
-  map(summary)
-```
-
-```{r}
-x <- list(1,1,1)
-y <- list(10,20,30)
-
-x
-y
-
-map2(x,y, ~.x + .y)
-```
-
 Simulation
 ```{r}
+#uniform distribution
+set.seed(123)
+runif(n = 5)
 
-hist(runif(1000)) #uniform distribution
-
-runif(5)
-runif(5)
+hist(runif(10000))
 
 set.seed(123)
-runif(5)
-
-set.seed(100)
-runif(5)
-
-runif(10, min = 1, max = 20)
+runif(n = 10, min = 1, max = 20)
 
 
-hist(rnorm(1000)) #normal distribution
-
+#normal distribution
 set.seed(123)
-rnorm(10, mean = 5, sd = 1)
+rnorm(n = 10, mean = 5, sd = 1)
+hist(rnorm(10000))
 
-
-set.seed(103)
+#sample
+set.seed(123)
 sample(c("a","b","c"),
-       size = 10,
-       replace = TRUE)
+       size = 100,
+       replace = TRUE,
+       prob = c(0.1, 0.2, 0.7))
 
-set.seed(103)
-sample(c("a","b","c"),
-       size = 10,
-       replace = TRUE)
-
-
+#random sample
 set.seed(123)
-
-simulated_data <- tibble(
-  X = runif(10,min = 0, max = 20),
-  Y = 3 *X + rnorm(10, mean = 0, sd = 1)
-)
+simulated_data <-
+  tibble(X = runif(10, min = 0, max = 20),
+        Y = 3*X + rnorm(10, mean = 0, sd = 1))
 
 simulated_data
 
 simulated_data %>%
-  ggplot(aes( x = X, y = Y)) + geom_point()
+  ggplot(aes(x = X, y = Y)) +
+  geom_point()
 ```
+
+
+1. Write a greeting function that says “good morning”, “good afternoon”, or “good evening”, depending on the time of day.
+```{r}
+library(lubridate)
+greeting <- function(){
+  current <- now()
+  current_hour <- hour(current)
+  greeting_output <- 
+  case_when(
+    current_hour > 4 && current_hour < 12 ~ "good morning",
+    current_hour < 16 ~ "good afternoon",
+    TRUE ~ "good evening"
+  )
+  return(greeting_output)
+}
+
+greeting()
+```
+
+2-Simulate a dataset using a normal distribution with mean 100 and standard deviation 15 as variable X, and a quadratic transformation of X as variable Y. Graph your data.
+```{r}
+simulated_data <-
+  tibble(X = rnorm(n = 1000, mean = 100, sd = 15),
+         Y = X ^ 2)
+
+simulated_data
+
+simulated_data %>%
+  ggplot(aes(x = X, y =Y)) +
+  geom_point()
+```
+
+*Learners worked on exercise slide deck and presented their findings
