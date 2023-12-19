@@ -1,204 +1,159 @@
 ---
-title: "Live coding"
-author: "Julia"
-date: "2023-06-10"
-output: pdf_document
+title: "in-class coding"
+author: "Julia Gallucci"
+date: "18/12/2023"
+output: html_document
 ---
 
-Class 6 Lesson 06 cont'd
-Exercises from last class
-1. Write a greeting function that says “good morning”, “good afternoon”, or “good evening”, depending on the time of day.
-
+Load in our libraries
 ```{r}
-library(lubridate)
-greeting <- function(){
-  current <- now()
-  current_hour <- hour(current)
-  greeting_output <-
-    case_when(
-      current_hour > 6 && current_hour < 12 ~ "Good morning!",
-      current_hour >= 12 && current_hour < 18 ~ "Good afternoon!" ,
-      TRUE ~ "Good evening!"
-    )
-  return(greeting_output)
-}
-greeting()
-```
-
-2-Simulate a dataset using a normal distribution with mean 100 and standard deviation 15 as variable X, and a quadratic transformation of X as variable Y. Graph your data.
-```{r}
-toy_data <- tibble(
-  X = rnorm(n = 100, mean = 100, sd = 15),
-  Y = X^2
-)
-
 library(ggplot2)
-
-toy_data %>%
-  ggplot(aes(x=X, y=Y)) + geom_point()
+library(tidyverse)
 ```
 
-Lesson 07
+Load in our dataset
 ```{r}
 CES_data <- read_csv("CES_data_short.csv")
-#OR
-CES_data <- read_csv("https://raw.githubusercontent.com/UofT-DSI/04-intro_r/main/Lessons-Data/CES_data_short.csv")
-dim(CES_data)
+```
+Overall syntax
+```{r}
+#ggplot(data = dataset, mapping = aes(x = variable1, y = variable2))
+
+#or
+
+# dataset %>%
+# ggplot(aes(x = variable1, y = variable2)) + layer + another layer...
 ```
 
-Bar graphs
+Barplot
 ```{r}
+table(CES_data$cps19_votechoice)
+
 CES_data %>%
   ggplot(aes(x = cps19_votechoice)) +
-  geom_bar(width = 0.5) #change width of the bar
+  geom_bar()
+
+?geom_bar
 ```
 Histogram
 ```{r}
 CES_data %>%
-  mutate(age = 90 - cps19_yob) %>% #create a new column age
-  ggplot(aes(x = age)) + 
-  geom_histogram()
+  mutate(age = 90 - cps19_yob) %>%
+  ggplot(aes(x = age)) + geom_histogram()
 ```
-
-Scatterplots
+Scatterplot
 ```{r}
 CES_data %>%
   mutate(age = 90 - cps19_yob) %>%
-  ggplot(aes(x = age , y = cps19_household)) +
-  geom_point(position = "jitter") #jitter so you can see overlapping points
+  ggplot(aes(x = age, y = cps19_household)) + geom_point()
 ```
 
-Exercises
-1. Barplot
+Exercise
+1. Make a barplot
 ```{r}
 CES_data %>%
-  ggplot(aes(x=cps19_votechoice)) +
-  geom_bar() + coord_flip() #coord_flip to flip the x and y axis
+  ggplot(aes(x = cps19_province)) + geom_bar()
 ```
-
-2. Histogram
+2. Make a histogram
 ```{r}
+table(CES_data$cps19_party_rating_24)
+
 CES_data %>%
-  ggplot(aes(x=cps19_yob)) +
+  ggplot(aes(x = cps19_party_rating_24)) +
   geom_histogram()
 ```
-
-3. Scatter
+3. Make a scatterplot
 ```{r}
-CES_data  %>%
-  ggplot(aes(x=cps19_yob,y=cps19_income_number)) +
-  geom_point()
-```
+str(CES_data)
 
-Customize plots
-Labels
+CES_data %>%
+  ggplot(aes(x=cps19_yob, y=cps19_party_rating_23)) + geom_point()
+```
+Customization
+
+Add labels
 ```{r}
 CES_data %>%
-  ggplot(aes(x = cps19_gender)) +
-  geom_bar() +
-  labs(x = "Self-identified gender",
-       y = "Count",
-       title = "Gender frequencies in CES data")
-#lab to create labels
+  ggplot(aes(x = cps19_gender)) + geom_bar() + labs(x = "Self-identified gender", y = "Counts", title = "Gender frequencies in the CES data")
 ```
-
-Filling based on gender variable
+Fill bars by a variable
 ```{r}
 CES_data %>%
-  ggplot(aes(x = cps19_age,
-             fill = cps19_gender)) + #fill based on a variable
+  ggplot(aes(x = cps19_age, fill = cps19_gender)) +
   geom_histogram()
 ```
-
-Filling based on specified color
+Fill bars by a color
 ```{r}
 CES_data %>%
   ggplot(aes(x = cps19_age)) +
-  geom_histogram(fill = "blue") #fill based on a color
+  geom_histogram(fill = "orange")
 ```
-
-Color to represent variable
+color lines by a variable
 ```{r}
 CES_data %>%
   ggplot(aes(x = cps19_age,
              y = cps19_household,
-             color = cps19_gender)) + #color representing gender
-  geom_smooth() +
-  geom_point() # line and data points; share aesthetics 
+             color = cps19_gender)) +
+  geom_smooth()
 ```
-
-Color visual effect
+color lines by a specified color
 ```{r}
 CES_data %>%
   ggplot(aes(x = cps19_age,
              y = cps19_household)) +
-  geom_smooth(color = "red") + #color data points and line
-  geom_point(color = "red")
+  geom_smooth(color = "blue")
 ```
-
-Size represent variable
+Change size of datapoints by a third variable
 ```{r}
 CES_data %>%
   ggplot(aes(x = cps19_age,
-             y = cps19_household,
-             size = cps19_income_number)) + #size within aesthetics to represent variable
+             y = cps19_income_number,
+             size = cps19_household)) +
   geom_point()
 ```
-
-Size for visual effect
-```{r}
-CES_data %>%
-  ggplot(aes(x = cps19_age,
-             y = cps19_household)) +
-  geom_point(size = 5) #change data point size for visual effect; outside aesthetics 
-```
-
-Share aesthetics
+Change size of datapoints by a specified size number
 ```{r}
 CES_data %>%
   ggplot(aes(x = cps19_age,
              y = cps19_income_number)) +
-  geom_point() + #geom point and smooth share 
+  geom_point(size = 5)
+```
+Use two geoms with a shares aesthetic 
+```{r}
+CES_data %>%
+  ggplot(aes(x = cps19_age,
+             y = cps19_income_number)) +
+  geom_point() +
   geom_smooth()
 ```
-
-Separate aesthetics
+Use two geoms, each with their own aesthetic
 ```{r}
 CES_data %>%
   ggplot() +
   geom_point(aes(x = cps19_age,
                  y = cps19_income_number)) +
-  geom_line(aes(x = cps19_age,
-                y = mean(cps19_income_number, na.rm = TRUE))) 
-#separate aesthetics for point and line
+  geom_line(aes(x = cps19_age, y = mean(cps19_income_number, na.rm = TRUE)))
 ```
-
-Facets
+Facets - wrap by a categorical variable
 ```{r}
 CES_data %>%
-  ggplot(aes(x = cps19_age)) + 
-  geom_histogram() +
-  facet_wrap(facets = "cps19_gender") #facets to separate histogram by categorical var
-```
-
-Themes
-```{r}
-histogram_age_by_gender<-
-  CES_data %>%
   ggplot(aes(x = cps19_age)) +
-  geom_histogram() + 
-  facet_wrap(facets = "cps19_gender") +
-  theme_bw() #black and white theme
-histogram_age_by_gender
-#ggsave("histogram_age_by_gender", histogram_age_by_gender)
-#to save ggplot
+  geom_histogram() +
+  facet_wrap(facets = "cps19_gender")
 ```
-Graphing CES data
+Change the theme of the overall plot
 ```{r}
 CES_data %>%
-  ggplot()+
-  geom_bar(aes(x = cps19_votechoice)) +
-  scale_x_discrete(labels = c(
+  ggplot(aes(x = cps19_age)) +
+  geom_histogram() +
+  facet_wrap(facets = "cps19_gender") +
+  theme_classic()
+```
+Add discrete x labels to reduce clutter
+```{r}
+CES_data %>%
+  ggplot(aes(x = cps19_votechoice)) +
+  geom_bar() + scale_x_discrete(labels = c(
     "Liberal Party" = "Liberal",
     "Conservative Party" = "Conservative",
     "Bloc Québécois" = "Bloc",
@@ -206,106 +161,47 @@ CES_data %>%
     "People's Party" = "PPC",
     "Another party" = "Other",
     "Don't know/ Prefer not to answer"= "DK/PNTA"
-  )) 
-#relable x axis 
+  ))
 ```
+
+Fill color by a variable
+specify ordering of x labels
+change position to dodge so bars are side-by-side rather than stacked
 ```{r}
 CES_data %>%
-  ggplot()+
+  ggplot() +
   geom_bar(aes(x = factor(cps19_votechoice,
-                          levels = c("Liberal Party", "Conservative Party", "Bloc Québécois", "Green Party", "People's Party", "Another party", "Don't know/ Prefer not to answer" )), fill = cps19_gender), position = "dodge", width = 0.5) +
-  scale_x_discrete(labels = c(
+                          levels = c("Liberal Party", "Conservative Party", "Bloc Québécois","Green Party", "People's Party", "Another party", "Don't know/ Prefer not to answer")), fill = cps19_gender), position = "dodge", width = 0.5) + scale_x_discrete(labels = c(
     "Liberal Party" = "Liberal",
     "Conservative Party" = "Conservative",
     "Bloc Québécois" = "Bloc",
     "Green Party" = "Green",
     "People's Party" = "PPC",
     "Another party" = "Other",
-    "Don't know/ Prefer not to answer"= "DK/PNTA")
-  ) + labs(x = "Voter's Choice", y = "Count", title = " Voter's Choice by Gender") +theme(plot.title = element_text(hjust = 0.5)) #add labels and center title
+    "Don't know/ Prefer not to answer"= "DK/PNTA"
+  ))
 ```
 
-Histograms
-```{r fig.height=2, fig.width=8}
-CES_data %>% 
+wrap histogram of conservative party rating by thoughts on education spending
+```{r}
+CES_data %>%
   ggplot() +
-  geom_histogram(aes(x = cps19_party_rating_24),
-                 bins = 10) +
-  facet_wrap(~factor(cps19_spend_educ, levels = c(
-    "Spend less", "Spend about the same as now", 
-    "Spend more", "Don't know/ Prefer not to answer"
-  )), nrow = 1) +
-  labs(x = "Conservative Party Rating", 
-       y = "Count",
-       title = "Views on education spending and the Conservative Party")
+  geom_histogram(aes(x = cps19_party_rating_24), bins = 10) + facet_wrap(facets = "cps19_spend_educ", nrow = 1)
 ```
-
+level facet to provide an order that makes more sense
+```{r fig.height=5, fig.width=5}
+CES_data %>%
+  ggplot() +
+  geom_histogram(aes(x = cps19_party_rating_24), bins = 10) + facet_wrap(~factor(cps19_spend_educ, levels = c("Spend less","Spend about the same as now", "Spend more", "Don't know/ Prefer not to answer")), nrow = 1) + labs(x = "Conservative party rating", y = "Counts", title = "Views on education spending and the conservative party")
+```
 Scatterplots
+specifying our y limits
 ```{r}
 CES_data %>%
-  ggplot()+
-  geom_point(aes(x = cps19_age,
-                 y = cps19_Q_TotalDuration),
-             position = "jitter",
-             size = 0.7) +
-  scale_y_continuous(limits = c(0,3600)) +
-  labs(x = "Age",
-       y = "Seconds spend completing the survey",
-       title = "Age and time to complete survey among attentive survey-takers")
-```
-
-Exercises
-1. Customize Barplot
-```{r fig.height=10, fig.width=12}
-CES_data %>%
-  ggplot(aes(x=cps19_votechoice, fill = cps19_gender)) +
-  scale_fill_manual("Gender", values = c("yellow","orange","red"))+
-  geom_bar(position = "dodge") +
-  labs(x = "Vote Choice",
-       y = "Count",
-       title = "Voters for Canadian Political Parties") +
-  theme(text = element_text(size = 20)) +coord_flip()
-
-#fill by gender, manually fill values
-#add labels and change size of text
-#flip x and y axis
-```
-
- 2. Histogram
-```{r}
-CES_data %>%
-  ggplot(aes(x=cps19_yob)) +
-  geom_histogram(bins = 15, position = "dodge") +
-  facet_wrap(facets = "cps19_votechoice", nrow = 2)+
-  labs(x = "Year of Birth",
-       y = "Counts",
-       title = "Age distribution of voters") +
-  theme_classic()+
-  theme(plot.title = element_text(hjust = 0.5))
-
-#facet by vote choice
-#add labels and center title
-#add classic theme
-```
-
-3. Scatter
-```{r}
-CES_data  %>%
   ggplot() +
-  geom_point(aes(x=cps19_yob,y=cps19_income_number, 
-                 size = cps19_household , 
-                 color = cps19_household), 
-             position = "jitter") +
-  scale_color_gradient("Household",low = "red", high = "blue")+
-  scale_y_continuous(limits = c(0,250000))+
-  geom_line(aes(x = cps19_yob, y= mean(cps19_income_number, na.rm = TRUE)))+
-    labs(x = "Year of Birth",
-         y = "Income number",
-         title = "Voter Age and Income < 250,000",
-         caption = "Note: Line represents mean income number") +
-  theme_classic()
-
-# color and size points by household
-#add labels and title
-#add classic theme
+  geom_point(aes( x = cps19_age,
+                  y = cps19_Q_TotalDuration),
+             position = "jitter", size = 0.5) +
+  scale_y_continuous(limits = c(0, 1500)) +labs(x = "Age", y = "Seconds spent on the survey", title = "Age and time to complete survey amongst attentive survey takers")
 ```
+
