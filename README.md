@@ -113,7 +113,7 @@ Schedule may be modified as needed, and learners will be informed. Course will b
 | 3 | Wednesday 13 December | [in-class coding examples](./Lessons-Rscripts/class_3.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class3_Summary.pdf) |
 | 4 | Thursday 14 December | [in-class coding examples](./Lessons-Rscripts/class_4.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class4_Summary.pdf) |
 | 5 | Saturday 16 December | [in-class coding examples](./Lessons-Rscripts/class_5.Rmd) | [summary sheet](./Lessons-%20Summary_Sheets/Class5_Summary.pdf) |
-| 6 | Monday 18 December | [in-class coding examples] | [summary sheet] |
+| 6 | Monday 18 December | [in-class coding examples](./Lessons-Rscripts/class_6.Rmd) | [summary sheet] |
 | 7 | Tuesday 19 December | [in-class coding examples] | [summary sheet] |
 | 8 | Wednesday 20 December |  NA | NA |
 
