@@ -1,28 +1,32 @@
 ---
-title: "Class 7"
-author: "Julia"
-date: "2023-06-12"
+title: "in-class coding"
+author: "Julia Gallucci"
+date: "19/12/2023"
 output: html_document
 ---
+
+Load in our libraries
 ```{r}
 library(tibble)
+#install.packages("kableExtra")
 library(kableExtra)
-
 ```
 
-##using kable package to make well-formatted tables 
 ```{r}
-my_table <- tibble(
-  categoryA = c(1,2,3,4),
-  categoryB = c("one","two","three","four"),
-  other = c(14.3,182.5,54,33.1)
-)
+my_table <- tibble(categoryA = c(1,2,3,4),
+                   categoryB = c("one","two","three","fours"),
+                   other = c(14.3,182.5,54.0,33.1))
 
+my_table
+```
+```{r}
 my_table %>%
-  kable(caption = "My Table", booktabs = TRUE,
-        col.names = c("A", "B", "Other")) %>%
-  pack_rows("Run 1", 1,2) %>%
+  kable(caption = "My Table", 
+        booktabs = TRUE,
+        col.names = c("A","B","Other")) %>%
+  pack_rows("Run 1" ,1,2) %>%
   pack_rows("Run 2", 3,4) %>%
   add_header_above(c("Categories" = 2, " " = 1)) %>%
-  kable_styling
+  kable_styling()
 ```
+
