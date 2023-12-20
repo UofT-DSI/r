@@ -1,4 +1,3 @@
-#Class 12 example
 
 library(shiny)
 
