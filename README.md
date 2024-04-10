@@ -11,7 +11,6 @@ Welcome! This course, offered by the University of Toronto's Data Sciences Insti
 6. [Materials](#Materials)
 7. [Schedule](#Schedule)
 8. [Marking Scheme](#Marking-Scheme)
-9. [Course Policies](#Course-Policies)
 
 ## Course Overview
 
@@ -131,55 +130,6 @@ The assignments can be located in the Assessment directory, or below. You will f
 | [Assignment 1](./Assessments/04-Assignment_1.pdf) <br> [Rmd modifiable template](./Assessments/Assessment1_template.Rmd)| Sunday 17 December, by 11:59 PM EST| https://forms.gle/ssLQEDirnKEQZuSv7 | 
 | [Assignment 2](./Assessments/04-Assignment_2.pdf) <br> [Rmd modifiable template](./Assessments/Assessment2_template.Rmd)| Friday 22 December, by 11:59 PM EST| https://forms.gle/UheooTnEzUPRZAQY9 | 
 
-# Course Policies
-
-## During Class
--   The course will include mainly live-coding classes. During the first 10-15 minutes of every class, learners will be encouraged to engage in discussion about any challenges they encountered in the previous session. The purpose of this is to foster an open dialogue among learners regarding areas that require further clarification or review, guaranteeing a thorough comprehension of the material before progressing to the next topic.
--   Learners are expected to follow along with the coding. Be mindful of online fatigue. Be respectful and only one speaker at a time. Use name provided in the course when participating in Zoom. You may use chat or microphone to ask questions. Keep microphones muted, unless you need to speak. Use raise hand feature, and indicate your name before speaking. Keeping your video on is optional, however, if you choose to leave it on, be mindful of what your peers can see. Course communications will take place via email. Learners with diverse learning styles and needs are welcome in this course. 
-
-## Assignment Submission Policy
--   See above for assessment weights, deadlines and guidelines. All assessment submissions must be done via email, unless stated otherwise. When submitting assessment files, label using this format: LASTNAME_FirstInitial_Assessment.format. E.g., GALLUCCI_J_A1.PDF. Instructions of each assessment will specify the ‘Assessment’ name and format. Students must follow this label format. The student is responsible for emailing correct files on time, in the format specified.
-
-## Late Penalty Policy
--   Assignments will NOT be accepted after three days. Be sure to plan well in advance.
-
-## Academic Integrity and Honesty
--   In this course you are expected to follow full disclosure policy: If it’s not your own, new idea, it has a source. All sources must be referenced. For advice on how not to plagiarize, read: https://advice.writing.utoronto.ca/using-sources/, https://www.academicintegrity.utoronto.ca/, and https://guides.library.utoronto.ca/plagiarism. You are responsible for understanding University policies on academic integrity. 
-
-## Keep Copies of Everything
--   Each student should keep all copies of any assessments submitted.
-
-## Collaboration
--   While you are encouraged to discuss approaches to assessments with other students, the material turned in must be your own.
-
-## Notice of Video Recording and Sharing (Download Prohibited; Reuse Prohibited)
-- Video recordings of this course, including your participation, may be created and made accessible to students for remote viewing during and after each session. These course videos and materials are the property of your instructor, the University, and/or other relevant sources, and they are protected by copyright. As a student in this course, you are allowed to view the session videos and materials for your own academic purposes. However, it is important to note that copying, sharing, or using them for any other purpose without explicit permission from the instructor is prohibited. If you have any inquiries regarding the recording and usage of videos in which you appear, please reach out to the instructo
-<div style="text-align:left"> 
-
-## Missed Class
--   Students who are absent from class for any reason (e.g., COVID, other illness or injury, family situation) and who require consideration for missed academic work should report their absence to instructor and TA, and discuss any needed consideration.
-
-## Downloading Files
--   All course material will be available via [IntroductionToR](https://github.com/anjalisilva/IntroductionToR) GitHub repository. As per prerequisites outlined for the course, it will be assumed that learners are familiar with GitHub. If you are unsure how to download files from GitHub, you may visit the repository [link](https://github.com/anjalisilva/IntroductionToR) and click 'Code' and then 'Download zip' to download all files, as shown below (see red arrows 1 and 2):
-<div style="text-align:center">
-
-<img src="Teaching-Notes/README-images/GitHub_Download1.png" alt="MixtureGaussian" width="550" height="350"/>
-
-<div style="text-align:center">
-<div style="text-align:left">
-<br/><br/>
-  
--   Alternatively, to download individual files, e.g., 03-Data-in-R PDF slides only, visit the slide [link](https://github.com/anjalisilva/IntroductionToR/blob/main/Lessons-PDF/03-data-in-r_deck.pdf) and click the 'Download' button on top right side of page as shown below (see red arrow):
-<div style="text-align:center">
-
-<img src="Teaching-Notes/README-images/GitHubDownload_2.png" alt="GitHubDownload" width="700" height="300"/>
-
-<div style="text-align:center">
-<div style="text-align:left">  
-<br/><br/>
-  
--   You may also read about [cloning a GitHub repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
-<div style="text-align:left"> 
 
 # Acknowledgements
 - Slides are adapted from Anjali Silva, originally from Amy Farrow under the supervision of Rohan Alexander, University of Toronto. Slides have been created and modified by Julia Gallucci for Summer 2023.
