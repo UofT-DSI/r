@@ -8,7 +8,7 @@ _class: invert
 paginate: true
 ---
 
-# Installing Git
+# Introduction to R 
 
 ```
 $ echo "Data Sciences Institute"

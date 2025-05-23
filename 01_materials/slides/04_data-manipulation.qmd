@@ -1,0 +1,198 @@
+---
+title: "Data Manipulation: Part 1"
+format: html
+---
+
+In this lesson, we will be learning about data manipulation in R using tools from the `tidyverse`.
+
+## Contents
+
+1.  Loading data
+2.  Subsetting and organizing data (`filter`, `select`, `arrange`)
+3.  The pipe operator (`|>`)
+4.  Transforming data (`mutate`, `group_by`, `summarise`)
+5.  Application: data cleaning
+
+## 1. Loading data
+
+Each data file format requires its own read-in function:
+
+| file type           | function     | library  |
+|---------------------|--------------|----------|
+| .csv                | `read_csv`   | `readr`  |
+| .tsv                | `read_tsv`   | `readr`  |
+| .xlsx (Excel sheet) | `read_excel` | `readxl` |
+| .sav (SPSS)         | `read_sav`   | `haven`  |
+| .dta (Stata)        | `read_dta`   | `haven`  |
+| .sas (SAS)          | `read_sas`   | `haven`  |
+
+```{r}
+library(tidyverse)
+
+ads_data <- haven::read_sav("../../05_src/slides_data/ads_raw.sav")
+```
+
+```{r}
+glimpse(ads_data)
+```
+
+## 2. Subsetting and organizing data
+
+Three key functions:
+
+-   `filter()` selects rows based on specific criteria
+-   `select()` selects columns using their names
+-   `arrange()` sorts columns (e.g. numerically, alphabetically, or by date)
+
+------------------------------------------------------------------------
+
+### Filtering
+
+Filtering allows us to select rows based on specific traits
+
+```{r}
+filter(ads_data, Duration__in_seconds_ < 100)
+```
+
+### Arranging
+
+Arranging allows us to sort the order of the table by a certain column
+
+```{r}
+arrange(ads_data, Duration__in_seconds_)
+```
+
+------------------------------------------------------------------------
+
+### Selecting
+
+Selecting allows us to pick certain columns
+
+```{r}
+select(ads_data, RecordedDate)
+```
+
+We can also remove columns
+
+```{r}
+select(ads_data, -Consent, -DistributionChannel)
+```
+
+## 3. The pipe operator
+
+What if we want to do multiple operations on the data in one go?
+
+For example:
+
+1.  Filter `ads_data` for durations less than 100 seconds, THEN
+2.  Sort the data in order of increasing durations, THEN
+3.  Pick out the recorded date (`RecordedDate`) and duration (`Duration__in_seconds`)
+
+```{r}
+select(
+  arrange(
+    filter(
+      ads_data, 
+      Duration__in_seconds_ < 100
+    ), Duration__in_seconds_
+  ), RecordedDate, Duration__in_seconds
+)
+```
+
+We can instead use the pipe `|>` which passes an object into the next function as the first argument.
+
+```{r}
+filter(ads_data, Duration__in_seconds < 100)
+# is the same as
+ads_data |> filter(Duration__in_seconds < 100)
+```
+
+So that instead of using nested functions, we can write:
+
+```{r}
+ads_data |>
+  filter(Duration__in_seconds_ < 100) |>
+  arrange(Duration__in_seconds_) |>
+  select(RecordedDate, Duration__in_seconds_)
+```
+
+## 4. Transforming data
+
+-   `mutate()` creates new columns that are functions of existing columns
+
+-   `summarise()` is used to compute summary statistics across the entire data frame or groups of rows
+
+-   `group_by()` is used to define groups of rows in the data frame (by which to summarise)
+
+### Mutate
+
+`mutate()` creates new columns that are functions of existing variables.
+
+It can also modify (if the name is the same as an existing column)
+
+For example, let's say we want to create a new column named `Birthyear_add_day` that takes the column Birthyear and joins it with a provided string ("-07-01").
+
+```{r}
+ads_data <- ads_data |>
+  # Add July 1 as birth day
+  mutate(Birthyear_add_day = str_c(Birthyear, "-07-01")) |> 
+  # Convert date to date-time format
+  mutate(Birthyear_add_day = as_datetime(Birthyear_add_day))
+
+# View data
+ads_data |>
+  select(EndDate, Birthyear, Birthyear_add_day)
+```
+
+For example, lets say we want to create a new column named `age` that takes the column `EndDate` and subtracts the column `Birthyear_add_day`
+
+```{r}
+ads_data %>%
+  mutate(age = EndDate - Birthyear_add_day) %>%
+  select(EndDate, Birthyear, Birthyear_add_day, age) 
+```
+
+### Summarise
+
+We may need to find the average (mean), median, or standard deviation of some of the variables in our data frame. These common functions already come with R:
+
+```{r}
+# Define a vector 
+numbers <- c(1, 5, 9, 13)
+
+mean(numbers) # Calculate the mean
+median(numbers) # Calculate the median
+sd(numbers) # Calculate the standard deviation
+```
+
+We can apply these in a data frame with `summarise()`, which returns the result in a new data frame.
+
+```{r}
+ads_data |>
+  summarise(
+    mean_time = mean(Duration__in_seconds_, na.rm = TRUE),
+    sd_time = sd(Duration__in_seconds_, na.rm = TRUE)
+  )
+
+ads_data |>
+  summarise(num_ads = n())
+```
+
+Note that if there are missing values, we need to include `na.rm = TRUE` to ignore them in the calculation.
+
+### Grouping
+
+Before summarising, we can group by a categorical variable using `group_by()`. Then `summarise()` will create a new data frame and return one row for each combination of grouping variables;
+
+```{r}
+ads_data |>
+  group_by(Gender) |> # I want to summarise the data separately for each Gender
+  summarise(
+    # Count of observations within each group, and the mean and sd of duration:
+    num_ads = n(), 
+    mean_time = mean(Duration__in_seconds_, na.rm = TRUE),
+    sd_time = sd(Duration__in_seconds_, na.rm = TRUE)
+  )
+```
+
+## 5. Application: data cleaning
