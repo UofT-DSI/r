@@ -1,10 +1,10 @@
 ---
 marp: true
+theme: dsi_certificates_theme
 style: |
     section {
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
     }
-_class: invert
 paginate: true
 ---
 
@@ -37,6 +37,8 @@ Even if everyone is treated equally, discrimination can occur. Equity is created
 ### Stereotypes
 
 Stereotypes are overgeneralized and often inaccurate beliefs about groups of people. We usually learn them from our family, friends, school, and media.
+
+---
 
 ### Bias
 

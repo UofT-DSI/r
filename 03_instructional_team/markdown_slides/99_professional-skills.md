@@ -1,10 +1,10 @@
 ---
 marp: true
+theme: dsi_certificates_theme
 style: |
     section {
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
     }
-_class: invert
 paginate: true
 ---
 
@@ -102,7 +102,7 @@ For the output to work correctly, you want to have blank lines in your markdown 
 
 A typical header for such a report would look like:
 
-![w:1000](./pics/11_report-header.png)
+![bg right:50% w:600](./pics/11_report-header.png)
 
 ---
 
@@ -152,7 +152,7 @@ library() # load libraries here, including bookdown
 A typical end of a report would look like this:
 
 
-![w:1000](./pics/11_report-tail.png)
+![w:700](./pics/11_report-tail.png)
 
 
 ---

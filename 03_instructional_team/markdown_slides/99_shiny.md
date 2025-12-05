@@ -1,10 +1,10 @@
 ---
 marp: true
+theme: dsi_certificates_theme
 style: |
     section {
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
     }
-_class: invert
 paginate: true
 ---
 

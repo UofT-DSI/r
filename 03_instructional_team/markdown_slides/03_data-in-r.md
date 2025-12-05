@@ -1,10 +1,10 @@
 ---
 marp: true
+theme: dsi_certificates_theme
 style: |
     section {
         font-family: Inter, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
     }
-_class: invert
 paginate: true
 ---
 
@@ -817,6 +817,7 @@ mytibble <- tibble(
 5. Match the sequence "'\ with regex
 6. Match words that start with x with regex.
 
+---
 ### Exercises
 
 7. Match words that are 3 letters long with regex.
